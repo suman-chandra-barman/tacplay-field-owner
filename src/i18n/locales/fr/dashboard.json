@@ -1,0 +1,201 @@
+{
+  "common": {
+    "dashboard": "Tableau de bord",
+    "settings": "Parametres",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "saveChanges": "Enregistrer les modifications",
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "yesSure": "Oui, bien sur",
+    "status": "Statut",
+    "action": "Action",
+    "show10": "Afficher 10",
+    "show25": "Afficher 25",
+    "show50": "Afficher 50"
+  },
+  "language": {
+    "label": "Langue",
+    "select": "Choisir la langue",
+    "en": "Anglais",
+    "de": "Allemand",
+    "fr": "Francais",
+    "es": "Espagnol"
+  },
+  "navbar": {
+    "menuSetting": "Parametres",
+    "menuLogout": "Se deconnecter",
+    "profileAlt": "Profil"
+  },
+  "sidebar": {
+    "sessions": "Sessions",
+    "bookingList": "Liste des reservations",
+    "earnings": "Revenus",
+    "arenaManagement": "Gestion de l'arena",
+    "upgradeToPremium": "Passer en Premium",
+    "currentPlan": "Forfait actuel : {{plan}}",
+    "active": "Actif",
+    "upgradeToSilver": "Passez a Silver pour plus de fonctionnalites",
+    "daysLeft": "{{days}} jours restants - {{status}}",
+    "unlockMessage": "Debloquez l'hebergement classe, les analyses et les outils premium.",
+    "manage": "Gerer",
+    "upgrade": "Upgrade"
+  },
+  "home": {
+    "analyticsReport": "Rapport d'analyse",
+    "analyticsSupport": "Analyse de support de 2025 a 2026",
+    "allReports": "Tous les rapports",
+    "week": "Semaine",
+    "month": "Mois",
+    "year": "Annee",
+    "loadFailed": "Impossible de charger les donnees du tableau de bord."
+  },
+  "sessions": {
+    "title": "Liste des sessions",
+    "createNew": "Creer une nouvelle session",
+    "loadFailed": "Impossible de charger les sessions.",
+    "columns": {
+      "sessionId": "ID session",
+      "date": "Date",
+      "time": "Heure",
+      "matchType": "Type de match",
+      "players": "Joueurs",
+      "booked": "Reserve",
+      "status": "Statut"
+    },
+    "filters": {
+      "allStatus": "Tous les statuts",
+      "open": "Ouvert",
+      "ongoing": "En cours",
+      "completed": "Termine",
+      "cancelled": "Annule",
+      "allMatchTypes": "Tous les types de match",
+      "ranked": "Classe",
+      "social": "Social"
+    },
+    "details": {
+      "invalidId": "ID de session invalide.",
+      "loadFailed": "Impossible de charger les details de la session.",
+      "title": "Details de la session",
+      "viewInfo": "Voir les infos de session",
+      "teamA": "Equipe A",
+      "teamB": "Equipe B"
+    }
+  },
+  "bookings": {
+    "title": "Liste des reservations",
+    "subtitle": "Gerez et consultez toutes les reservations de session.",
+    "loadFailed": "Impossible de charger les reservations.",
+    "columns": {
+      "bookingId": "ID reservation",
+      "playerName": "Nom du joueur",
+      "sessionDate": "Date de session",
+      "matchType": "Type de match",
+      "paymentStatus": "Statut de paiement",
+      "team": "Equipe",
+      "status": "Statut"
+    },
+    "details": {
+      "title": "Details de reservation",
+      "subtitle": "Voir les informations completes de reservation et de transaction.",
+      "loading": "Chargement des details de reservation...",
+      "loadFailed": "Impossible de charger les details de reservation.",
+      "playerInfo": "Info joueur",
+      "sessionInfo": "Info session",
+      "paymentInfo": "Info paiement",
+      "markCheckedIn": "Marquer comme enregistre",
+      "confirmCheckIn": "Voulez-vous vraiment marquer ce joueur comme enregistre ?",
+      "confirmDescription": "Confirmer l'action d'enregistrement"
+    }
+  },
+  "earnings": {
+    "title": "Revenus",
+    "subtitle": "Suivez les revenus et consultez les details des transactions.",
+    "loadFailed": "Impossible de charger les revenus.",
+    "columns": {
+      "transactionId": "ID transaction",
+      "playerName": "Nom du joueur",
+      "sessionId": "ID session",
+      "matchType": "Type de match",
+      "date": "Date",
+      "amount": "Montant",
+      "paymentMethod": "Methode de paiement"
+    },
+    "details": {
+      "title": "Details de transaction",
+      "subtitle": "Voir les informations completes de transaction et de paiement.",
+      "loading": "Chargement des details de transaction...",
+      "loadFailed": "Impossible de charger les details de transaction.",
+      "playerInfo": "Info joueur",
+      "paymentInfo": "Info paiement",
+      "cancel": "Annuler",
+      "download": "Telecharger et imprimer",
+      "generating": "Generation du PDF...",
+      "pdfFooter": "Genere depuis les details de transaction des revenus TacPlay"
+    }
+  },
+  "settingsPage": {
+    "title": "Parametres",
+    "subtitle": "Gerez vos informations personnelles et preferences de compte.",
+    "arenaOwner": "Proprietaire d'arena",
+    "loading": "Chargement du profil...",
+    "loadFailed": "Impossible de charger les informations du profil.",
+    "personalInfo": "Informations personnelles",
+    "fullName": "Nom complet",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "contactNumber": "Numero de contact",
+    "passwordChange": "Changer le mot de passe",
+    "editProfile": "Modifier le profil"
+  },
+  "editAccount": {
+    "title": "Modifier les infos du compte",
+    "subtitle": "Mettez a jour votre photo de profil et votre nom d'affichage.",
+    "fullName": "Nom complet",
+    "contactNumber": "Numero de contact",
+    "fullNameRequired": "Le nom complet est requis.",
+    "contactRequired": "Le numero de contact est requis.",
+    "saving": "Enregistrement...",
+    "saveChanges": "Enregistrer les modifications",
+    "updated": "Profil mis a jour avec succes.",
+    "updateFailed": "Echec de la mise a jour du profil."
+  },
+  "changePassword": {
+    "title": "Definir un nouveau mot de passe",
+    "subtitle": "Votre nouveau mot de passe doit etre different des precedents.",
+    "current": "Mot de passe actuel",
+    "new": "Nouveau mot de passe",
+    "confirm": "Confirmer le mot de passe",
+    "placeholderCurrent": "Entrez le mot de passe actuel",
+    "placeholderNew": "Entrez le nouveau mot de passe",
+    "placeholderConfirm": "Confirmez le nouveau mot de passe",
+    "hint": "Doit contenir au moins 8 caracteres.",
+    "allRequired": "Tous les champs sont requis.",
+    "minLength": "Le mot de passe doit contenir au moins 8 caracteres.",
+    "mismatch": "Les mots de passe ne correspondent pas.",
+    "changing": "Changement...",
+    "change": "Changer le mot de passe",
+    "changed": "Mot de passe change avec succes.",
+    "failed": "Echec du changement de mot de passe."
+  },
+  "logout": {
+    "title": "Se deconnecter",
+    "question": "Voulez-vous vraiment vous deconnecter ?",
+    "confirm": "Oui, se deconnecter"
+  },
+  "table": {
+    "showing": "Affichage de {{from}} a {{to}} sur {{total}} entrees"
+  },
+  "arena": {
+    "title": "Gestion de l'arena",
+    "arenaOwner": "Proprietaire d'arena",
+    "pro": "Pro",
+    "tabs": {
+      "arenaInfo": "Infos arena",
+      "fieldSetup": "Configuration du terrain",
+      "packageManagement": "Gestion des forfaits",
+      "payoutDetails": "Details de paiement",
+      "billings": "Facturation"
+    }
+  }
+}

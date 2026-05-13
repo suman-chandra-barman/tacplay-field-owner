@@ -1,0 +1,194 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "settings": "Einstellungen",
+    "cancel": "Abbrechen",
+    "saveChanges": "Änderungen speichern",
+    "loading": "Wird geladen...",
+    "yesSure": "Ja, sicher",
+    "status": "Status",
+    "action": "Aktion",
+    "show10": "10 anzeigen",
+    "show25": "25 anzeigen",
+    "show50": "50 anzeigen"
+  },
+  "language": {
+    "label": "Sprache",
+    "select": "Sprache auswahlen",
+    "en": "Englisch",
+    "de": "Deutsch",
+    "fr": "Franzosisch",
+    "es": "Spanisch"
+  },
+  "navbar": {
+    "menuSetting": "Einstellungen",
+    "menuLogout": "Abmelden",
+    "profileAlt": "Profil"
+  },
+  "sidebar": {
+    "sessions": "Sitzungen",
+    "bookingList": "Buchungsliste",
+    "earnings": "Einnahmen",
+    "arenaManagement": "Arena-Verwaltung",
+    "upgradeToPremium": "Auf Premium upgraden",
+    "currentPlan": "Aktueller Plan: {{plan}}",
+    "upgradeToSilver": "Upgrade auf Silber für mehr Funktionen",
+    "unlockMessage": "Aktivieren Sie Ranglisten-Hosting, Analysen und Premium-Tools.",
+    "manage": "Verwalten",
+    "upgrade": "Upgrade"
+  },
+  "home": {
+    "analyticsReport": "Analysebericht",
+    "analyticsSupport": "Analyseunterstutzung von 2025 bis 2026",
+    "allReports": "Alle Berichte",
+    "week": "Woche",
+    "month": "Monat",
+    "year": "Jahr",
+    "loadFailed": "Dashboard-Daten konnten nicht geladen werden."
+  },
+  "sessions": {
+    "title": "Sitzungsliste",
+    "createNew": "Neue Sitzung erstellen",
+    "loadFailed": "Sitzungen konnten nicht geladen werden.",
+    "columns": {
+      "sessionId": "Sitzungs-ID",
+      "date": "Datum",
+      "time": "Zeit",
+      "matchType": "Match-Typ",
+      "players": "Spieler",
+      "booked": "Gebucht",
+      "status": "Status"
+    },
+    "filters": {
+      "allStatus": "Alle Status",
+      "open": "Offen",
+      "ongoing": "Laufend",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert",
+      "allMatchTypes": "Alle Match-Typen",
+      "ranked": "Gewertet",
+      "social": "Freundschaft"
+    },
+    "details": {
+      "invalidId": "Ungültige Sitzungs-ID.",
+      "loadFailed": "Sitzungsdetails konnten nicht geladen werden.",
+      "title": "Sitzungsdetails",
+      "viewInfo": "Sitzungsinfo anzeigen",
+      "teamA": "Team A",
+      "teamB": "Team B"
+    }
+  },
+  "bookings": {
+    "title": "Buchungsliste",
+    "subtitle": "Verwalten und überprüfen Sie alle Sitzungsbuchungen.",
+    "loadFailed": "Buchungen konnten nicht geladen werden.",
+    "columns": {
+      "bookingId": "Buchungs-ID",
+      "playerName": "Spielername",
+      "sessionDate": "Sitzungsdatum",
+      "matchType": "Match-Typ",
+      "paymentStatus": "Zahlungsstatus",
+      "team": "Team",
+      "status": "Status"
+    },
+    "details": {
+      "title": "Buchungsdetails",
+      "subtitle": "Vollstandige Buchungs- und Zahlungsinformationen anzeigen.",
+      "loading": "Buchungsdetails werden geladen...",
+      "loadFailed": "Buchungsdetails konnten nicht geladen werden.",
+      "playerInfo": "Spielerinfo",
+      "sessionInfo": "Sitzungsinfo",
+      "paymentInfo": "Zahlungsinfo",
+      "markCheckedIn": "Als eingecheckt markieren",
+      "confirmCheckIn": "Möchten Sie diesen Spieler wirklich als eingecheckt markieren?",
+      "confirmDescription": "Check-in Aktion bestätigen"
+    }
+  },
+  "earnings": {
+    "title": "Einnahmen",
+    "subtitle": "Umsatz verfolgen und Transaktionsdetails anzeigen.",
+    "loadFailed": "Einnahmen konnten nicht geladen werden.",
+    "columns": {
+      "transactionId": "Transaktions-ID",
+      "playerName": "Spielername",
+      "sessionId": "Sitzungs-ID",
+      "matchType": "Match-Typ",
+      "date": "Datum",
+      "amount": "Betrag",
+      "paymentMethod": "Zahlungsmethode"
+    },
+    "details": {
+      "title": "Transaktionsdetails",
+      "subtitle": "Vollstandige Transaktions- und Zahlungsinformationen anzeigen.",
+      "loading": "Transaktionsdetails werden geladen...",
+      "loadFailed": "Transaktionsdetails konnten nicht geladen werden.",
+      "playerInfo": "Spielerinfo",
+      "paymentInfo": "Zahlungsinfo",
+      "cancel": "Abbrechen",
+      "download": "Herunterladen und drucken",
+      "generating": "PDF wird erstellt...",
+      "pdfFooter": "Erstellt aus TacPlay Einnahmen-Transaktionsdetails"
+    }
+  },
+  "settingsPage": {
+    "title": "Einstellungen",
+    "subtitle": "Verwalten Sie personliche Informationen und Kontooptionen.",
+    "arenaOwner": "Arena-Besitzer",
+    "loading": "Profil wird geladen...",
+    "loadFailed": "Profilinformationen konnten nicht geladen werden.",
+    "personalInfo": "Personliche Informationen",
+    "fullName": "Vollstandiger Name",
+    "password": "Passwort",
+    "contactNumber": "Telefonnummer",
+    "passwordChange": "Passwort ändern",
+    "editProfile": "Profil bearbeiten"
+  },
+  "editAccount": {
+    "title": "Kontoinfo bearbeiten",
+    "subtitle": "Aktualisieren Sie Ihr Profilbild und Ihren Anzeigenamen.",
+    "fullName": "Vollstandiger Name",
+    "contactNumber": "Telefonnummer",
+    "fullNameRequired": "Vollstandiger Name ist erforderlich.",
+    "saving": "Wird gespeichert...",
+    "saveChanges": "Änderungen speichern",
+    "updated": "Profil erfolgreich aktualisiert.",
+    "updateFailed": "Profil konnte nicht aktualisiert werden."
+  },
+  "changePassword": {
+    "title": "Neues Passwort festlegen",
+    "subtitle": "Das neue Passwort muss sich von vorherigen unterscheiden.",
+    "current": "Aktuelles Passwort",
+    "new": "Neues Passwort",
+    "confirm": "Passwort bestatigen",
+    "placeholderCurrent": "Aktuelles Passwort eingeben",
+    "placeholderNew": "Neues Passwort eingeben",
+    "placeholderConfirm": "Neues Passwort bestatigen",
+    "hint": "Muss mindestens 8 Zeichen haben.",
+    "allRequired": "Alle Felder sind erforderlich.",
+    "minLength": "Passwort muss mindestens 8 Zeichen lang sein.",
+    "changing": "Wird geändert...",
+    "change": "Passwort ändern",
+    "changed": "Passwort erfolgreich geändert.",
+    "failed": "Passwort konnte nicht geandert werden."
+  },
+  "logout": {
+    "title": "Abmelden",
+    "question": "Möchten Sie sich wirklich abmelden?",
+    "confirm": "Ja, abmelden"
+  },
+  "table": {
+    "showing": "Zeige {{from}} bis {{to}} von {{total}} Einträgen"
+  },
+  "arena": {
+    "title": "Arena-Verwaltung",
+    "arenaOwner": "Arena-Besitzer",
+    "pro": "Pro",
+    "tabs": {
+      "arenaInfo": "Arena-Info",
+      "fieldSetup": "Feld-Setup",
+      "packageManagement": "Paketverwaltung",
+      "payoutDetails": "Auszahlungsdetails",
+      "billings": "Abrechnungen"
+    }
+  }
+}

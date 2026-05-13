@@ -1,0 +1,201 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "search": "Search",
+    "loading": "Loading...",
+    "yesSure": "Yes, Sure",
+    "status": "Status",
+    "action": "Action",
+    "show10": "Show 10",
+    "show25": "Show 25",
+    "show50": "Show 50"
+  },
+  "language": {
+    "label": "Language",
+    "select": "Select language",
+    "en": "English",
+    "de": "German",
+    "fr": "French",
+    "es": "Spanish"
+  },
+  "navbar": {
+    "menuSetting": "Settings",
+    "menuLogout": "Log out",
+    "profileAlt": "Profile"
+  },
+  "sidebar": {
+    "sessions": "Sessions",
+    "bookingList": "Booking List",
+    "earnings": "Earnings",
+    "arenaManagement": "Arena Management",
+    "upgradeToPremium": "Upgrade to Premium",
+    "currentPlan": "Current plan: {{plan}}",
+    "active": "Active",
+    "upgradeToSilver": "Upgrade to Silver for more Features",
+    "daysLeft": "{{days}} days left - {{status}}",
+    "unlockMessage": "Unlock ranked hosting, analytics, and premium tools.",
+    "manage": "Manage",
+    "upgrade": "Upgrade"
+  },
+  "home": {
+    "analyticsReport": "Analytics report",
+    "analyticsSupport": "Analytics support form 2025 to 2026",
+    "allReports": "All Reports",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "loadFailed": "Failed to load dashboard data."
+  },
+  "sessions": {
+    "title": "Sessions Lists",
+    "createNew": "Create New Session",
+    "loadFailed": "Failed to load sessions.",
+    "columns": {
+      "sessionId": "Session ID",
+      "date": "Date",
+      "time": "Time",
+      "matchType": "Match Type",
+      "players": "Players",
+      "booked": "Booked",
+      "status": "Status"
+    },
+    "filters": {
+      "allStatus": "All Status",
+      "open": "Open",
+      "ongoing": "Ongoing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "allMatchTypes": "All Match Types",
+      "ranked": "Ranked",
+      "social": "Social"
+    },
+    "details": {
+      "invalidId": "Invalid session id.",
+      "loadFailed": "Failed to load session details.",
+      "title": "Sessions Details",
+      "viewInfo": "View Session Info",
+      "teamA": "Team A",
+      "teamB": "Team B"
+    }
+  },
+  "bookings": {
+    "title": "Booking List",
+    "subtitle": "Manage and review all session bookings.",
+    "loadFailed": "Failed to load bookings.",
+    "columns": {
+      "bookingId": "Booking ID",
+      "playerName": "Player Name",
+      "sessionDate": "Session Date",
+      "matchType": "Match Type",
+      "paymentStatus": "Payment Status",
+      "team": "Team",
+      "status": "Status"
+    },
+    "details": {
+      "title": "Booking Details",
+      "subtitle": "View full booking information and transaction.",
+      "loading": "Loading booking details...",
+      "loadFailed": "Failed to load booking details.",
+      "playerInfo": "Player Info",
+      "sessionInfo": "Session Info",
+      "paymentInfo": "Payment Info",
+      "markCheckedIn": "Mark as Checked-In",
+      "confirmCheckIn": "Are you sure you want to mark this player as checked-in?",
+      "confirmDescription": "Confirm check-in action"
+    }
+  },
+  "earnings": {
+    "title": "Earnings",
+    "subtitle": "Track revenue and view transaction details.",
+    "loadFailed": "Failed to load earnings.",
+    "columns": {
+      "transactionId": "Transaction ID",
+      "playerName": "Player Name",
+      "sessionId": "Session ID",
+      "matchType": "Match Type",
+      "date": "Date",
+      "amount": "Amount",
+      "paymentMethod": "Payment Method"
+    },
+    "details": {
+      "title": "Transaction Details",
+      "subtitle": "View complete transaction and payment information.",
+      "loading": "Loading transaction details...",
+      "loadFailed": "Failed to load transaction details.",
+      "playerInfo": "Player Info",
+      "paymentInfo": "Payment Info",
+      "cancel": "Cancel",
+      "download": "Download and Print",
+      "generating": "Generating PDF...",
+      "pdfFooter": "Generated from TacPlay earnings transaction details"
+    }
+  },
+  "settingsPage": {
+    "title": "Settings",
+    "subtitle": "Manage your personal information and account preferences.",
+    "arenaOwner": "Arena Owner",
+    "loading": "Loading profile...",
+    "loadFailed": "Failed to load profile information.",
+    "personalInfo": "Personal Information",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "password": "Password",
+    "contactNumber": "Contact Number",
+    "passwordChange": "Password Change",
+    "editProfile": "Edit Profile"
+  },
+  "editAccount": {
+    "title": "Edit Account Info",
+    "subtitle": "Update your profile picture and display name.",
+    "fullName": "Full Name",
+    "contactNumber": "Contact Number",
+    "fullNameRequired": "Full name is required.",
+    "contactRequired": "Contact number is required.",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "updated": "Profile updated successfully.",
+    "updateFailed": "Failed to update profile."
+  },
+  "changePassword": {
+    "title": "Set a new password",
+    "subtitle": "Your new password must be different from previously used passwords.",
+    "current": "Current Password",
+    "new": "New Password",
+    "confirm": "Confirm Password",
+    "placeholderCurrent": "Enter current password",
+    "placeholderNew": "Enter new password",
+    "placeholderConfirm": "Confirm new password",
+    "hint": "Must be at least 8 characters.",
+    "allRequired": "All fields are required.",
+    "minLength": "Password must be at least 8 characters.",
+    "mismatch": "Passwords do not match.",
+    "changing": "Changing...",
+    "change": "Change Password",
+    "changed": "Password changed successfully.",
+    "failed": "Failed to change password."
+  },
+  "logout": {
+    "title": "Sign Out",
+    "question": "Are you sure you want to sign out?",
+    "confirm": "Yes, Sign Out"
+  },
+  "table": {
+    "showing": "Showing {{from}} to {{to}} of {{total}} entries"
+  },
+  "arena": {
+    "title": "Arena Management",
+    "arenaOwner": "Arena Owner",
+    "pro": "Pro",
+    "tabs": {
+      "arenaInfo": "Arena Info",
+      "fieldSetup": "Field Setup",
+      "packageManagement": "Package Management",
+      "payoutDetails": "Payout Details",
+      "billings": "Billings"
+    }
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "common": {
+    "dashboard": "Panel",
+    "settings": "Configuracion",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "saveChanges": "Guardar cambios",
+    "search": "Buscar",
+    "loading": "Cargando...",
+    "yesSure": "Si, seguro",
+    "status": "Estado",
+    "action": "Accion",
+    "show10": "Mostrar 10",
+    "show25": "Mostrar 25",
+    "show50": "Mostrar 50"
+  },
+  "language": {
+    "label": "Idioma",
+    "select": "Seleccionar idioma",
+    "en": "Ingles",
+    "de": "Aleman",
+    "fr": "Frances",
+    "es": "Espanol"
+  },
+  "navbar": {
+    "menuSetting": "Configuracion",
+    "menuLogout": "Cerrar sesion",
+    "profileAlt": "Perfil"
+  },
+  "sidebar": {
+    "sessions": "Sesiones",
+    "bookingList": "Lista de reservas",
+    "earnings": "Ganancias",
+    "arenaManagement": "Gestion de arena",
+    "upgradeToPremium": "Mejorar a Premium",
+    "currentPlan": "Plan actual: {{plan}}",
+    "active": "Activo",
+    "upgradeToSilver": "Sube a Silver para mas funciones",
+    "daysLeft": "{{days}} dias restantes - {{status}}",
+    "unlockMessage": "Desbloquea partidas clasificadas, analiticas y herramientas premium.",
+    "manage": "Gestionar",
+    "upgrade": "Mejorar"
+  },
+  "home": {
+    "analyticsReport": "Informe de analitica",
+    "analyticsSupport": "Soporte analitico de 2025 a 2026",
+    "allReports": "Todos los reportes",
+    "week": "Semana",
+    "month": "Mes",
+    "year": "Ano",
+    "loadFailed": "No se pudieron cargar los datos del panel."
+  },
+  "sessions": {
+    "title": "Lista de sesiones",
+    "createNew": "Crear nueva sesion",
+    "loadFailed": "No se pudieron cargar las sesiones.",
+    "columns": {
+      "sessionId": "ID de sesion",
+      "date": "Fecha",
+      "time": "Hora",
+      "matchType": "Tipo de partida",
+      "players": "Jugadores",
+      "booked": "Reservado",
+      "status": "Estado"
+    },
+    "filters": {
+      "allStatus": "Todos los estados",
+      "open": "Abierto",
+      "ongoing": "En curso",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "allMatchTypes": "Todos los tipos de partida",
+      "ranked": "Clasificado",
+      "social": "Social"
+    },
+    "details": {
+      "invalidId": "ID de sesion invalido.",
+      "loadFailed": "No se pudieron cargar los detalles de la sesion.",
+      "title": "Detalles de la sesion",
+      "viewInfo": "Ver info de sesion",
+      "teamA": "Equipo A",
+      "teamB": "Equipo B"
+    }
+  },
+  "bookings": {
+    "title": "Lista de reservas",
+    "subtitle": "Gestiona y revisa todas las reservas de sesion.",
+    "loadFailed": "No se pudieron cargar las reservas.",
+    "columns": {
+      "bookingId": "ID de reserva",
+      "playerName": "Nombre del jugador",
+      "sessionDate": "Fecha de sesion",
+      "matchType": "Tipo de partida",
+      "paymentStatus": "Estado de pago",
+      "team": "Equipo",
+      "status": "Estado"
+    },
+    "details": {
+      "title": "Detalles de la reserva",
+      "subtitle": "Ver informacion completa de reserva y transaccion.",
+      "loading": "Cargando detalles de reserva...",
+      "loadFailed": "No se pudieron cargar los detalles de reserva.",
+      "playerInfo": "Info del jugador",
+      "sessionInfo": "Info de sesion",
+      "paymentInfo": "Info de pago",
+      "markCheckedIn": "Marcar como registrado",
+      "confirmCheckIn": "Estas seguro de marcar a este jugador como registrado?",
+      "confirmDescription": "Confirmar accion de registro"
+    }
+  },
+  "earnings": {
+    "title": "Ganancias",
+    "subtitle": "Sigue ingresos y revisa detalles de transacciones.",
+    "loadFailed": "No se pudieron cargar las ganancias.",
+    "columns": {
+      "transactionId": "ID de transaccion",
+      "playerName": "Nombre del jugador",
+      "sessionId": "ID de sesion",
+      "matchType": "Tipo de partida",
+      "date": "Fecha",
+      "amount": "Monto",
+      "paymentMethod": "Metodo de pago"
+    },
+    "details": {
+      "title": "Detalles de transaccion",
+      "subtitle": "Ver informacion completa de transaccion y pago.",
+      "loading": "Cargando detalles de transaccion...",
+      "loadFailed": "No se pudieron cargar los detalles de transaccion.",
+      "playerInfo": "Info del jugador",
+      "paymentInfo": "Info de pago",
+      "cancel": "Cancelar",
+      "download": "Descargar e imprimir",
+      "generating": "Generando PDF...",
+      "pdfFooter": "Generado desde detalles de transaccion de ganancias TacPlay"
+    }
+  },
+  "settingsPage": {
+    "title": "Configuracion",
+    "subtitle": "Administra tu informacion personal y preferencias de cuenta.",
+    "arenaOwner": "Propietario del arena",
+    "loading": "Cargando perfil...",
+    "loadFailed": "No se pudo cargar la informacion del perfil.",
+    "personalInfo": "Informacion personal",
+    "fullName": "Nombre completo",
+    "email": "Correo electronico",
+    "password": "Contrasena",
+    "contactNumber": "Numero de contacto",
+    "passwordChange": "Cambiar contrasena",
+    "editProfile": "Editar perfil"
+  },
+  "editAccount": {
+    "title": "Editar informacion de cuenta",
+    "subtitle": "Actualiza tu foto de perfil y nombre para mostrar.",
+    "fullName": "Nombre completo",
+    "contactNumber": "Numero de contacto",
+    "fullNameRequired": "El nombre completo es obligatorio.",
+    "contactRequired": "El numero de contacto es obligatorio.",
+    "saving": "Guardando...",
+    "saveChanges": "Guardar cambios",
+    "updated": "Perfil actualizado correctamente.",
+    "updateFailed": "No se pudo actualizar el perfil."
+  },
+  "changePassword": {
+    "title": "Establecer nueva contrasena",
+    "subtitle": "Tu nueva contrasena debe ser distinta de las anteriores.",
+    "current": "Contrasena actual",
+    "new": "Nueva contrasena",
+    "confirm": "Confirmar contrasena",
+    "placeholderCurrent": "Ingresa la contrasena actual",
+    "placeholderNew": "Ingresa la nueva contrasena",
+    "placeholderConfirm": "Confirma la nueva contrasena",
+    "hint": "Debe tener al menos 8 caracteres.",
+    "allRequired": "Todos los campos son obligatorios.",
+    "minLength": "La contrasena debe tener al menos 8 caracteres.",
+    "mismatch": "Las contrasenas no coinciden.",
+    "changing": "Cambiando...",
+    "change": "Cambiar contrasena",
+    "changed": "Contrasena cambiada correctamente.",
+    "failed": "No se pudo cambiar la contrasena."
+  },
+  "logout": {
+    "title": "Cerrar sesion",
+    "question": "Estas seguro de que quieres cerrar sesion?",
+    "confirm": "Si, cerrar sesion"
+  },
+  "table": {
+    "showing": "Mostrando {{from}} a {{to}} de {{total}} registros"
+  },
+  "arena": {
+    "title": "Gestion de arena",
+    "arenaOwner": "Propietario del arena",
+    "pro": "Pro",
+    "tabs": {
+      "arenaInfo": "Info del arena",
+      "fieldSetup": "Configuracion de campo",
+      "packageManagement": "Gestion de paquetes",
+      "payoutDetails": "Detalles de pago",
+      "billings": "Facturacion"
+    }
+  }
+}
