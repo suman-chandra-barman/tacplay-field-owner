@@ -3,11 +3,11 @@
 "use client";
 
 import {
-  DollarSign,
   CalendarCheck,
   Gamepad2,
   Trophy,
   FileText,
+  Euro,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import StatsCard from "@/components/DashboardComponents/StatsCard";
@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 const RANGE_OPTIONS: DashboardRange[] = ["week", "month", "year"];
 
 const STATS_ICON_BY_KEY: Record<string, ReactNode> = {
-  total_revenue: <DollarSign className="w-4 h-4" />,
+  total_revenue: <Euro className="w-4 h-4" />,
   total_bookings: <CalendarCheck className="w-4 h-4" />,
   upcoming_sessions: <Gamepad2 className="w-4 h-4" />,
   matches_hosted: <Trophy className="w-4 h-4" />,
@@ -103,12 +103,12 @@ export default function Home() {
             <StatsCard
               key={item.key}
               title={item.label}
-              value={item.value_display}
+              value={item.value}
               change={item.change.display}
               isPositive={item.change.is_positive}
               icon={
                 STATS_ICON_BY_KEY[item.key] ?? (
-                  <DollarSign className="w-4 h-4" />
+                  <Euro className="w-4 h-4" />
                 )
               }
             />
@@ -118,7 +118,7 @@ export default function Home() {
         {revenueSection ? (
           <RevenueChart
             title={revenueSection.title}
-            valueDisplay={revenueSection.value_display}
+            valueDisplay={revenueSection.value}
             legends={revenueSection.legends}
             chartData={revenueSection.chart}
           />

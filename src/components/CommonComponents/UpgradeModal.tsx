@@ -35,7 +35,6 @@ const PLAN_FEATURES: Record<string, string[]> = {
   ],
   field_silver_monthly: [
     "Everything in Bronze",
-    "Host ranked matches",
     "Advanced booking analytics",
     "Priority listing in search",
     "Ai Smart Scheduling",
@@ -78,25 +77,6 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
 
   const plans = plansResponse?.data ?? [];
   const currentPlanCode = statusResponse?.data?.plan_code ?? null;
-
-  const statusCard = useMemo(() => {
-    const status = statusResponse?.data;
-
-    if (!status) return null;
-
-    return {
-      title: status.has_active_subscription
-        ? `Current plan: ${status.plan_name || "Active"}`
-        : "No active subscription",
-      subtitle: status.has_active_subscription
-        ? `${status.price || "0.00"} ${status.currency || ""} • ${status.status}`
-        : "Select a plan to continue.",
-      badge: status.has_active_subscription ? "Active" : "Inactive",
-      badgeClass: status.has_active_subscription
-        ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-        : "bg-secondary/20 text-secondary border-secondary/30",
-    };
-  }, [statusResponse?.data]);
 
   const handleUpgrade = async (planCode: string) => {
     if (currentPlanCode === planCode) {
@@ -165,33 +145,6 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
             Choose a plan that unlocks the right tools to manage sessions, host
             ranked games, and grow your arena on TACPLAY.
           </p>
-        </div>
-
-        <div className="px-6 pb-2">
-          <div className="rounded-2xl border border-[#2C2740] bg-[#100F17] px-4 py-3 flex items-center justify-between gap-3">
-            <div>
-              <p className="text-sm font-semibold text-primary">
-                {isStatusLoading || isStatusFetching
-                  ? "Loading subscription status..."
-                  : (statusCard?.title ?? "Subscription status")}
-              </p>
-              <p className="text-xs text-secondary mt-1">
-                {isStatusLoading || isStatusFetching
-                  ? "Please wait while we fetch your current plan."
-                  : (statusCard?.subtitle ?? "")}
-              </p>
-            </div>
-            {statusCard ? (
-              <span
-                className={cn(
-                  "px-3 py-1 rounded-md border text-xs font-medium shrink-0",
-                  statusCard.badgeClass,
-                )}
-              >
-                {statusCard.badge}
-              </span>
-            ) : null}
-          </div>
         </div>
 
         {/* Cards */}

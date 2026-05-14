@@ -16,6 +16,7 @@ import type {
   DashboardLegend,
   DashboardMark2ChartItem,
 } from "@/types/DashboardTypes";
+import { Euro } from "lucide-react";
 
 type RevenueChartProps = {
   title: string;
@@ -63,8 +64,8 @@ const RevenueChart: React.FC<RevenueChartProps> = ({
       <div className="flex items-start justify-between mb-6">
         <div>
           <p className="text-sm md:text-sm text-secondary mb-1">{title}</p>
-          <h2 className="text-xl md:text-3xl font-bold text-primary">
-            {valueDisplay}
+          <h2 className="text-xl md:text-3xl font-bold text-primary flex items-center gap-1">
+            <Euro className="w-4 h-4" /> {valueDisplay}
           </h2>
         </div>
         <div className="flex items-center gap-4">

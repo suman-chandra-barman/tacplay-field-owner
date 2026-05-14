@@ -3,11 +3,11 @@
 "use client";
 
 import React from "react";
-import { TrendingUp, TrendingDown } from "lucide-react";
+import { TrendingUp, TrendingDown, Euro } from "lucide-react";
 
 interface StatsCardProps {
   title: string;
-  value: string;
+  value: number | string;
   change: string;
   isPositive: boolean;
   icon: React.ReactNode;
@@ -23,7 +23,10 @@ const StatsCard: React.FC<StatsCardProps> = ({
   return (
     <div className="bg-card border border-white/5 rounded-xl p-5 flex flex-col gap-3 min-w-0 flex-1">
       <div className="flex items-start justify-between gap-2">
-        <h2 className="text-xl md:text-3xl font-bold text-primary tracking-tight">
+        <h2 className="text-xl md:text-3xl font-bold text-primary tracking-tight flex items-center gap-1">
+          {title === "Total Revenue" ? (
+            <Euro className="w-4 h-4" />
+          ) : null}
           {value}
         </h2>
         <span
