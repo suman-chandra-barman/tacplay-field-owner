@@ -66,3 +66,21 @@ export type UpgradeSubscriptionResponse = {
   };
   requestId: string;
 };
+
+export type BillingHistoryItem = {
+  invoice_id: string;
+  date: string;
+  plan: string;
+  price: string;
+  currency: string;
+  payment_status: string;
+  paid_at: string | null;
+};
+
+export type BillingHistoryResponse = {
+  success: boolean;
+  message: string;
+  meta: Record<string, unknown>;
+  data: BillingHistoryItem[];
+  requestId: string;
+};

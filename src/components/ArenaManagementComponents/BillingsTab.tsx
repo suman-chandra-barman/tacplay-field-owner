@@ -2,32 +2,107 @@
 
 "use client";
 
-import React, { useState } from "react";
-import { Search, SlidersHorizontal, ArrowUpDown } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+import  { useMemo, useState } from "react";
+import { Loader2, Search } from "lucide-react";
+import { useGetFieldOwnerBillingHistoryQuery } from "@/redux/features/subscriptions/subscriptionsAPI";
+import type { BillingHistoryItem } from "@/types/SubscriptionTypes";
 
-interface BillingRecord {
-  invoiceId: string;
-  date: string;
-  plan: string;
-  price: string;
-}
-
-const sampleBillings: BillingRecord[] = Array.from({ length: 12 }, () => ({
-  invoiceId: "#CH 565",
-  date: "26 Jan 2026",
-  plan: "Starter",
-  price: "$265",
-}));
+const statusBadgeClassMap: Record<string, string> = {
+  paid: "bg-teal-500/20 text-teal-400 border border-teal-500/30",
+  pending: "bg-custom-yellow/20 text-yellow-400 border border-custom-yellow/30",
+  failed: "bg-custom-red/20 text-red-400 border border-custom-red/30",
+  refunded: "bg-slate-500/20 text-slate-300 border border-slate-500/30",
+};
 
 const BillingsTab = () => {
   const [search, setSearch] = useState("");
+  const { data, isLoading, isFetching, isError } =
+    useGetFieldOwnerBillingHistoryQuery();
 
-  const filteredData = sampleBillings.filter(
-    (b) =>
-      b.invoiceId.toLowerCase().includes(search.toLowerCase()) ||
-      b.plan.toLowerCase().includes(search.toLowerCase()),
-  );
+  const billings = useMemo(() => data?.data ?? [], [data]);
+
+  const filteredData = useMemo(() => {
+    const normalizedSearch = search.trim().toLowerCase();
+
+    if (!normalizedSearch) {
+      return billings;
+    }
+
+    return billings.filter((billing) =>
+      [
+        billing.invoice_id,
+        billing.date,
+        billing.plan,
+        billing.price,
+        billing.currency,
+        billing.payment_status,
+      ]
+        .filter(Boolean)
+        .some((value) => value.toLowerCase().includes(normalizedSearch)),
+    );
+  }, [billings, search]);
+
+  const formatPrice = (billing: BillingHistoryItem) =>
+    `${billing.currency} ${billing.price}`;
+
+  const statusBadge = (status: string) => {
+    const colors =
+      statusBadgeClassMap[status.toLowerCase()] ??
+      "bg-secondary/20 text-secondary border border-secondary/30";
+
+    return (
+      <span
+        className={`inline-flex px-2.5 py-0.5 text-xs font-medium rounded-md capitalize ${colors}`}
+      >
+        {status}
+      </span>
+    );
+  };
+
+  if (isLoading || isFetching) {
+    return (
+      <div className="py-10 flex items-center justify-center text-muted-foreground">
+        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+        Loading billing history...
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="py-10 text-sm text-destructive">
+        Failed to load billing history.
+      </div>
+    );
+  }
+
+  if (billings.length === 0) {
+    return (
+      <div className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-primary">
+            Billing History
+          </h2>
+          <div className="flex items-center gap-3">
+            <div className="relative flex-1 sm:flex-none">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full sm:w-56 pl-9 pr-4 py-2 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center py-10 text-muted-foreground text-sm">
+          No billing records found.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -48,11 +123,7 @@ const BillingsTab = () => {
               className="w-full sm:w-56 pl-9 pr-4 py-2 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50"
             />
           </div>
-          {/* Filter Button */}
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 bg-input/30 text-sm text-primary hover:bg-input/50 transition-colors">
-            <SlidersHorizontal className="w-4 h-4" />
-            Filter
-          </button>
+  
         </div>
       </div>
 
@@ -61,31 +132,29 @@ const BillingsTab = () => {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-white/10 bg-muted/30">
-              <th className="p-3 text-left w-10">
-                <Checkbox className="border-white/20" />
-              </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
                   Invoice Id
-                  <ArrowUpDown className="w-3 h-3" />
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
                   Date
-                  <ArrowUpDown className="w-3 h-3" />
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
                   Plan
-                  <ArrowUpDown className="w-3 h-3" />
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
                   Price
-                  <ArrowUpDown className="w-3 h-3" />
+                </div>
+              </th>
+              <th className="p-3 text-left">
+                <div className="flex items-center gap-1 text-muted-foreground font-medium">
+                  Status
                 </div>
               </th>
             </tr>
@@ -96,22 +165,22 @@ const BillingsTab = () => {
                 key={index}
                 className="border-b border-white/5 hover:bg-muted/20 transition-colors"
               >
-                <td className="p-3">
-                  <Checkbox className="border-white/20" />
-                </td>
                 <td className="p-3 text-primary font-medium">
-                  {item.invoiceId}
+                  {item.invoice_id}
                 </td>
                 <td className="p-3 text-muted-foreground">{item.date}</td>
                 <td className="p-3 text-muted-foreground">{item.plan}</td>
-                <td className="p-3 text-primary font-medium">{item.price}</td>
+                <td className="p-3 text-primary font-medium">
+                  {formatPrice(item)}
+                </td>
+                <td className="p-3 text-primary font-medium">
+                  {statusBadge(item.payment_status)}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      {/* Empty state */}
       {filteredData.length === 0 && (
         <div className="text-center py-10 text-muted-foreground text-sm">
           No billing records found.

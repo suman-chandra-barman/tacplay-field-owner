@@ -2,6 +2,7 @@
 
 import baseAPI from "@/redux/api/baseAPI";
 import type {
+  BillingHistoryResponse,
   SubscriptionPlansResponse,
   SubscriptionStatusResponse,
   UpgradeSubscriptionPayload,
@@ -30,6 +31,13 @@ const subscriptionsAPI = baseAPI.injectEndpoints({
       }),
       providesTags: ["Subscriptions"],
     }),
+    getFieldOwnerBillingHistory: builder.query<BillingHistoryResponse, void>({
+      query: () => ({
+        url: "/api/auth/field-owner/subscription/billing-history/",
+        method: "GET",
+      }),
+      providesTags: ["Subscriptions"],
+    }),
     upgradeFieldOwnerSubscription: builder.mutation<
       UpgradeSubscriptionResponse,
       UpgradeSubscriptionPayload
@@ -47,6 +55,7 @@ const subscriptionsAPI = baseAPI.injectEndpoints({
 export const {
   useGetFieldOwnerSubscriptionPlansQuery,
   useGetFieldOwnerSubscriptionStatusQuery,
+  useGetFieldOwnerBillingHistoryQuery,
   useUpgradeFieldOwnerSubscriptionMutation,
 } = subscriptionsAPI;
 
