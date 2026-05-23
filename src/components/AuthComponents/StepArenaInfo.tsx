@@ -13,12 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Camera } from "lucide-react";
-import {
-  getDataCitysByCountry,
-  getDataCountrys,
-  type cityProps,
-  type countryProps,
-} from "country-state-city-nextjs";
+import { City, Country, type ICity, type ICountry } from "country-state-city";
 
 export type ArenaStepForm = {
   field_name: string;
@@ -37,8 +32,8 @@ type StepArenaInfoProps = {
 const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
-  const [countries, setCountries] = useState<countryProps[]>([]);
-  const [cities, setCities] = useState<cityProps[]>([]);
+  const [countries, setCountries] = useState<ICountry[]>([]);
+  const [cities, setCities] = useState<ICity[]>([]);
 
   const imagePreviewUrl = useMemo(() => {
     if (!value.image) return null;
@@ -48,8 +43,8 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
   useEffect(() => {
     let active = true;
 
-    const loadCountries = async () => {
-      const data = (await getDataCountrys()) as countryProps[];
+    const loadCountries = () => {
+      const data = Country.getAllCountries();
       if (!active) return;
       setCountries(Array.isArray(data) ? data : []);
     };
@@ -64,24 +59,21 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
   useEffect(() => {
     let active = true;
 
-    const loadCities = async () => {
+    const loadCities = () => {
       if (!value.country) {
         setCities([]);
         return;
       }
 
       const selectedCountry = countries.find(
-        (country) => country.text === value.country,
+        (country) => country.name === value.country,
       );
       if (!selectedCountry) {
         setCities([]);
         return;
       }
 
-      const data = (await getDataCitysByCountry({
-        id: selectedCountry.id,
-        text: selectedCountry.text,
-      })) as cityProps[];
+      const data = City.getCitiesOfCountry(selectedCountry.isoCode);
 
       if (!active) return;
       setCities(Array.isArray(data) ? data : []);
@@ -149,8 +141,8 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
               </SelectTrigger>
               <SelectContent className="bg-card border-white/10">
                 {countries.map((country) => (
-                  <SelectItem key={country.id} value={country.text}>
-                    {country.text}
+                  <SelectItem key={country.isoCode} value={country.name}>
+                    {country.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -167,8 +159,8 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
               </SelectTrigger>
               <SelectContent className="bg-card border-white/10">
                 {cities.map((city) => (
-                  <SelectItem key={city.id} value={city.text}>
-                    {city.text}
+                  <SelectItem key={city.name} value={city.name}>
+                    {city.name}
                   </SelectItem>
                 ))}
               </SelectContent>
