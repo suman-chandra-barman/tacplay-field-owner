@@ -16,22 +16,37 @@ export type PackageEntryForm = {
 type StepPackageManagementProps = {
   value: PackageEntryForm[];
   onChange: (index: number, patch: Partial<PackageEntryForm>) => void;
+  onAddPackage: () => void;
+  onRemovePackage: (index: number) => void;
 };
 
 const StepPackageManagement = ({
   value,
   onChange,
+  onAddPackage,
+  onRemovePackage,
 }: StepPackageManagementProps) => {
+  const canRemove = value.length > 1;
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-xl sm:text-2xl font-bold text-primary">
-          Field Packages Management
-        </h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Create bundled packages for players and events including equipment and
-          paintballs.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-primary">
+            Field Packages Management
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            Create bundled packages for players and events including equipment
+            and paintballs.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={onAddPackage}
+          className="px-4 py-2 rounded-lg border border-white/10 bg-input/30 text-sm text-primary hover:bg-input/50 transition-colors"
+        >
+          Add Package
+        </button>
       </div>
 
       {value.map((pkg, index) => (
@@ -39,9 +54,20 @@ const StepPackageManagement = ({
           key={index}
           className="space-y-5 border-t border-white/5 pt-6 first:border-t-0 first:pt-0"
         >
-          <h3 className="text-lg font-bold text-primary">
-            Package Type {index + 1}
-          </h3>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h3 className="text-lg font-bold text-primary">
+              Package Type {index + 1}
+            </h3>
+            {canRemove ? (
+              <button
+                type="button"
+                onClick={() => onRemovePackage(index)}
+                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                Remove
+              </button>
+            ) : null}
+          </div>
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">

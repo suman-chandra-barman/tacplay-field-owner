@@ -112,20 +112,14 @@ const defaultMatchRules: MatchRulesStepForm = {
   allow_ranked_matches: false,
 };
 
-const defaultPackages: PackageEntryForm[] = [
-  {
-    package_name: "",
-    description: "",
-    package_fee: "",
-    include_items: "",
-  },
-  {
-    package_name: "",
-    description: "",
-    package_fee: "",
-    include_items: "",
-  },
-];
+const createEmptyPackage = (): PackageEntryForm => ({
+  package_name: "",
+  description: "",
+  package_fee: "",
+  include_items: "",
+});
+
+const defaultPackages: PackageEntryForm[] = [createEmptyPackage()];
 
 const defaultPayout: PayoutStepForm = {
   business_name: "",
@@ -210,6 +204,16 @@ const ProfileSetupPage = () => {
     }
   };
 
+  const handleAddPackage = () => {
+    setPackages((prev) => [...prev, createEmptyPackage()]);
+  };
+
+  const handleRemovePackage = (index: number) => {
+    setPackages((prev) =>
+      prev.length > 1 ? prev.filter((_, i) => i !== index) : prev,
+    );
+  };
+
   const saveArenaSuccess = (response: CompletionFlowResponse) => {
     dispatch(setArenaField(response.data));
   };
@@ -286,7 +290,7 @@ const ProfileSetupPage = () => {
           if (!p.package_name || !p.description || !p.package_fee) {
             toastStepError(
               "Packages incomplete",
-              "Each package needs a name, description, and fee. Check both package blocks.",
+              "Each package needs a name, description, and fee. Check all packages before continuing.",
             );
             return;
           }
@@ -400,6 +404,8 @@ const ProfileSetupPage = () => {
                 prev.map((p, i) => (i === index ? { ...p, ...patch } : p)),
               )
             }
+            onAddPackage={handleAddPackage}
+            onRemovePackage={handleRemovePackage}
           />
         );
       case 3:
