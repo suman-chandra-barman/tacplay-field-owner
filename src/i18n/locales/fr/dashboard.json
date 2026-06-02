@@ -31,7 +31,7 @@
     "sessions": "Sessions",
     "bookingList": "Liste des reservations",
     "earnings": "Revenus",
-    "arenaManagement": "Gestion de l'arena",
+    "arenaManagement": "Gestion de l'arene",
     "upgradeToPremium": "Passer en Premium",
     "currentPlan": "Forfait actuel : {{plan}}",
     "active": "Actif",
@@ -43,7 +43,7 @@
   },
   "home": {
     "analyticsReport": "Rapport d'analyse",
-    "analyticsSupport": "Analyse de support de 2025 a 2026",
+    "analyticsSupport": "Support analytique de 2025 a 2026",
     "allReports": "Tous les rapports",
     "week": "Semaine",
     "month": "Mois",
@@ -67,8 +67,8 @@
       "allStatus": "Tous les statuts",
       "open": "Ouvert",
       "ongoing": "En cours",
-      "completed": "Termine",
-      "cancelled": "Annule",
+      "completed": "Terminee",
+      "cancelled": "Annulee",
       "allMatchTypes": "Tous les types de match",
       "ranked": "Classe",
       "social": "Social"
@@ -137,7 +137,7 @@
   "settingsPage": {
     "title": "Parametres",
     "subtitle": "Gerez vos informations personnelles et preferences de compte.",
-    "arenaOwner": "Proprietaire d'arena",
+    "arenaOwner": "Proprietaire d'arene",
     "loading": "Chargement du profil...",
     "loadFailed": "Impossible de charger les informations du profil.",
     "personalInfo": "Informations personnelles",
@@ -187,11 +187,11 @@
     "showing": "Affichage de {{from}} a {{to}} sur {{total}} entrees"
   },
   "arena": {
-    "title": "Gestion de l'arena",
-    "arenaOwner": "Proprietaire d'arena",
+    "title": "Gestion de l'arene",
+    "arenaOwner": "Proprietaire d'arene",
     "pro": "Pro",
     "tabs": {
-      "arenaInfo": "Infos arena",
+      "arenaInfo": "Infos arene",
       "fieldSetup": "Configuration du terrain",
       "packageManagement": "Gestion des forfaits",
       "payoutDetails": "Details de paiement",

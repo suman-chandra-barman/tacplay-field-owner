@@ -137,7 +137,7 @@
   "settingsPage": {
     "title": "Configuracion",
     "subtitle": "Administra tu informacion personal y preferencias de cuenta.",
-    "arenaOwner": "Propietario del arena",
+    "arenaOwner": "Propietario de arena",
     "loading": "Cargando perfil...",
     "loadFailed": "No se pudo cargar la informacion del perfil.",
     "personalInfo": "Informacion personal",
@@ -188,10 +188,10 @@
   },
   "arena": {
     "title": "Gestion de arena",
-    "arenaOwner": "Propietario del arena",
+    "arenaOwner": "Propietario de arena",
     "pro": "Pro",
     "tabs": {
-      "arenaInfo": "Info del arena",
+      "arenaInfo": "Info de la arena",
       "fieldSetup": "Configuracion de campo",
       "packageManagement": "Gestion de paquetes",
       "payoutDetails": "Detalles de pago",
