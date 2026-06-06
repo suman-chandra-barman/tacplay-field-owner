@@ -12,7 +12,8 @@
     "action": "Aktion",
     "show10": "10 anzeigen",
     "show25": "25 anzeigen",
-    "show50": "50 anzeigen"
+    "show50": "50 anzeigen",
+    "locked": "Gesperrt"
   },
   "language": {
     "label": "Sprache",
@@ -83,7 +84,9 @@
       "cancelled": "Storniert",
       "allMatchTypes": "Alle Match-Typen",
       "ranked": "Gewertet",
-      "social": "Sozial"
+      "social": "Sozial",
+      "rankedMatch": "Gewertetes Spiel",
+      "socialMatch": "Freizeitspiel"
     },
     "details": {
       "invalidId": "Ungültige Sitzungs-ID.",

@@ -22,14 +22,17 @@ const SessionPieChart: React.FC<SessionPieChartProps> = ({
 }) => {
   const { t, i18n } = useTranslation("dashboard");
   const translateLabel = (name: string) => {
-    if (name === "Ranked") return t("sessions.filters.ranked");
-    if (name === "Social") return t("sessions.filters.social");
+    if (name === "Ranked" || name === "Ranked Match") return t("sessions.filters.rankedMatch");
+    if (name === "Social" || name === "Social Match") return t("sessions.filters.socialMatch");
     return name;
   };
 
   const getCenterValueDisplay = (val: string) => {
     if (!val) return val;
     const currentLang = i18n.language;
+    if (val.toLowerCase().includes("locked")) {
+      return val.replace(/locked/gi, t("common.locked") || "Locked");
+    }
     if (val.toLowerCase().includes("total sessions")) {
       if (currentLang === "es") return val.replace(/total sessions/gi, "Total de sesiones");
       if (currentLang === "fr") return val.replace(/total sessions/gi, "Total des sessions");

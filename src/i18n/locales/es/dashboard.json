@@ -12,7 +12,8 @@
     "action": "Accion",
     "show10": "Mostrar 10",
     "show25": "Mostrar 25",
-    "show50": "Mostrar 50"
+    "show50": "Mostrar 50",
+    "locked": "Bloqueado"
   },
   "language": {
     "label": "Idioma",
@@ -83,7 +84,9 @@
       "cancelled": "Cancelado",
       "allMatchTypes": "Todos los tipos de partida",
       "ranked": "Clasificado",
-      "social": "Social"
+      "social": "Social",
+      "rankedMatch": "Partida clasificada",
+      "socialMatch": "Partida social"
     },
     "details": {
       "invalidId": "ID de sesion invalido.",

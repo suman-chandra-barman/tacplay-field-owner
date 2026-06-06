@@ -12,7 +12,8 @@
     "action": "Action",
     "show10": "Show 10",
     "show25": "Show 25",
-    "show50": "Show 50"
+    "show50": "Show 50",
+    "locked": "Locked"
   },
   "language": {
     "label": "Language",
@@ -83,7 +84,9 @@
       "cancelled": "Cancelled",
       "allMatchTypes": "All Match Types",
       "ranked": "Ranked",
-      "social": "Social"
+      "social": "Social",
+      "rankedMatch": "Ranked Match",
+      "socialMatch": "Social Match"
     },
     "details": {
       "invalidId": "Invalid session id.",

@@ -12,7 +12,8 @@
     "action": "Action",
     "show10": "Afficher 10",
     "show25": "Afficher 25",
-    "show50": "Afficher 50"
+    "show50": "Afficher 50",
+    "locked": "Verrouillé"
   },
   "language": {
     "label": "Langue",
@@ -83,7 +84,9 @@
       "cancelled": "Annulee",
       "allMatchTypes": "Tous les types de match",
       "ranked": "Classe",
-      "social": "Social"
+      "social": "Social",
+      "rankedMatch": "Match classé",
+      "socialMatch": "Match amical"
     },
     "details": {
       "invalidId": "ID de session invalide.",
