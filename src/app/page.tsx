@@ -30,6 +30,14 @@ const STATS_ICON_BY_KEY: Record<string, ReactNode> = {
   matches_hosted: <Trophy className="w-4 h-4" />,
 };
 
+const getStatsTranslationKey = (key: string) => {
+  if (key === "total_revenue") return "totalRevenue";
+  if (key === "total_bookings") return "totalBookings";
+  if (key === "upcoming_sessions") return "upcomingSessions";
+  if (key === "matches_hosted") return "matchesHosted";
+  return key;
+};
+
 export default function Home() {
   const { t } = useTranslation("dashboard");
   const dispatch = useAppDispatch();
@@ -102,10 +110,11 @@ export default function Home() {
           {statsItems.map((item) => (
             <StatsCard
               key={item.key}
-              title={item.label}
+              title={t(`home.${getStatsTranslationKey(item.key)}`, { defaultValue: item.label })}
               value={item.value}
               change={item.change.display}
               isPositive={item.change.is_positive}
+              showCurrencyIcon={item.key === "total_revenue"}
               icon={
                 STATS_ICON_BY_KEY[item.key] ?? (
                   <Euro className="w-4 h-4" />

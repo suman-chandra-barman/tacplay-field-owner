@@ -12,6 +12,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useTranslation } from "react-i18next";
 import type {
   DashboardLegend,
   DashboardMark4ChartItem,
@@ -58,14 +59,26 @@ const BookingBarChart: React.FC<BookingBarChartProps> = ({
   legends,
   chartData,
 }) => {
-  const legendA = legends[0]?.label ?? "Premium";
-  const legendB = legends[1]?.label ?? "Free";
+  const { t } = useTranslation("dashboard");
+  const getLegendLabel = (label: string) => {
+    if (label === "Premium") return t("home.legends.premium");
+    if (label === "Free") return t("home.legends.free");
+    if (label === "Booking Count") return t("home.legends.bookingCount");
+    return label;
+  };
+  const legendA = legends[0]?.label ? getLegendLabel(legends[0].label) : t("home.legends.premium");
+  const legendB = legends[1]?.label ? getLegendLabel(legends[1].label) : t("home.legends.free");
+  const translatedTitle = title === "Booking Source Breakdown"
+    ? t("home.bookingSourceBreakdown")
+    : title === "Booking Count"
+    ? t("home.legends.bookingCount")
+    : title;
 
   return (
     <div className="bg-card border border-white/5 rounded-xl p-5 flex-1">
       <div className="flex items-start justify-between mb-1">
         <div>
-          <h3 className="text-base font-semibold text-secondary">{title}</h3>
+          <h3 className="text-base font-semibold text-secondary">{translatedTitle}</h3>
           <h2 className="text-xl md:text-3xl font-bold text-primary mt-1">
             {valueDisplay}
           </h2>

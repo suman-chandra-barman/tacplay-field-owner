@@ -17,6 +17,7 @@ import type {
   DashboardMark2ChartItem,
 } from "@/types/DashboardTypes";
 import { Euro } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type RevenueChartProps = {
   title: string;
@@ -55,15 +56,22 @@ const RevenueChart: React.FC<RevenueChartProps> = ({
   legends,
   chartData,
 }) => {
-  const legendA = legends[0]?.label ?? "Revenue Growth";
-  const legendB = legends[1]?.label ?? "Booking Count";
+  const { t } = useTranslation("dashboard");
+  const getLegendLabel = (label: string) => {
+    if (label === "Revenue Growth") return t("home.legends.revenueGrowth");
+    if (label === "Booking Count") return t("home.legends.bookingCount");
+    return label;
+  };
+  const legendA = legends[0]?.label ? getLegendLabel(legends[0].label) : t("home.legends.revenueGrowth");
+  const legendB = legends[1]?.label ? getLegendLabel(legends[1].label) : t("home.legends.bookingCount");
+  const translatedTitle = (title === "Revenue" || title === "Total Revenue") ? t("home.totalRevenue") : title;
 
   return (
     <div className="bg-card border border-white/5 rounded-xl p-5">
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
-          <p className="text-sm md:text-sm text-secondary mb-1">{title}</p>
+          <p className="text-sm md:text-sm text-secondary mb-1">{translatedTitle}</p>
           <h2 className="text-xl md:text-3xl font-bold text-primary flex items-center gap-1">
             <Euro className="w-4 h-4" /> {valueDisplay}
           </h2>

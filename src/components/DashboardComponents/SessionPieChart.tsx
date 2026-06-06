@@ -4,6 +4,7 @@
 
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { useTranslation } from "react-i18next";
 import type { DashboardMark3Item } from "@/types/DashboardTypes";
 
 const COLORS = ["#980009", "#b4971e"];
@@ -19,15 +20,41 @@ const SessionPieChart: React.FC<SessionPieChartProps> = ({
   centerValueDisplay,
   items,
 }) => {
+  const { t, i18n } = useTranslation("dashboard");
+  const translateLabel = (name: string) => {
+    if (name === "Ranked") return t("sessions.filters.ranked");
+    if (name === "Social") return t("sessions.filters.social");
+    return name;
+  };
+
+  const getCenterValueDisplay = (val: string) => {
+    if (!val) return val;
+    const currentLang = i18n.language;
+    if (val.toLowerCase().includes("total sessions")) {
+      if (currentLang === "es") return val.replace(/total sessions/gi, "Total de sesiones");
+      if (currentLang === "fr") return val.replace(/total sessions/gi, "Total des sessions");
+      if (currentLang === "de") return val.replace(/total sessions/gi, "Sitzungen insgesamt");
+    } else if (val.toLowerCase().includes("sessions")) {
+      return val.replace(/sessions/gi, t("sidebar.sessions"));
+    }
+    return val;
+  };
+
   const chartData = items.map((item) => ({
-    name: item.label,
+    name: translateLabel(item.label),
     value: item.value,
   }));
+
+  const translatedTitle = title === "Session Distribution"
+    ? t("home.sessionDistribution")
+    : title === "Sessions"
+    ? t("sidebar.sessions")
+    : title;
 
   return (
     <div className="bg-card border border-white/5 rounded-xl p-5 flex-1">
       <h3 className="text-base md:text-lg font-semibold text-secondary mb-4">
-        {title}
+        {translatedTitle}
       </h3>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-center relative gap-4">
@@ -57,7 +84,7 @@ const SessionPieChart: React.FC<SessionPieChartProps> = ({
           </ResponsiveContainer>
           <div className="absolute inset-0 flex items-center justify-center flex-col">
             <span className="text-[10px] sm:text-xs text-secondary text-center px-4">
-              {centerValueDisplay}
+              {getCenterValueDisplay(centerValueDisplay)}
             </span>
           </div>
         </div>

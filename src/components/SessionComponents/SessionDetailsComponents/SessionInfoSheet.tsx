@@ -41,6 +41,15 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
     "win",
   );
 
+  const getStatusDisplay = (status: string) => {
+    const lower = status?.toLowerCase();
+    if (lower === "open") return t("sessions.filters.open");
+    if (lower === "ongoing") return t("sessions.filters.ongoing");
+    if (lower === "completed" || lower === "complete") return t("sessions.filters.completed");
+    if (lower === "cancelled" || lower === "canceled") return t("sessions.filters.cancelled");
+    return status;
+  };
+
   const { data, isLoading, isFetching, isError } = useGetOwnerSessionInfoQuery(
     sessionId as number,
     {
@@ -86,9 +95,9 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
 
     try {
       const response = await startMatch(sessionId).unwrap();
-      toast.success(getSuccessMessage(response, "Match started successfully."));
+      toast.success(getSuccessMessage(response, t("sessions.details.startedSuccess")));
     } catch (error) {
-      toast.error(getErrorMessage(error, "Failed to start match."));
+      toast.error(getErrorMessage(error, t("sessions.details.startedFailed")));
     }
   };
 
@@ -98,10 +107,10 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
     try {
       const response = await cancelMatch(sessionId).unwrap();
       toast.success(
-        getSuccessMessage(response, "Match cancelled successfully."),
+        getSuccessMessage(response, t("sessions.details.cancelledSuccess")),
       );
     } catch (error) {
-      toast.error(getErrorMessage(error, "Failed to cancel match."));
+      toast.error(getErrorMessage(error, t("sessions.details.cancelledFailed")));
     }
   };
 
@@ -117,10 +126,10 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
         },
       }).unwrap();
       toast.success(
-        getSuccessMessage(response, "Final result submitted successfully."),
+        getSuccessMessage(response, t("sessions.details.resultSuccess")),
       );
     } catch (error) {
-      toast.error(getErrorMessage(error, "Failed to submit final result."));
+      toast.error(getErrorMessage(error, t("sessions.details.resultFailed")));
     }
   };
 
@@ -149,7 +158,7 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
                   : "bg-secondary/20 text-secondary border-secondary/30"
               }`}
             >
-              {details?.status_display ?? "Status"}
+              {details?.status ? getStatusDisplay(details.status) : t("common.status")}
             </span>
           </div>
           <SheetTitle className="text-xl font-bold text-primary ">
@@ -172,17 +181,17 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
           <div className="px-5">
             <div>
               <h3 className="text-lg font-semibold text-primary mb-3">
-                Field Info
+                {t("sessions.details.fieldInfo")}
               </h3>
               <div>
-                <InfoRow label="Field ID" value={details.field_info.field_id} />
+                <InfoRow label={t("sessions.details.fieldId")} value={details.field_info.field_id} />
                 <InfoRow
-                  label="Field Name"
+                  label={t("sessions.details.fieldName")}
                   value={details.field_info.field_name}
                 />
-                <InfoRow label="Location" value={details.field_info.location} />
+                <InfoRow label={t("sessions.details.location")} value={details.field_info.location} />
                 <InfoRow
-                  label="Contact Number"
+                  label={t("sessions.details.contactNumber")}
                   value={details.field_info.contact_number}
                 />
               </div>
@@ -190,15 +199,15 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
 
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-primary mb-3">
-                Session Info
+                {t("sessions.details.sessionInfo")}
               </h3>
               <div>
                 <InfoRow
-                  label="Session ID"
+                  label={t("sessions.details.sessionId")}
                   value={details.session_info.session_id}
                 />
                 <InfoRow
-                  label="Match Type"
+                  label={t("sessions.details.matchType")}
                   value={
                     <span className="flex items-center gap-2 justify-end">
                       <span
@@ -209,29 +218,33 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
                             : "bg-custom-yellow"
                         }`}
                       />
-                      {details.session_info.match_type_display}
+                      {details.session_info.match_type.toLowerCase() === "ranked"
+                        ? t("sessions.filters.ranked")
+                        : details.session_info.match_type.toLowerCase() === "social"
+                        ? t("sessions.filters.social")
+                        : details.session_info.match_type_display}
                     </span>
                   }
                 />
                 <InfoRow
-                  label="Session Date"
+                  label={t("sessions.details.sessionDate")}
                   value={details.session_info.session_date}
                 />
-                <InfoRow label="Time" value={details.session_info.time} />
+                <InfoRow label={t("sessions.details.time")} value={details.session_info.time} />
                 <InfoRow
-                  label="Session Type"
+                  label={t("sessions.details.sessionType")}
                   value={details.session_info.session_type}
                 />
                 <InfoRow
-                  label="Team"
+                  label={t("sessions.details.team")}
                   value={details.session_info.team ?? "N/A"}
                 />
                 <InfoRow
-                  label="Player Per Team"
+                  label={t("sessions.details.playerPerTeam")}
                   value={details.session_info.player_per_team}
                 />
                 <InfoRow
-                  label="Packages"
+                  label={t("sessions.details.packages")}
                   value={details.session_info.packages}
                 />
               </div>
@@ -239,26 +252,26 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
 
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-primary mb-3">
-                Team Info
+                {t("sessions.details.teamInfo")}
               </h3>
               <div>
                 <InfoRow
-                  label="Team A Name"
+                  label={t("sessions.details.teamAName")}
                   value={details.team_info.team_a_name}
                 />
                 <InfoRow
-                  label="Team A Score"
+                  label={t("sessions.details.teamAScore")}
                   value={String(details.team_info.team_a_score)}
                 />
                 <InfoRow
-                  label="Team B Name"
+                  label={t("sessions.details.teamBName")}
                   value={details.team_info.team_b_name}
                 />
                 <InfoRow
-                  label="Team B Score"
+                  label={t("sessions.details.teamBScore")}
                   value={String(details.team_info.team_b_score)}
                 />
-                <InfoRow label="Champion" value={details.team_info.champion} />
+                <InfoRow label={t("sessions.details.champion")} value={details.team_info.champion} />
               </div>
             </div>
           </div>
@@ -267,7 +280,7 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
         {details && isOngoingStatus ? (
           <div className="px-5 pt-2 space-y-4">
             <div className="space-y-2">
-              <p className="text-sm font-medium text-primary">Team Result</p>
+              <p className="text-sm font-medium text-primary">{t("sessions.details.teamResult")}</p>
               <div className="grid grid-cols-2 gap-3">
                 <ResultSelector
                   title={details.team_info.team_a_name}
@@ -297,7 +310,7 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
                 >
                   {isCancellingMatch
                     ? `${t("common.loading")}`
-                    : "Match Cancel"}
+                    : t("sessions.details.matchCancel")}
                 </Button>
                 <Button
                   onClick={handleStartMatch}
@@ -306,7 +319,9 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
                 >
                   {isStartingMatch
                     ? `${t("common.loading")}`
-                    : (details.actions.primary_button ?? "Match Start")}
+                    : (details.actions.primary_button === "Match Start"
+                        ? t("sessions.details.matchStart")
+                        : (details.actions.primary_button ?? t("sessions.details.matchStart")))}
                 </Button>
               </>
             ) : null}
@@ -321,7 +336,7 @@ const SessionInfoSheet: React.FC<SessionInfoSheetProps> = ({
               >
                 {isSubmittingResult
                   ? `${t("common.loading")}`
-                  : "Submit Final Result"}
+                  : t("sessions.details.submitResult")}
               </Button>
             ) : null}
           </SheetFooter>
@@ -341,6 +356,7 @@ const ResultSelector = ({
   onChange: (value: "win" | "loss" | "draw") => void;
 }) => {
   const options: Array<"win" | "loss" | "draw"> = ["win", "loss", "draw"];
+  const { t } = useTranslation("dashboard");
 
   return (
     <div className="bg-[#0c0a0c] border border-white/5 rounded-xl p-2 space-y-2">
@@ -357,7 +373,11 @@ const ResultSelector = ({
                 : "text-secondary hover:text-white",
             )}
           >
-            {option.charAt(0).toUpperCase() + option.slice(1)}
+            {option === "win"
+              ? t("sessions.details.win")
+              : option === "loss"
+              ? t("sessions.details.loss")
+              : t("sessions.details.draw")}
           </button>
         ))}
       </div>

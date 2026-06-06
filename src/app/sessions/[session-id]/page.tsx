@@ -188,7 +188,7 @@ const SessionDetailsPage = () => {
                     {details.top_summary.team_a.score}
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs mt-1">
-                    Score
+                    {t("sessions.details.score")}
                   </p>
                 </div>
                 <div className="absolute right-[60%] top-0 bottom-0 w-px bg-linear-to-b from-transparent via-red-600 to-transparent transform -skew-x-20"></div>
@@ -199,7 +199,7 @@ const SessionDetailsPage = () => {
                     {details.top_summary.team_full.booked_display}
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs mt-1">
-                    Team Full
+                    {t("sessions.details.teamFull")}
                   </p>
                 </div>
                 <div className="absolute right-[40%] top-0 bottom-0 w-px bg-linear-to-b from-transparent via-red-600 to-transparent transform -skew-x-20"></div>
@@ -210,7 +210,7 @@ const SessionDetailsPage = () => {
                     {details.top_summary.team_b.score}
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs mt-1">
-                    Score
+                    {t("sessions.details.score")}
                   </p>
                 </div>
                 <div className="absolute right-[20%] top-0 bottom-0 w-px bg-linear-to-b from-transparent via-red-600 to-transparent transform -skew-x-20"></div>
@@ -250,7 +250,7 @@ const SessionDetailsPage = () => {
             ))}
             {teamAPlayers.length === 0 ? (
               <div className="text-sm text-secondary">
-                No players in Team A.
+                {t("sessions.details.noPlayersTeamA")}
               </div>
             ) : null}
           </div>
@@ -266,7 +266,7 @@ const SessionDetailsPage = () => {
             ))}
             {teamBPlayers.length === 0 ? (
               <div className="text-sm text-secondary">
-                No players in Team B.
+                {t("sessions.details.noPlayersTeamB")}
               </div>
             ) : null}
           </div>

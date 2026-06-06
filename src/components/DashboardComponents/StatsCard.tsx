@@ -11,6 +11,7 @@ interface StatsCardProps {
   change: string;
   isPositive: boolean;
   icon: React.ReactNode;
+  showCurrencyIcon?: boolean;
 }
 
 const StatsCard: React.FC<StatsCardProps> = ({
@@ -19,12 +20,13 @@ const StatsCard: React.FC<StatsCardProps> = ({
   change,
   isPositive,
   icon,
+  showCurrencyIcon,
 }) => {
   return (
     <div className="bg-card border border-white/5 rounded-xl p-5 flex flex-col gap-3 min-w-0 flex-1">
       <div className="flex items-start justify-between gap-2">
         <h2 className="text-xl md:text-3xl font-bold text-primary tracking-tight flex items-center gap-1">
-          {title === "Total Revenue" ? (
+          {showCurrencyIcon ? (
             <Euro className="w-4 h-4" />
           ) : null}
           {value}
