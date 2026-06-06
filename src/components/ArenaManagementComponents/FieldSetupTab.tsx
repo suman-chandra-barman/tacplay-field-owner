@@ -20,6 +20,7 @@ import {
 } from "@/redux/features/arenaManagement/arenaManagementAPI";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 type FieldSetupForm = {
   minimum_players_per_team: number;
@@ -34,6 +35,7 @@ type FieldSetupForm = {
 };
 
 const FieldSetupTab = () => {
+  const { t } = useTranslation("dashboard");
   const { data, isLoading, isFetching, isError } = useGetFieldSetupQuery();
   const [editFieldSetup, { isLoading: isSaving }] = useEditFieldSetupMutation();
 
@@ -84,13 +86,13 @@ const FieldSetupTab = () => {
       }).unwrap();
 
       toast.success(
-        getSuccessMessage(response, "Field setup updated successfully."),
+        getSuccessMessage(response, t("arena.fieldSetupTab.updated")),
       );
 
       setDraft(null);
       setIsEditing(false);
     } catch (error) {
-      toast.error(getErrorMessage(error, "Failed to update field setup."));
+      toast.error(getErrorMessage(error, t("arena.fieldSetupTab.updateFailed")));
       // Keep edit mode open so user can retry.
     }
   };
@@ -99,7 +101,7 @@ const FieldSetupTab = () => {
     return (
       <div className="py-10 flex items-center justify-center text-muted-foreground">
         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-        Loading field setup...
+        {t("arena.fieldSetupTab.loading")}
       </div>
     );
   }
@@ -107,7 +109,7 @@ const FieldSetupTab = () => {
   if (isError) {
     return (
       <div className="py-10 text-sm text-destructive">
-        Failed to load field setup.
+        {t("arena.fieldSetupTab.loadFailed")}
       </div>
     );
   }
@@ -117,11 +119,10 @@ const FieldSetupTab = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-primary">
-            Match Requirements &amp; Capacity
+            {t("onboardingFields.business.title")}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            Adjust minimum players, team format, and session limits to ensure
-            fair gameplay and ranked match qualification.
+            {t("onboardingFields.business.subtitle")}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -132,7 +133,7 @@ const FieldSetupTab = () => {
             onClick={handleToggleEdit}
           >
             <Pen className="w-4 h-4" />
-            {isEditing ? "Cancel Edit" : "Edit Information"}
+            {isEditing ? t("arena.cancelEdit") : t("arena.editInfo")}
           </Button>
           {isEditing && (
             <Button
@@ -147,7 +148,7 @@ const FieldSetupTab = () => {
               ) : (
                 <Save className="w-4 h-4" />
               )}
-              Save
+              {t("arena.save")}
             </Button>
           )}
         </div>
@@ -157,7 +158,7 @@ const FieldSetupTab = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Minimum Players Per Team
+              {t("onboardingFields.business.minPlayersTeam")}
             </label>
             <Input
               type="number"
@@ -178,7 +179,7 @@ const FieldSetupTab = () => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Maximum Players Per Team
+              {t("onboardingFields.business.maxPlayersTeam")}
             </label>
             <Input
               type="number"
@@ -202,7 +203,7 @@ const FieldSetupTab = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Minimum Players Per Sessions
+              {t("onboardingFields.business.minPlayersSession")}
             </label>
             <Input
               type="number"
@@ -223,7 +224,7 @@ const FieldSetupTab = () => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Maximum Players Per Sessions
+              {t("onboardingFields.business.maxPlayersSession")}
             </label>
             <Input
               type="number"
@@ -246,7 +247,7 @@ const FieldSetupTab = () => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Default Session Duration
+            {t("onboardingFields.business.defaultDuration")}
           </label>
           <div className="flex gap-3">
             <Input
@@ -267,11 +268,11 @@ const FieldSetupTab = () => {
             />
             <Select value={form.duration_unit} disabled>
               <SelectTrigger className="w-28 bg-input/30 border-white/10 text-primary h-11">
-                <SelectValue placeholder="Unit" />
+                <SelectValue placeholder={t("onboardingFields.business.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-card border-white/10">
-                <SelectItem value="minute">Minute</SelectItem>
-                <SelectItem value="hour">Hour</SelectItem>
+                <SelectItem value="minute">{t("onboardingFields.business.unitMinute")}</SelectItem>
+                <SelectItem value="hour">{t("onboardingFields.business.unitHour")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -279,7 +280,7 @@ const FieldSetupTab = () => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Base Price Per Player
+            {t("onboardingFields.business.basePrice")}
           </label>
           <Input
             value={form.base_price_per_player}
@@ -300,7 +301,7 @@ const FieldSetupTab = () => {
 
         <div className="flex items-center justify-between py-3 border-t border-white/5">
           <label className="text-sm font-medium text-primary">
-            Allow Social Matches
+            {t("onboardingFields.business.allowSocial")}
           </label>
           <div className="flex items-center gap-3">
             <Switch
@@ -319,14 +320,14 @@ const FieldSetupTab = () => {
               className="data-[state=checked]:bg-custom-yellow"
             />
             <span className="text-sm text-muted-foreground">
-              {form.allow_social_matches ? "On" : "Off"}
+              {form.allow_social_matches ? t("arena.on") : t("arena.off")}
             </span>
           </div>
         </div>
 
         <div className="flex items-center justify-between py-3 border-t border-white/5">
           <label className="text-sm font-medium text-primary">
-            Allow Ranked Matches
+            {t("onboardingFields.business.allowRanked")}
           </label>
           <div className="flex items-center gap-3">
             <Switch
@@ -345,7 +346,7 @@ const FieldSetupTab = () => {
               className="data-[state=checked]:bg-custom-yellow"
             />
             <span className="text-sm text-muted-foreground">
-              {form.allow_ranked_matches ? "On" : "Off"}
+              {form.allow_ranked_matches ? t("arena.on") : t("arena.off")}
             </span>
           </div>
         </div>

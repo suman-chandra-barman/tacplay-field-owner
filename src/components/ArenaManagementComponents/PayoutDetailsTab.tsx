@@ -19,6 +19,7 @@ import {
 } from "@/redux/features/arenaManagement/arenaManagementAPI";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 type PayoutForm = {
   business_name: string;
@@ -32,6 +33,7 @@ type PayoutForm = {
 };
 
 const PayoutDetailsTab = () => {
+  const { t } = useTranslation("dashboard");
   const { data, isLoading, isFetching, isError } = useGetPayoutDetailsQuery();
   const [editPayoutDetails, { isLoading: isSaving }] =
     useEditPayoutDetailsMutation();
@@ -82,13 +84,13 @@ const PayoutDetailsTab = () => {
       }).unwrap();
 
       toast.success(
-        getSuccessMessage(response, "Payout details updated successfully."),
+        getSuccessMessage(response, t("arena.payoutTab.updated")),
       );
 
       setDraft(null);
       setIsEditing(false);
     } catch (error) {
-      toast.error(getErrorMessage(error, "Failed to update payout details."));
+      toast.error(getErrorMessage(error, t("arena.payoutTab.updateFailed")));
       // Keep edit mode open so user can retry.
     }
   };
@@ -97,7 +99,7 @@ const PayoutDetailsTab = () => {
     return (
       <div className="py-10 flex items-center justify-center text-muted-foreground">
         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-        Loading payout details...
+        {t("arena.payoutTab.loading")}
       </div>
     );
   }
@@ -105,7 +107,7 @@ const PayoutDetailsTab = () => {
   if (isError) {
     return (
       <div className="py-10 text-sm text-destructive">
-        Failed to load payout details.
+        {t("arena.payoutTab.loadFailed")}
       </div>
     );
   }
@@ -115,11 +117,10 @@ const PayoutDetailsTab = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-primary">
-            Business &amp; Payout Information
+            {t("onboardingFields.payout.title")}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            Provide business details and payout information to receive booking
-            payments and manage subscriptions securely.
+            {t("onboardingFields.payout.subtitle")}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -130,7 +131,7 @@ const PayoutDetailsTab = () => {
             onClick={handleToggleEdit}
           >
             <Pen className="w-4 h-4" />
-            {isEditing ? "Cancel Edit" : "Edit Information"}
+            {isEditing ? t("arena.cancelEdit") : t("arena.editInfo")}
           </Button>
           {isEditing && (
             <Button
@@ -145,7 +146,7 @@ const PayoutDetailsTab = () => {
               ) : (
                 <Save className="w-4 h-4" />
               )}
-              Save
+              {t("arena.save")}
             </Button>
           )}
         </div>
@@ -154,7 +155,7 @@ const PayoutDetailsTab = () => {
       <div className="space-y-5">
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Business Name
+            {t("onboardingFields.payout.bizNameLabel")}
           </label>
           <Input
             value={form.business_name}
@@ -175,7 +176,7 @@ const PayoutDetailsTab = () => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Business Type
+            {t("onboardingFields.payout.bizTypeLabel")}
           </label>
           <Select
             value={form.business_type}
@@ -192,12 +193,12 @@ const PayoutDetailsTab = () => {
             disabled={!isEditing}
           >
             <SelectTrigger className="w-full bg-input/30 border-white/10 text-primary h-11">
-              <SelectValue placeholder="Select business type" />
+              <SelectValue placeholder={t("onboardingFields.payout.bizTypePlaceholder")} />
             </SelectTrigger>
             <SelectContent className="bg-card border-white/10">
-              <SelectItem value="individual">Individual</SelectItem>
+              <SelectItem value="individual">{t("onboardingFields.payout.typeIndividual")}</SelectItem>
               <SelectItem value="registered_company">
-                Registered Company
+                {t("onboardingFields.payout.typeCompany")}
               </SelectItem>
             </SelectContent>
           </Select>
@@ -205,7 +206,7 @@ const PayoutDetailsTab = () => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Contact Phone Number
+            {t("onboardingFields.payout.phoneLabel")}
           </label>
           <Input
             value={form.contact_phone_number}
@@ -228,17 +229,17 @@ const PayoutDetailsTab = () => {
       <div className="space-y-5">
         <div>
           <h3 className="text-lg sm:text-xl font-bold text-primary">
-            Payout Account Details
+            {t("onboardingFields.payout.accountDetailsHeader")}
           </h3>
           <p className="text-sm text-muted-foreground mt-1">
-            Provide your bank details to receive payments from player bookings.
+            {t("onboardingFields.payout.accountDetailsDesc")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Bank Account Holder Name
+              {t("onboardingFields.payout.holderLabel")}
             </label>
             <Input
               value={form.bank_account_holder_name}
@@ -258,7 +259,7 @@ const PayoutDetailsTab = () => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Bank Name
+              {t("onboardingFields.payout.bankLabel")}
             </label>
             <Input
               value={form.bank_name}
@@ -280,7 +281,7 @@ const PayoutDetailsTab = () => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Account Number
+            {t("onboardingFields.payout.numberLabel")}
           </label>
           <Input
             value={form.account_number}
@@ -302,7 +303,7 @@ const PayoutDetailsTab = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              IBAN / Routing Number
+              {t("onboardingFields.payout.ibanLabel")}
             </label>
             <Input
               value={form.iban_routing_number}
@@ -322,7 +323,7 @@ const PayoutDetailsTab = () => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              SWIFT / BIC Code
+              {t("onboardingFields.payout.swiftLabel")}
             </label>
             <Input
               value={form.swift_bic_code}

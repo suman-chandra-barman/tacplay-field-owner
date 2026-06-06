@@ -196,6 +196,55 @@
       "packageManagement": "Paketverwaltung",
       "payoutDetails": "Auszahlungsdetails",
       "billings": "Abrechnungen"
+    },
+    "cancelEdit": "Bearbeiten abbrechen",
+    "editInfo": "Informationen bearbeiten",
+    "save": "Speichern",
+    "on": "An",
+    "off": "Aus",
+    "add": "Hinzufügen",
+    "arenaInfoTab": {
+      "loading": "Arenainformationen werden geladen...",
+      "loadFailed": "Arenainformationen konnten nicht geladen werden.",
+      "updated": "Arenainformationen erfolgreich aktualisiert.",
+      "updateFailed": "Arenainformationen konnten nicht aktualisiert werden."
+    },
+    "fieldSetupTab": {
+      "loading": "Spielfeld-Setup wird geladen...",
+      "loadFailed": "Spielfeld-Setup konnte nicht geladen werden.",
+      "updated": "Spielfeld-Setup erfolgreich aktualisiert.",
+      "updateFailed": "Spielfeld-Setup konnte nicht aktualisiert werden."
+    },
+    "packagesTab": {
+      "loading": "Pakete werden geladen...",
+      "loadFailed": "Pakete konnten nicht geladen werden.",
+      "addNew": "Neues Paket hinzufügen",
+      "type": "Pakettyp {{index}}",
+      "active": "Paket aktiv",
+      "placeholder": "Geben Sie einen Artikel ein und drücken Sie die Eingabetaste",
+      "updated": "Paketverwaltung erfolgreich aktualisiert.",
+      "updateFailed": "Paketverwaltung konnte nicht aktualisiert werden."
+    },
+    "payoutTab": {
+      "loading": "Auszahlungsdetails werden geladen...",
+      "loadFailed": "Auszahlungsdetails konnten nicht geladen werden.",
+      "updated": "Auszahlungsdetails erfolgreich aktualisiert.",
+      "updateFailed": "Auszahlungsdetails konnten nicht aktualisiert werden."
+    },
+    "billingsTab": {
+      "title": "Rechnungsverlauf",
+      "loading": "Rechnungsverlauf wird geladen...",
+      "loadFailed": "Rechnungsverlauf konnte nicht geladen werden.",
+      "noRecords": "Keine Rechnungsbelege gefunden.",
+      "invoiceId": "Rechnungs-ID",
+      "date": "Datum",
+      "plan": "Plan",
+      "price": "Preis",
+      "status": "Status",
+      "statusPaid": "Bezahlt",
+      "statusPending": "Ausstehend",
+      "statusFailed": "Fehlgeschlagen",
+      "statusRefunded": "Rückerstattet"
     }
   },
   "auth": {
@@ -339,6 +388,49 @@
       "ibanPlaceholder": "IBAN oder Bankleitzahl",
       "swiftLabel": "SWIFT / BIC-Code",
       "swiftPlaceholder": "SWIFT-Code"
+    }
+  },
+  "upgradeModal": {
+    "title": "Stärken Sie Ihr Spielfeld. Kontrollieren Sie jedes Match.",
+    "subtitle": "Wählen Sie einen Plan, der die richtigen Tools freischaltet, um Sitzungen zu verwalten, Ranglistenspiele zu veranstalten und Ihre Arena auf TACPLAY auszubauen.",
+    "cancel": "Abbrechen",
+    "currentPlan": "Aktueller Plan",
+    "comingSoon": "Demnächst",
+    "failedToLoad": "Abonnementpläne konnten nicht geladen werden.",
+    "activePlanMessage": "Dieser Plan ist bereits aktiv.",
+    "checkoutSuccess": "Stripe-Checkout-Sitzung erfolgreich erstellt.",
+    "upgradeFailed": "Abonnement-Upgrade konnte nicht gestartet werden.",
+    "redirecting": "Weiterleitung...",
+    "buttonActive": "Aktiv",
+    "buttonUpgrade": "Upgrade",
+    "featuresLabel": "Enthaltene Funktionen:",
+    "features": {
+      "field_bronze_monthly": [
+        "Sitzungen erstellen und verwalten",
+        "Spielerbuchungen akzeptieren",
+        "In den Suchergebnissen für Spielfelder erscheinen",
+        "Einfache Buchungsübersicht",
+        "Push-Benachrichtigungen",
+        "Spielerbewertungen und Rezensionen",
+        "Ranglistenspiele veranstalten"
+      ],
+      "field_silver_monthly": [
+        "Alles in Bronze",
+        "Erweiterte Buchungsanalyse",
+        "Vorrangige Platzierung in der Suche",
+        "KI-gestützte intelligente Planung",
+        "Rabattcodes und Werbeaktionen",
+        "E-Mail- und Push-Kampagnen",
+        "Vorrangiger E-Mail-Support"
+      ],
+      "field_gold_monthly": [
+        "Alles in Silber",
+        "Unbegrenzte Sitzungserstellung",
+        "Vollständige Einnahmenverfolgung",
+        "Detaillierte Leistungseinblicke",
+        "Eigenes Spielfeld-Branding",
+        "Demnächst verfügbar & Hervorheben"
+      ]
     }
   }
 }

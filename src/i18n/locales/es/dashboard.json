@@ -196,6 +196,55 @@
       "packageManagement": "Gestion de paquetes",
       "payoutDetails": "Detalles de pago",
       "billings": "Facturacion"
+    },
+    "cancelEdit": "Cancelar edición",
+    "editInfo": "Editar información",
+    "save": "Guardar",
+    "on": "Encendido",
+    "off": "Apagado",
+    "add": "Añadir",
+    "arenaInfoTab": {
+      "loading": "Cargando información de la arena...",
+      "loadFailed": "Error al cargar la información de la arena.",
+      "updated": "Información de la arena actualizada correctamente.",
+      "updateFailed": "Error al actualizar la información de la arena."
+    },
+    "fieldSetupTab": {
+      "loading": "Cargando configuración del campo...",
+      "loadFailed": "Error al cargar la configuración del campo.",
+      "updated": "Configuración del campo actualizada correctamente.",
+      "updateFailed": "Error al actualizar la configuración del campo."
+    },
+    "packagesTab": {
+      "loading": "Cargando paquetes...",
+      "loadFailed": "Error al cargar los paquetes.",
+      "addNew": "Añadir nuevo paquete",
+      "type": "Tipo de paquete {{index}}",
+      "active": "Paquete activo",
+      "placeholder": "Escribe un artículo y presiona Enter",
+      "updated": "Gestión de paquetes actualizada correctamente.",
+      "updateFailed": "Error al actualizar la gestión de paquetes."
+    },
+    "payoutTab": {
+      "loading": "Cargando detalles de pago...",
+      "loadFailed": "Error al cargar los detalles de pago.",
+      "updated": "Detalles de pago actualizados correctamente.",
+      "updateFailed": "Error al actualizar los detalles de pago."
+    },
+    "billingsTab": {
+      "title": "Historial de facturación",
+      "loading": "Cargando historial de facturación...",
+      "loadFailed": "Error al cargar el historial de facturación.",
+      "noRecords": "No se encontraron registros de facturación.",
+      "invoiceId": "ID de factura",
+      "date": "Fecha",
+      "plan": "Plan",
+      "price": "Precio",
+      "status": "Estado",
+      "statusPaid": "Pagado",
+      "statusPending": "Pendiente",
+      "statusFailed": "Fallido",
+      "statusRefunded": "Reembolsado"
     }
   },
   "auth": {
@@ -339,6 +388,49 @@
       "ibanPlaceholder": "IBAN o número de ruta",
       "swiftLabel": "Código SWIFT / BIC",
       "swiftPlaceholder": "Código SWIFT"
+    }
+  },
+  "upgradeModal": {
+    "title": "Potencia tu campo. Controla cada partida.",
+    "subtitle": "Elige un plan que desbloquee las herramientas adecuadas para gestionar sesiones, organizar juegos clasificados y hacer crecer tu arena en TACPLAY.",
+    "cancel": "Cancelar",
+    "currentPlan": "Plan actual",
+    "comingSoon": "Próximamente",
+    "failedToLoad": "No se pudieron cargar los planes de suscripción.",
+    "activePlanMessage": "Este plan ya está activo.",
+    "checkoutSuccess": "Sesión de pago de Stripe creada con éxito.",
+    "upgradeFailed": "Error al iniciar la actualización de la suscripción.",
+    "redirecting": "Redirigiendo...",
+    "buttonActive": "Activo",
+    "buttonUpgrade": "Mejorar",
+    "featuresLabel": "Funciones incluidas:",
+    "features": {
+      "field_bronze_monthly": [
+        "Crear y gestionar sesiones",
+        "Aceptar reservas de jugadores",
+        "Aparecer en los resultados de búsqueda de campos",
+        "Resumen básico de reservas",
+        "Notificaciones push",
+        "Reseñas y valoraciones de jugadores",
+        "Organizar partidos clasificados"
+      ],
+      "field_silver_monthly": [
+        "Todo lo de Bronce",
+        "Analíticas avanzadas de reservas",
+        "Listado prioritario en búsquedas",
+        "Programación inteligente con IA",
+        "Códigos de descuento y promociones",
+        "Campañas por correo electrónico y push",
+        "Soporte prioritario por correo electrónico"
+      ],
+      "field_gold_monthly": [
+        "Todo lo de Plata",
+        "Creación ilimitada de sesiones",
+        "Seguimiento completo de ganancias",
+        "Información detallada de rendimiento",
+        "Personalización de marca del campo",
+        "Próximamente y destacar"
+      ]
     }
   }
 }

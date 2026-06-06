@@ -196,6 +196,55 @@
       "packageManagement": "Package Management",
       "payoutDetails": "Payout Details",
       "billings": "Billings"
+    },
+    "cancelEdit": "Cancel Edit",
+    "editInfo": "Edit Information",
+    "save": "Save",
+    "on": "On",
+    "off": "Off",
+    "add": "Add",
+    "arenaInfoTab": {
+      "loading": "Loading arena info...",
+      "loadFailed": "Failed to load arena info.",
+      "updated": "Arena info updated successfully.",
+      "updateFailed": "Failed to update arena info."
+    },
+    "fieldSetupTab": {
+      "loading": "Loading field setup...",
+      "loadFailed": "Failed to load field setup.",
+      "updated": "Field setup updated successfully.",
+      "updateFailed": "Failed to update field setup."
+    },
+    "packagesTab": {
+      "loading": "Loading packages...",
+      "loadFailed": "Failed to load packages.",
+      "addNew": "Add New Package",
+      "type": "Package Type {{index}}",
+      "active": "Package Active",
+      "placeholder": "Type an item and press Enter",
+      "updated": "Package management updated successfully.",
+      "updateFailed": "Failed to update package management."
+    },
+    "payoutTab": {
+      "loading": "Loading payout details...",
+      "loadFailed": "Your current Bronze plan does not include access to earnings or payout details. Please upgrade to Silver or Gold to access this feature.",
+      "updated": "Payout details updated successfully.",
+      "updateFailed": "Failed to update payout details."
+    },
+    "billingsTab": {
+      "title": "Billing History",
+      "loading": "Loading billing history...",
+      "loadFailed": "Failed to load billing history.",
+      "noRecords": "No billing records found.",
+      "invoiceId": "Invoice Id",
+      "date": "Date",
+      "plan": "Plan",
+      "price": "Price",
+      "status": "Status",
+      "statusPaid": "Paid",
+      "statusPending": "Pending",
+      "statusFailed": "Failed",
+      "statusRefunded": "Refunded"
     }
   },
   "auth": {
@@ -339,6 +388,49 @@
       "ibanPlaceholder": "IBAN or routing number",
       "swiftLabel": "SWIFT / BIC Code",
       "swiftPlaceholder": "SWIFT code"
+    }
+  },
+  "upgradeModal": {
+    "title": "Power Your Field. Control Every Match.",
+    "subtitle": "Choose a plan that unlocks the right tools to manage sessions, host ranked games, and grow your arena on TACPLAY.",
+    "cancel": "Cancel",
+    "currentPlan": "Current Plan",
+    "comingSoon": "Coming Soon",
+    "failedToLoad": "Failed to load subscription plans.",
+    "activePlanMessage": "This plan is already active.",
+    "checkoutSuccess": "Stripe checkout session created successfully.",
+    "upgradeFailed": "Failed to start subscription upgrade.",
+    "redirecting": "Redirecting...",
+    "buttonActive": "Active",
+    "buttonUpgrade": "Upgrade",
+    "featuresLabel": "Included Features:",
+    "features": {
+      "field_bronze_monthly": [
+        "Create and manage sessions",
+        "Accept player bookings",
+        "Appear in field search results",
+        "Basic booking overview",
+        "Push Notification",
+        "Player Review & Rating",
+        "Host ranked matches"
+      ],
+      "field_silver_monthly": [
+        "Everything in Bronze",
+        "Advanced booking analytics",
+        "Priority listing in search",
+        "Ai Smart Scheduling",
+        "Discount code & Promotion",
+        "Email & Push Campaign",
+        "Priority Email Support"
+      ],
+      "field_gold_monthly": [
+        "Everything in Silver",
+        "Unlimited session creation",
+        "Full earnings tracking",
+        "Detailed performance insights",
+        "Custom field branding",
+        "Coming Soon & blend Out"
+      ]
     }
   }
 }

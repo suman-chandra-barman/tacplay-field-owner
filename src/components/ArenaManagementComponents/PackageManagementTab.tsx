@@ -14,6 +14,7 @@ import {
 } from "@/redux/features/arenaManagement/arenaManagementAPI";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 type PackageForm = {
   id?: number;
@@ -33,6 +34,7 @@ const EMPTY_PACKAGE: PackageForm = {
 };
 
 const PackageManagementTab = () => {
+  const { t } = useTranslation("dashboard");
   const { data, isLoading, isFetching, isError } =
     useGetPackageManagementQuery();
   const [editPackageManagement, { isLoading: isSaving }] =
@@ -88,7 +90,7 @@ const PackageManagementTab = () => {
       }).unwrap();
 
       toast.success(
-        getSuccessMessage(response, "Package management updated successfully."),
+        getSuccessMessage(response, t("arena.packagesTab.updated")),
       );
 
       setDraftPackages(null);
@@ -96,7 +98,7 @@ const PackageManagementTab = () => {
       setIsEditing(false);
     } catch (error) {
       toast.error(
-        getErrorMessage(error, "Failed to update package management."),
+        getErrorMessage(error, t("arena.packagesTab.updateFailed")),
       );
       // Keep edit mode open so user can retry.
     }
@@ -178,7 +180,7 @@ const PackageManagementTab = () => {
     return (
       <div className="py-10 flex items-center justify-center text-muted-foreground">
         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-        Loading packages...
+        {t("arena.packagesTab.loading")}
       </div>
     );
   }
@@ -186,7 +188,7 @@ const PackageManagementTab = () => {
   if (isError) {
     return (
       <div className="py-10 text-sm text-destructive">
-        Failed to load packages.
+        {t("arena.packagesTab.loadFailed")}
       </div>
     );
   }
@@ -196,11 +198,10 @@ const PackageManagementTab = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-primary">
-            Field Packages Management
+            {t("onboardingFields.packages.title")}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            Create bundled packages for players and events including equipment
-            and paintballs.
+            {t("onboardingFields.packages.subtitle")}
           </p>
         </div>
         <div className="flex gap-3 flex-wrap">
@@ -211,7 +212,7 @@ const PackageManagementTab = () => {
             onClick={handleToggleEdit}
           >
             <Pen className="w-4 h-4" />
-            {isEditing ? "Cancel Edit" : "Edit Information"}
+            {isEditing ? t("arena.cancelEdit") : t("arena.editInfo")}
           </Button>
           {isEditing && (
             <>
@@ -227,7 +228,7 @@ const PackageManagementTab = () => {
                 ) : (
                   <Save className="w-4 h-4" />
                 )}
-                Save
+                {t("arena.save")}
               </Button>
               <Button
                 variant="default"
@@ -236,7 +237,7 @@ const PackageManagementTab = () => {
                 onClick={addPackage}
               >
                 <Plus className="w-4 h-4" />
-                Add New Package
+                {t("arena.packagesTab.addNew")}
               </Button>
             </>
           )}
@@ -248,7 +249,7 @@ const PackageManagementTab = () => {
           <div key={`${pkg.id ?? "new"}-${index}`} className="space-y-5">
             <div className="flex items-center justify-between">
               <h3 className="text-lg sm:text-xl font-bold text-primary">
-                Package Type {index + 1}
+                {t("arena.packagesTab.type", { index: index + 1 })}
               </h3>
               {isEditing && (
                 <Button
@@ -264,7 +265,7 @@ const PackageManagementTab = () => {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-primary">
-                Package Name
+                {t("onboardingFields.packages.nameLabel")}
               </label>
               <Input
                 value={pkg.package_name}
@@ -278,7 +279,7 @@ const PackageManagementTab = () => {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-primary">
-                Description
+                {t("onboardingFields.packages.descLabel")}
               </label>
               <Textarea
                 value={pkg.description}
@@ -292,7 +293,7 @@ const PackageManagementTab = () => {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-primary">
-                Package Fee
+                {t("onboardingFields.packages.feeLabel")}
               </label>
               <Input
                 type="number"
@@ -309,7 +310,7 @@ const PackageManagementTab = () => {
 
             <div className="flex items-center justify-between py-2 border-t border-white/5">
               <label className="text-sm font-medium text-primary">
-                Package Active
+                {t("arena.packagesTab.active")}
               </label>
               <div className="flex items-center gap-3">
                 <Switch
@@ -321,18 +322,18 @@ const PackageManagementTab = () => {
                   className="data-[state=checked]:bg-custom-yellow"
                 />
                 <span className="text-sm text-muted-foreground">
-                  {pkg.is_active ? "On" : "Off"}
+                  {pkg.is_active ? t("arena.on") : t("arena.off")}
                 </span>
               </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-primary">
-                Include Items
+                {t("onboardingFields.packages.includeLabel")}
               </label>
               <div className="flex gap-2">
                 <Input
-                  placeholder="Type an item and press Enter"
+                  placeholder={t("arena.packagesTab.placeholder")}
                   className="bg-input/30 border-white/10 text-primary h-11"
                   readOnly={!isEditing}
                   value={includeItemInputs[index] ?? ""}
@@ -353,7 +354,7 @@ const PackageManagementTab = () => {
                   className="h-11 px-4"
                   onClick={() => addItem(index, includeItemInputs[index] ?? "")}
                 >
-                  Add
+                  {t("arena.add")}
                 </Button>
               </div>
 

@@ -1,8 +1,8 @@
 /** @format */
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import { Check, X } from "lucide-react";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogClose, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { toast } from "react-toastify";
@@ -17,43 +17,31 @@ import {
   setLastPaymentUrl,
   setSelectedPlanCode,
 } from "@/redux/features/subscriptions/subscriptionsSlice";
+import { useTranslation } from "react-i18next";
+import { SubscriptionPlan } from "@/types/SubscriptionTypes";
 
 interface UpgradeModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const PLAN_FEATURES: Record<string, string[]> = {
-  field_bronze_monthly: [
-    "Create and manage sessions",
-    "Accept player bookings",
-    "Appear in field search results",
-    "Basic booking overview",
-    "Push Notification",
-    "Player Review & Rating",
-    "Host ranked matches",
-  ],
-  field_silver_monthly: [
-    "Everything in Bronze",
-    "Advanced booking analytics",
-    "Priority listing in search",
-    "Ai Smart Scheduling",
-    "Discount code & Promotion",
-    "Email & Push Campaign",
-    "Priority Email Support",
-  ],
-  field_gold_monthly: [
-    "Everything in Silver",
-    "Unlimited session creation",
-    "Full earnings tracking",
-    "Detailed performance insights",
-    "Custom field branding",
-    "Coming Soon & blend Out",
-  ],
-};
-
 export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
+  const { t } = useTranslation("dashboard");
   const dispatch = useAppDispatch();
+
+  const getPlanButtonText = (plan: SubscriptionPlan) => {
+    if (plan.is_current) {
+      return t("upgradeModal.buttonActive");
+    }
+    const btnTextLower = plan.button_text?.toLowerCase();
+    if (btnTextLower === "active" || btnTextLower === "current") {
+      return t("upgradeModal.buttonActive");
+    }
+    if (btnTextLower === "upgrade" || btnTextLower === "buy now" || btnTextLower === "get started") {
+      return t("upgradeModal.buttonUpgrade");
+    }
+    return plan.button_text;
+  };
 
   const {
     data: plansResponse,
@@ -66,8 +54,6 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
 
   const {
     data: statusResponse,
-    isLoading: isStatusLoading,
-    isFetching: isStatusFetching,
   } = useGetFieldOwnerSubscriptionStatusQuery(undefined, {
     skip: !isOpen,
   });
@@ -80,7 +66,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
 
   const handleUpgrade = async (planCode: string) => {
     if (currentPlanCode === planCode) {
-      toast.success("This plan is already active.");
+      toast.success(t("upgradeModal.alreadyActive"));
       return;
     }
 
@@ -104,7 +90,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
       toast.success(
         getSuccessMessage(
           response,
-          "Stripe checkout session created successfully.",
+          t("upgradeModal.checkoutSuccess"),
         ),
       );
       onClose();
@@ -113,7 +99,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
         paymentWindow.close();
       }
       toast.error(
-        getErrorMessage(error, "Failed to start subscription upgrade."),
+        getErrorMessage(error, t("upgradeModal.upgradeFailed")),
       );
     }
   };
@@ -131,20 +117,23 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
               onClick={onClose}
               className="cursor-pointer absolute top-4 right-4 flex items-center gap-1.5 text-[#9a98b8] hover:text-white text-sm font-medium transition-colors"
             >
-              Cancel
+              {t("upgradeModal.cancel")}
               <span className="w-6 h-6 rounded-full border border-[#2C2740] flex items-center justify-center">
                 <X size={12} />
               </span>
             </button>
           </DialogClose>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">
-            Power Your Field. Control Every Match.
-          </h2>
-          <p className="text-secondary text-sm max-w-md mx-auto leading-relaxed">
-            Choose a plan that unlocks the right tools to manage sessions, host
-            ranked games, and grow your arena on TACPLAY.
-          </p>
+          <DialogTitle asChild>
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">
+              {t("upgradeModal.title")}
+            </h2>
+          </DialogTitle>
+          <DialogDescription asChild>
+            <p className="text-secondary text-sm max-w-md mx-auto leading-relaxed">
+              {t("upgradeModal.subtitle")}
+            </p>
+          </DialogDescription>
         </div>
 
         {/* Cards */}
@@ -160,7 +149,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
             </div>
           ) : isPlansError ? (
             <div className="md:col-span-3 rounded-2xl border border-[#2C2740] bg-[#0b0b0f] p-6 text-sm text-red-400">
-              Failed to load subscription plans.
+              {t("upgradeModal.failedToLoad")}
             </div>
           ) : (
             plans.map((plan) => {
@@ -189,7 +178,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                   {isSelected && (
                     <div className="absolute top-4 right-4">
                       <Button className="bg-emerald-500/20 text-emerald-400 text-xs font-semibold px-3 py-1 border border-emerald-500/30">
-                        Current Plan
+                        {t("upgradeModal.currentPlan")}
                       </Button>
                     </div>
                   )}
@@ -197,7 +186,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                   {isComingSoonPlan && (
                     <div className="absolute top-4 right-4">
                       <Button className="bg-[#cdba20]/15 text-[#cdba20] text-xs font-semibold px-3 py-1 border border-[#cdba20]/40">
-                        Coming Soon
+                        {t("upgradeModal.comingSoon")}
                       </Button>
                     </div>
                   )}
@@ -211,7 +200,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
 
                   {isComingSoonPlan ? (
                     <div className="flex items-center justify-center h-36 md:min-h-80 text-[#cdba20] text-sm font-semibold tracking-wide">
-                      Coming Soon
+                      {t("upgradeModal.comingSoon")}
                     </div>
                   ) : (
                     <>
@@ -246,28 +235,32 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                           handleUpgrade(plan.code);
                         }}
                       >
-                        {isUpgrading ? "Redirecting..." : plan.button_text}
+                        {isUpgrading ? t("upgradeModal.redirecting") : getPlanButtonText(plan)}
                       </button>
 
                       {/* Features */}
                       <div>
                         <p className="text-white font-semibold text-sm mb-3">
-                          Included Features:
+                          {t("upgradeModal.featuresLabel")}
                         </p>
                         <ul className="space-y-2">
-                          {(PLAN_FEATURES[plan.code] ?? []).map((feature) => (
-                            <li
-                              key={feature}
-                              className="flex items-center gap-2 text-xs text-[#d1cfe8]"
-                            >
-                              <Check
-                                size={14}
-                                className="text-[#980009] shrink-0"
-                                strokeWidth={3}
-                              />
-                              {feature}
-                            </li>
-                          ))}
+                          {(() => {
+                            const localizedFeatures = t(`upgradeModal.features.${plan.code}`, { returnObjects: true });
+                            const featuresList = Array.isArray(localizedFeatures) ? localizedFeatures : [];
+                            return featuresList.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-center gap-2 text-xs text-[#d1cfe8]"
+                              >
+                                <Check
+                                  size={14}
+                                  className="text-[#980009] shrink-0"
+                                  strokeWidth={3}
+                                />
+                                {feature}
+                              </li>
+                            ));
+                          })()}
                         </ul>
                       </div>
                     </>

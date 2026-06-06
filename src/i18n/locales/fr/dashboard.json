@@ -196,6 +196,55 @@
       "packageManagement": "Gestion des forfaits",
       "payoutDetails": "Details de paiement",
       "billings": "Facturation"
+    },
+    "cancelEdit": "Annuler la modification",
+    "editInfo": "Modifier l'information",
+    "save": "Enregistrer",
+    "on": "Activer",
+    "off": "Désactiver",
+    "add": "Ajouter",
+    "arenaInfoTab": {
+      "loading": "Chargement des informations de l'arène...",
+      "loadFailed": "Échec du chargement des informations de l'arène.",
+      "updated": "Informations de l'arène mises à jour avec succès.",
+      "updateFailed": "Échec de la mise à jour des informations de l'arène."
+    },
+    "fieldSetupTab": {
+      "loading": "Chargement de la configuration du terrain...",
+      "loadFailed": "Échec du chargement de la configuration du terrain.",
+      "updated": "Configuration du terrain mise à jour avec succès.",
+      "updateFailed": "Échec de la mise à jour de la configuration du terrain."
+    },
+    "packagesTab": {
+      "loading": "Chargement des forfaits...",
+      "loadFailed": "Échec du chargement des forfaits.",
+      "addNew": "Ajouter un nouveau forfait",
+      "type": "Type de forfait {{index}}",
+      "active": "Forfait actif",
+      "placeholder": "Saisissez un élément et appuyez sur Entrée",
+      "updated": "Gestion des forfaits mise à jour avec succès.",
+      "updateFailed": "Échec de la mise à jour de la gestion des forfaits."
+    },
+    "payoutTab": {
+      "loading": "Chargement des détails de paiement...",
+      "loadFailed": "Échec du chargement des détails de paiement.",
+      "updated": "Détails de paiement mis à jour avec succès.",
+      "updateFailed": "Échec de la mise à jour des détails de paiement."
+    },
+    "billingsTab": {
+      "title": "Historique de facturation",
+      "loading": "Chargement de l'historique de facturation...",
+      "loadFailed": "Échec du chargement de l'historique de facturation.",
+      "noRecords": "Aucun enregistrement de facturation trouvé.",
+      "invoiceId": "ID de facture",
+      "date": "Date",
+      "plan": "Plan",
+      "price": "Prix",
+      "status": "Statut",
+      "statusPaid": "Payé",
+      "statusPending": "En attente",
+      "statusFailed": "Échoué",
+      "statusRefunded": "Remboursé"
     }
   },
   "auth": {
@@ -339,6 +388,49 @@
       "ibanPlaceholder": "IBAN ou numéro de routage",
       "swiftLabel": "Code SWIFT / BIC",
       "swiftPlaceholder": "Code SWIFT"
+    }
+  },
+  "upgradeModal": {
+    "title": "Propulsez votre terrain. Contrôlez chaque match.",
+    "subtitle": "Choisissez un plan qui déverrouille les bons outils pour gérer les sessions, héberger des jeux classés et développer votre arène sur TACPLAY.",
+    "cancel": "Annuler",
+    "currentPlan": "Plan actuel",
+    "comingSoon": "Bientôt disponible",
+    "failedToLoad": "Échec du chargement des plans d'abonnement.",
+    "activePlanMessage": "Ce plan est déjà actif.",
+    "checkoutSuccess": "Session de paiement Stripe créée avec succès.",
+    "upgradeFailed": "Échec du démarrage de la mise à niveau de l'abonnement.",
+    "redirecting": "Redirection...",
+    "buttonActive": "Actif",
+    "buttonUpgrade": "Mettre à niveau",
+    "featuresLabel": "Fonctionnalités incluses :",
+    "features": {
+      "field_bronze_monthly": [
+        "Créer et gérer des sessions",
+        "Accepter les réservations des joueurs",
+        "Apparaître dans les résultats de recherche de terrains",
+        "Aperçu de base des réservations",
+        "Notifications push",
+        "Avis et évaluations des joueurs",
+        "Héberger des matchs classés"
+      ],
+      "field_silver_monthly": [
+        "Tout ce qui est dans Bronze",
+        "Analyses de réservation avancées",
+        "Affichage prioritaire dans les recherches",
+        "Planification intelligente par IA",
+        "Codes de réduction et promotions",
+        "Campagnes d'emailing et push",
+        "Support client prioritaire par email"
+      ],
+      "field_gold_monthly": [
+        "Tout ce qui est dans Silver",
+        "Création illimitée de sessions",
+        "Suivi complet des gains",
+        "Informations détaillées sur les performances",
+        "Personnalisation de l'arène",
+        "Bientôt disponible et mise en avant"
+      ]
     }
   }
 }

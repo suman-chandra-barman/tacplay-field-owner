@@ -2,10 +2,11 @@
 
 "use client";
 
-import  { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Loader2, Search } from "lucide-react";
 import { useGetFieldOwnerBillingHistoryQuery } from "@/redux/features/subscriptions/subscriptionsAPI";
 import type { BillingHistoryItem } from "@/types/SubscriptionTypes";
+import { useTranslation } from "react-i18next";
 
 const statusBadgeClassMap: Record<string, string> = {
   paid: "bg-teal-500/20 text-teal-400 border border-teal-500/30",
@@ -15,6 +16,7 @@ const statusBadgeClassMap: Record<string, string> = {
 };
 
 const BillingsTab = () => {
+  const { t } = useTranslation("dashboard");
   const [search, setSearch] = useState("");
   const { data, isLoading, isFetching, isError } =
     useGetFieldOwnerBillingHistoryQuery();
@@ -50,11 +52,15 @@ const BillingsTab = () => {
       statusBadgeClassMap[status.toLowerCase()] ??
       "bg-secondary/20 text-secondary border border-secondary/30";
 
+    const normalizedStatus = status.toLowerCase();
+    const statusKey = `status${normalizedStatus.charAt(0).toUpperCase() + normalizedStatus.slice(1)}`;
+    const translatedStatus = t(`arena.billingsTab.${statusKey}`, { defaultValue: status });
+
     return (
       <span
         className={`inline-flex px-2.5 py-0.5 text-xs font-medium rounded-md capitalize ${colors}`}
       >
-        {status}
+        {translatedStatus}
       </span>
     );
   };
@@ -63,7 +69,7 @@ const BillingsTab = () => {
     return (
       <div className="py-10 flex items-center justify-center text-muted-foreground">
         <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-        Loading billing history...
+        {t("arena.billingsTab.loading")}
       </div>
     );
   }
@@ -71,7 +77,7 @@ const BillingsTab = () => {
   if (isError) {
     return (
       <div className="py-10 text-sm text-destructive">
-        Failed to load billing history.
+        {t("arena.billingsTab.loadFailed")}
       </div>
     );
   }
@@ -81,14 +87,14 @@ const BillingsTab = () => {
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <h2 className="text-xl sm:text-2xl font-bold text-primary">
-            Billing History
+            {t("arena.billingsTab.title")}
           </h2>
           <div className="flex items-center gap-3">
             <div className="relative flex-1 sm:flex-none">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder={t("common.search")}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full sm:w-56 pl-9 pr-4 py-2 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50"
@@ -98,7 +104,7 @@ const BillingsTab = () => {
         </div>
 
         <div className="text-center py-10 text-muted-foreground text-sm">
-          No billing records found.
+          {t("arena.billingsTab.noRecords")}
         </div>
       </div>
     );
@@ -109,7 +115,7 @@ const BillingsTab = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h2 className="text-xl sm:text-2xl font-bold text-primary">
-          Billing History
+          {t("arena.billingsTab.title")}
         </h2>
         <div className="flex items-center gap-3">
           {/* Search */}
@@ -117,7 +123,7 @@ const BillingsTab = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Search"
+              placeholder={t("common.search")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full sm:w-56 pl-9 pr-4 py-2 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50"
@@ -134,27 +140,27 @@ const BillingsTab = () => {
             <tr className="border-b border-white/10 bg-muted/30">
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
-                  Invoice Id
+                  {t("arena.billingsTab.invoiceId")}
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
-                  Date
+                  {t("arena.billingsTab.date")}
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
-                  Plan
+                  {t("arena.billingsTab.plan")}
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
-                  Price
+                  {t("arena.billingsTab.price")}
                 </div>
               </th>
               <th className="p-3 text-left">
                 <div className="flex items-center gap-1 text-muted-foreground font-medium">
-                  Status
+                  {t("arena.billingsTab.status")}
                 </div>
               </th>
             </tr>
@@ -183,7 +189,7 @@ const BillingsTab = () => {
       </div>
       {filteredData.length === 0 && (
         <div className="text-center py-10 text-muted-foreground text-sm">
-          No billing records found.
+          {t("arena.billingsTab.noRecords")}
         </div>
       )}
     </div>

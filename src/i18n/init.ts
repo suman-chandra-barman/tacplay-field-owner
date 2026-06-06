@@ -11,7 +11,7 @@ import {
 
 const STORAGE_KEY = "tp-language";
 
-const getBrowserLanguage = (): SupportedLanguage => {
+export const getBrowserLanguage = (): SupportedLanguage => {
   if (typeof window === "undefined") {
     return DEFAULT_LANGUAGE;
   }
@@ -32,7 +32,7 @@ const getBrowserLanguage = (): SupportedLanguage => {
 if (!i18n.isInitialized) {
   i18n.use(initReactI18next).init({
     resources,
-    lng: getBrowserLanguage(),
+    lng: DEFAULT_LANGUAGE,
     fallbackLng: DEFAULT_LANGUAGE,
     defaultNS: "dashboard",
     ns: ["dashboard"],
