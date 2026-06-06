@@ -39,7 +39,7 @@ export default function LanguageDropdown() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all text-sm select-none border border-white/5 bg-white/[0.02] hover:bg-white/10 hover:border-white/10 outline-none">
+      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all text-sm select-none border border-white/5 bg-white/2 hover:bg-white/10 hover:border-white/10 outline-none">
         <Globe className="w-4 h-4 text-muted-foreground" />
         <span className="text-muted-foreground text-xs sm:text-sm">
           {displayLabel}
