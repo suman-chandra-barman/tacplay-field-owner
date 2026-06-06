@@ -14,8 +14,11 @@ import { useSignUpFieldOwnerMutation } from "@/redux/features/auth/authAPI";
 import { useAppDispatch } from "@/redux/hooks";
 import { setPendingVerification } from "@/redux/features/auth/authSlice";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
+import { useTranslation } from "react-i18next";
+
 
 const SignUpPage = () => {
+  const { t } = useTranslation("dashboard");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreed, setAgreed] = useState(false);
@@ -84,11 +87,10 @@ const SignUpPage = () => {
 
         {/* Heading */}
         <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2 text-center">
-          Register Your Field
+          {t("auth.registerField")}
         </h1>
         <p className="text-sm text-muted-foreground text-center mb-8 max-w-sm">
-          Create your Field Owner account to publish sessions, manage bookings,
-          and grow your tactical community on TACPLAY.
+          {t("auth.signUpDesc")}
         </p>
 
         {/* Form */}
@@ -96,11 +98,11 @@ const SignUpPage = () => {
           {/* Owner Name */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Owner Name
+              {t("auth.ownerName")}
             </label>
             <input
               type="text"
-              placeholder="Enter owner name"
+              placeholder={t("auth.placeholders.enterOwnerName")}
               value={ownerName}
               onChange={(event) => setOwnerName(event.target.value)}
               className="w-full px-4 py-2.5 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -110,11 +112,11 @@ const SignUpPage = () => {
           {/* Business Email */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Business Email
+              {t("auth.businessEmail")}
             </label>
             <input
               type="email"
-              placeholder="Enter email address"
+              placeholder={t("auth.placeholders.enterSignUpEmail")}
               value={businessEmail}
               onChange={(event) => setBusinessEmail(event.target.value)}
               className="w-full px-4 py-2.5 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -123,11 +125,11 @@ const SignUpPage = () => {
 
           {/* Password */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-primary">Password</label>
+            <label className="text-sm font-medium text-primary">{t("auth.password")}</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Create a secure password"
+                placeholder={t("auth.placeholders.createPassword")}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full px-4 py-2.5 pr-11 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -149,12 +151,12 @@ const SignUpPage = () => {
           {/* Confirm Password */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Confirm Password
+              {t("auth.confirmPassword")}
             </label>
             <div className="relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Re-enter your password"
+                placeholder={t("auth.placeholders.reenterPassword")}
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
                 className="w-full px-4 py-2.5 pr-11 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -182,7 +184,7 @@ const SignUpPage = () => {
             />
             <Link href="https://tacplay.eu/owner" target="_blank">
               <label className="text-sm text-muted-foreground hover:underline cursor-pointer select-none">
-                I agree to field owner agreement
+                {t("auth.agreeToTerms")}
               </label>
             </Link>
           </div>
@@ -193,24 +195,24 @@ const SignUpPage = () => {
             disabled={isLoading}
             className="w-full py-3 rounded-lg bg-custom-red text-white text-sm font-semibold hover:bg-custom-red/90 transition-colors border-2 border-border"
           >
-            {isLoading ? "Signing Up..." : "Sign Up"}
+            {isLoading ? t("auth.signingUp") : t("auth.signUp")}
           </button>
 
           {/* Divider */}
           <div className="flex items-center gap-3">
             <div className="flex-1 h-px bg-white/10" />
-            <span className="text-xs text-muted-foreground">or</span>
+            <span className="text-xs text-muted-foreground">{t("auth.or")}</span>
             <div className="flex-1 h-px bg-white/10" />
           </div>
 
           {/* Already have account */}
           <p className="text-sm text-center text-muted-foreground">
-            Already have an account?{" "}
+            {t("auth.alreadyHaveAccount")}{" "}
             <Link
               href="/sign-in"
               className="text-primary font-semibold underline underline-offset-2 hover:text-custom-yellow transition-colors"
             >
-              Sign In
+              {t("auth.signIn")}
             </Link>
           </p>
         </div>

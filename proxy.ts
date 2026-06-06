@@ -9,7 +9,6 @@ const authOnlyRoutes = [
   "/sign-up",
   "/forgot-pass",
   "/verify-otp",
-  "/reset-pass",
 ];
 
 const isAuthOnlyRoute = (pathname: string) => {

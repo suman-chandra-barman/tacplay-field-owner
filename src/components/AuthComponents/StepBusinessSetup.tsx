@@ -1,7 +1,3 @@
-/** @format */
-
-"use client";
-
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -12,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslation } from "react-i18next";
 
 export type MatchRulesStepForm = {
   minimum_players_per_team: string;
@@ -31,15 +28,16 @@ type StepBusinessSetupProps = {
 };
 
 const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
+  const { t } = useTranslation("dashboard");
+
   return (
     <div className="space-y-6">
       <div>
         <h2 className="text-xl sm:text-2xl font-bold text-primary">
-          Match Requirements &amp; Capacity
+          {t("onboardingFields.business.title")}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          Adjust minimum players, team format, and session limits to ensure fair
-          gameplay and ranked match qualification.
+          {t("onboardingFields.business.subtitle")}
         </p>
       </div>
 
@@ -47,7 +45,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Minimum Players Per Team
+              {t("onboardingFields.business.minPlayersTeam")}
             </label>
             <Input
               type="number"
@@ -62,7 +60,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Maximum Players Per Team
+              {t("onboardingFields.business.maxPlayersTeam")}
             </label>
             <Input
               type="number"
@@ -80,7 +78,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Minimum Players Per Sessions
+              {t("onboardingFields.business.minPlayersSession")}
             </label>
             <Input
               type="number"
@@ -95,7 +93,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Maximum Players Per Sessions
+              {t("onboardingFields.business.maxPlayersSession")}
             </label>
             <Input
               type="number"
@@ -112,7 +110,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Default Session Duration
+            {t("onboardingFields.business.defaultDuration")}
           </label>
           <div className="flex gap-3">
             <Input
@@ -130,11 +128,11 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
               onValueChange={(v) => onChange({ duration_unit: v })}
             >
               <SelectTrigger className="w-28 bg-input/30 border-white/10 text-primary h-11">
-                <SelectValue placeholder="Unit" />
+                <SelectValue placeholder={t("onboardingFields.business.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-card border-white/10">
-                <SelectItem value="minute">Minute</SelectItem>
-                <SelectItem value="hour">Hour</SelectItem>
+                <SelectItem value="minute">{t("onboardingFields.business.unitMinute")}</SelectItem>
+                <SelectItem value="hour">{t("onboardingFields.business.unitHour")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -142,7 +140,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Base Price Per Player
+            {t("onboardingFields.business.basePrice")}
           </label>
           <Input
             placeholder="0.00"
@@ -156,7 +154,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
 
         <div className="flex items-center justify-between py-3 border-t border-white/5">
           <label className="text-sm font-medium text-primary">
-            Allow Social Matches
+            {t("onboardingFields.business.allowSocial")}
           </label>
           <div className="flex items-center gap-3">
             <Switch
@@ -165,14 +163,14 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
               onCheckedChange={(v) => onChange({ allow_social_matches: v })}
             />
             <span className="text-sm text-muted-foreground">
-              {value.allow_social_matches ? "On" : "Off"}
+              {value.allow_social_matches ? t("onboardingFields.business.on") : t("onboardingFields.business.off")}
             </span>
           </div>
         </div>
 
         <div className="flex items-center justify-between py-3 border-t border-white/5">
           <label className="text-sm font-medium text-primary">
-            Allow Ranked Matches
+            {t("onboardingFields.business.allowRanked")}
           </label>
           <div className="flex items-center gap-3">
             <Switch
@@ -181,7 +179,7 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
               onCheckedChange={(v) => onChange({ allow_ranked_matches: v })}
             />
             <span className="text-sm text-muted-foreground">
-              {value.allow_ranked_matches ? "On" : "Off"}
+              {value.allow_ranked_matches ? t("onboardingFields.business.on") : t("onboardingFields.business.off")}
             </span>
           </div>
         </div>

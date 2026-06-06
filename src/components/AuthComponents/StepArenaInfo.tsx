@@ -4,6 +4,7 @@
 
 import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useTranslation } from "react-i18next";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -30,6 +31,7 @@ type StepArenaInfoProps = {
 };
 
 const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
+  const { t } = useTranslation("dashboard");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const inputId = useId();
   const [countries, setCountries] = useState<ICountry[]>([]);
@@ -96,21 +98,20 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
     <div className="space-y-6">
       <div>
         <h2 className="text-xl sm:text-2xl font-bold text-primary">
-          Tell Us About Your Field
+          {t("onboardingFields.arena.title")}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          This info will be visible to players when they browse and book
-          sessions at your arena.
+          {t("onboardingFields.arena.subtitle")}
         </p>
       </div>
 
       <div className="space-y-5">
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Field / Arena Name
+            {t("onboardingFields.arena.nameLabel")}
           </label>
           <Input
-            placeholder="Enter arena name"
+            placeholder={t("onboardingFields.arena.namePlaceholder")}
             className="bg-input/30 border-white/10 text-primary h-11"
             value={value.field_name}
             onChange={(e) => onChange({ field_name: e.target.value })}
@@ -119,11 +120,11 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Description
+            {t("onboardingFields.arena.descLabel")}
           </label>
           <Textarea
-            placeholder="Describe your arena..."
-            className="bg-input/30 border-white/10 text-primary min-h-[100px]"
+            placeholder={t("onboardingFields.arena.descPlaceholder")}
+            className="bg-input/30 border-white/10 text-primary min-h-25"
             value={value.description}
             onChange={(e) => onChange({ description: e.target.value })}
           />
@@ -131,13 +132,15 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-primary">Country</label>
+            <label className="text-sm font-medium text-primary">
+              {t("onboardingFields.arena.countryLabel")}
+            </label>
             <Select
               value={value.country}
               onValueChange={(v) => onChange({ country: v, city: "" })}
             >
               <SelectTrigger className="w-full bg-input/30 border-white/10 text-primary h-11">
-                <SelectValue placeholder="Select country" />
+                <SelectValue placeholder={t("onboardingFields.arena.countryPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-card border-white/10">
                 {countries.map((country) => (
@@ -149,13 +152,15 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
             </Select>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-primary">City</label>
+            <label className="text-sm font-medium text-primary">
+              {t("onboardingFields.arena.cityLabel")}
+            </label>
             <Select
               value={value.city}
               onValueChange={(v) => onChange({ city: v })}
             >
               <SelectTrigger className="w-full bg-input/30 border-white/10 text-primary h-11">
-                <SelectValue placeholder="Select city" />
+                <SelectValue placeholder={t("onboardingFields.arena.cityPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-card border-white/10">
                 {cities.map((city) => (
@@ -170,10 +175,10 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Full Address
+            {t("onboardingFields.arena.addressLabel")}
           </label>
           <Input
-            placeholder="Enter your full address"
+            placeholder={t("onboardingFields.arena.addressPlaceholder")}
             className="bg-input/30 border-white/10 text-primary h-11"
             value={value.full_address}
             onChange={(e) => onChange({ full_address: e.target.value })}
@@ -182,10 +187,10 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Arena Thumbnail
+            {t("onboardingFields.arena.thumbLabel")}
           </label>
           <p className="text-xs text-muted-foreground">
-            Upload a photo to display as your arena&apos;s profile picture.
+            {t("onboardingFields.arena.thumbDesc")}
           </p>
           <input
             id={inputId}
@@ -217,7 +222,7 @@ const StepArenaInfo = ({ value, onChange }: StepArenaInfoProps) => {
               onClick={() => fileInputRef.current?.click()}
               className="px-4 py-2 rounded-lg border border-white/10 bg-input/30 text-sm text-primary hover:bg-input/50 transition-colors"
             >
-              Choose
+              {t("onboardingFields.arena.chooseButton")}
             </button>
           </div>
         </div>

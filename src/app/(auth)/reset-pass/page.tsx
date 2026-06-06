@@ -10,15 +10,17 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useResetPasswordMutation } from "@/redux/features/auth/authAPI";
 import { useAppDispatch } from "@/redux/hooks";
-import { setAuthSession } from "@/redux/features/auth/authSlice";
+import { clearAuthSession } from "@/redux/features/auth/authSlice";
 import {
+  clearAuthTokens,
   getErrorMessage,
   getSuccessMessage,
-  saveAuthTokens,
-  saveAuthUser,
 } from "@/lib/auth";
+import { useTranslation } from "react-i18next";
+
 
 const ResetPasswordPage = () => {
+  const { t } = useTranslation("dashboard");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
@@ -44,17 +46,16 @@ const ResetPasswordPage = () => {
         confirm_password: confirmPassword,
       }).unwrap();
 
-      if (!response.accessToken || !response.refreshToken || !response.user) {
-        toast.error("Reset response is missing required auth data");
-        return;
-      }
+      clearAuthTokens();
+      dispatch(clearAuthSession());
 
-      saveAuthTokens(response.accessToken, response.refreshToken);
-      saveAuthUser(response.user);
-      dispatch(setAuthSession(response.user));
-
-      toast.success(getSuccessMessage(response, "Password reset successfully"));
-      router.push("/");
+      toast.success(
+        getSuccessMessage(
+          response,
+          "Password reset successfully. Please sign in with your new password.",
+        ),
+      );
+      router.push("/sign-in");
     } catch (error) {
       toast.error(getErrorMessage(error, "Failed to reset password"));
     }
@@ -82,11 +83,10 @@ const ResetPasswordPage = () => {
         {/* Heading */}
         <div className="text-center space-y-2">
           <h1 className="text-xl sm:text-2xl font-bold text-primary">
-            Set a new password
+            {t("auth.setNewPassword")}
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground">
-            Make your secure password to keep your dashboard safe and
-            accessible.
+            {t("auth.resetPasswordDesc")}
           </p>
         </div>
 
@@ -94,11 +94,11 @@ const ResetPasswordPage = () => {
         <div className="space-y-4">
           {/* Password */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-primary">Password</label>
+            <label className="text-sm font-medium text-primary">{t("auth.password")}</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter new password"
+                placeholder={t("auth.placeholders.enterNewPassword")}
                 value={newPassword}
                 onChange={(event) => setNewPassword(event.target.value)}
                 className="w-full px-4 py-2.5 pr-11 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -120,12 +120,12 @@ const ResetPasswordPage = () => {
           {/* Confirm Password */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Confirm Password
+              {t("auth.confirmPassword")}
             </label>
             <div className="relative">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Re-enter your password"
+                placeholder={t("auth.placeholders.reenterPassword")}
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
                 className="w-full px-4 py-2.5 pr-11 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -150,18 +150,18 @@ const ResetPasswordPage = () => {
             disabled={isLoading}
             className="w-full py-3 rounded-lg bg-custom-red text-white text-sm font-semibold hover:bg-custom-red/90 transition-colors border-2 border-border mt-2"
           >
-            {isLoading ? "Changing..." : "Change Password"}
+            {isLoading ? t("auth.changing") : t("auth.changePassword")}
           </button>
         </div>
 
         {/* Confirm & back */}
         <p className="text-sm text-center text-muted-foreground">
-          Confirmed Password &amp; Go to the{" "}
+          {t("auth.confirmedPassGoTo")}{" "}
           <Link
             href="/sign-in"
             className="text-primary font-semibold underline underline-offset-2 hover:text-custom-yellow transition-colors"
           >
-            Sign In Page?
+            {t("auth.signInPageQuestion")}
           </Link>
         </p>
       </div>

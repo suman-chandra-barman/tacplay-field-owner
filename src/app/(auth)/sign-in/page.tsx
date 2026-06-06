@@ -13,6 +13,8 @@ import { useLoginFieldOwnerMutation } from "@/redux/features/auth/authAPI";
 import { useAppDispatch } from "@/redux/hooks";
 import { setAuthSession } from "@/redux/features/auth/authSlice";
 import { getErrorMessage, saveAuthTokens, saveAuthUser } from "@/lib/auth";
+import { useTranslation } from "react-i18next";
+
 
 function safeReturnPath(from: string | null): string | null {
   if (!from) return null;
@@ -22,6 +24,7 @@ function safeReturnPath(from: string | null): string | null {
 }
 
 const SignInPageInner = () => {
+  const { t } = useTranslation("dashboard");
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -87,10 +90,10 @@ const SignInPageInner = () => {
 
         {/* Heading */}
         <h1 className="text-2xl sm:text-3xl font-bold text-primary mb-2 text-center">
-          Welcome Back
+          {t("auth.welcomeBack")}
         </h1>
         <p className="text-sm text-muted-foreground text-center mb-8 max-w-sm">
-          Manage your arena, sessions, bookings, and ranked match results.
+          {t("auth.signInDesc")}
         </p>
 
         {/* Form */}
@@ -98,7 +101,7 @@ const SignInPageInner = () => {
           {/* Business Email */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Business Email
+              {t("auth.businessEmail")}
             </label>
             <input
               type="email"
@@ -106,7 +109,7 @@ const SignInPageInner = () => {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
+              placeholder={t("auth.placeholders.enterEmail")}
               className="w-full px-4 py-2.5 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
             />
           </div>
@@ -115,13 +118,13 @@ const SignInPageInner = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-primary">
-                Password
+                {t("auth.password")}
               </label>
               <Link
                 href="/forgot-pass"
                 className="text-xs text-primary hover:text-custom-yellow transition-colors font-medium"
               >
-                Forgot Password?
+                {t("auth.forgotPassword")}
               </Link>
             </div>
             <div className="relative">
@@ -131,7 +134,7 @@ const SignInPageInner = () => {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
+                placeholder={t("auth.placeholders.enterPassword")}
                 className="w-full px-4 py-2.5 pr-11 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
               />
               <button
@@ -154,17 +157,17 @@ const SignInPageInner = () => {
             disabled={isLoading}
             className="w-full cursor-pointer py-3 rounded-lg bg-custom-red text-white text-sm font-semibold hover:bg-custom-red/90 transition-colors border-2 border-border disabled:opacity-60 disabled:pointer-events-none"
           >
-            {isLoading ? "Signing in…" : "Sign In"}
+            {isLoading ? t("auth.signingIn") : t("auth.signIn")}
           </button>
 
           {/* Don't have account */}
           <p className="text-sm text-center text-muted-foreground">
-            Don&apos;t have an account?{" "}
+            {t("auth.dontHaveAccount")}{" "}
             <Link
               href="/sign-up"
               className="text-primary cursor-pointer font-semibold underline underline-offset-2 hover:text-custom-yellow transition-colors"
             >
-              Sign Up
+              {t("auth.signUp")}
             </Link>
           </p>
         </form>
@@ -174,12 +177,13 @@ const SignInPageInner = () => {
 };
 
 export default function SignInPage() {
+  const { t } = useTranslation("dashboard");
   return (
     <Suspense
       fallback={
         <AuthBanner>
           <div className="flex min-h-60 items-center justify-center text-sm text-muted-foreground">
-            Loading…
+            {t("auth.loading")}
           </div>
         </AuthBanner>
       }

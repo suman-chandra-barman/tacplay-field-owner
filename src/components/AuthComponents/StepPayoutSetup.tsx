@@ -1,7 +1,3 @@
-/** @format */
-
-"use client";
-
 import React from "react";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslation } from "react-i18next";
 
 export type PayoutStepForm = {
   business_name: string;
@@ -29,31 +26,32 @@ type StepPayoutSetupProps = {
   onChange: (patch: Partial<PayoutStepForm>) => void;
 };
 
-const BUSINESS_TYPES: { value: string; label: string }[] = [
+const BUSINESS_TYPES = [
   { value: "individual", label: "Individual" },
   { value: "registered_company", label: "Registered Company" },
 ];
 
 const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
+  const { t } = useTranslation("dashboard");
+
   return (
     <div className="space-y-8">
       <div>
         <h2 className="text-xl sm:text-2xl font-bold text-primary">
-          Business &amp; Payout Information
+          {t("onboardingFields.payout.title")}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          Provide business details and payout information to receive booking
-          payments and manage subscriptions securely.
+          {t("onboardingFields.payout.subtitle")}
         </p>
       </div>
 
       <div className="space-y-5">
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Business Name
+            {t("onboardingFields.payout.bizNameLabel")}
           </label>
           <Input
-            placeholder="Enter business name"
+            placeholder={t("onboardingFields.payout.bizNamePlaceholder")}
             className="bg-input/30 border-white/10 text-primary h-11"
             value={value.business_name}
             onChange={(e) => onChange({ business_name: e.target.value })}
@@ -62,19 +60,21 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Business Type
+            {t("onboardingFields.payout.bizTypeLabel")}
           </label>
           <Select
             value={value.business_type}
             onValueChange={(v) => onChange({ business_type: v })}
           >
             <SelectTrigger className="w-full bg-input/30 border-white/10 text-primary h-11">
-              <SelectValue placeholder="Select business type" />
+              <SelectValue placeholder={t("onboardingFields.payout.bizTypePlaceholder")} />
             </SelectTrigger>
             <SelectContent className="bg-card border-white/10">
-              {BUSINESS_TYPES.map((t) => (
-                <SelectItem key={t.value} value={t.value}>
-                  {t.label}
+              {BUSINESS_TYPES.map((typeObj) => (
+                <SelectItem key={typeObj.value} value={typeObj.value}>
+                  {typeObj.value === "individual"
+                    ? t("onboardingFields.payout.typeIndividual")
+                    : t("onboardingFields.payout.typeCompany")}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -83,10 +83,10 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Contact Phone Number
+            {t("onboardingFields.payout.phoneLabel")}
           </label>
           <Input
-            placeholder="+44 7700 900123"
+            placeholder={t("onboardingFields.payout.phonePlaceholder")}
             className="bg-input/30 border-white/10 text-primary h-11"
             value={value.contact_phone_number}
             onChange={(e) => onChange({ contact_phone_number: e.target.value })}
@@ -97,20 +97,20 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
       <div className="space-y-5">
         <div>
           <h3 className="text-lg font-bold text-primary">
-            Payout Account Details
+            {t("onboardingFields.payout.accountDetailsHeader")}
           </h3>
           <p className="text-sm text-muted-foreground mt-1">
-            Provide your bank details to receive payments from player bookings.
+            {t("onboardingFields.payout.accountDetailsDesc")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Bank Account Holder Name
+              {t("onboardingFields.payout.holderLabel")}
             </label>
             <Input
-              placeholder="Account holder name"
+              placeholder={t("onboardingFields.payout.holderPlaceholder")}
               className="bg-input/30 border-white/10 text-primary h-11"
               value={value.bank_account_holder_name}
               onChange={(e) =>
@@ -120,10 +120,10 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Bank Name
+              {t("onboardingFields.payout.bankLabel")}
             </label>
             <Input
-              placeholder="Bank name"
+              placeholder={t("onboardingFields.payout.bankPlaceholder")}
               className="bg-input/30 border-white/10 text-primary h-11"
               value={value.bank_name}
               onChange={(e) => onChange({ bank_name: e.target.value })}
@@ -133,10 +133,10 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Account Number
+            {t("onboardingFields.payout.numberLabel")}
           </label>
           <Input
-            placeholder="Enter account number"
+            placeholder={t("onboardingFields.payout.numberPlaceholder")}
             className="bg-input/30 border-white/10 text-primary h-11"
             value={value.account_number}
             onChange={(e) => onChange({ account_number: e.target.value })}
@@ -146,10 +146,10 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-primary">
-            Confirm Account Number
+            {t("onboardingFields.payout.confirmNumberLabel")}
           </label>
           <Input
-            placeholder="Re-enter account number"
+            placeholder={t("onboardingFields.payout.confirmNumberPlaceholder")}
             className="bg-input/30 border-white/10 text-primary h-11"
             value={value.confirm_account_number}
             onChange={(e) =>
@@ -162,10 +162,10 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              IBAN / Routing Number
+              {t("onboardingFields.payout.ibanLabel")}
             </label>
             <Input
-              placeholder="IBAN or routing number"
+              placeholder={t("onboardingFields.payout.ibanPlaceholder")}
               className="bg-input/30 border-white/10 text-primary h-11"
               value={value.iban_routing_number}
               onChange={(e) =>
@@ -175,10 +175,10 @@ const StepPayoutSetup = ({ value, onChange }: StepPayoutSetupProps) => {
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              SWIFT / BIC Code
+              {t("onboardingFields.payout.swiftLabel")}
             </label>
             <Input
-              placeholder="SWIFT code"
+              placeholder={t("onboardingFields.payout.swiftPlaceholder")}
               className="bg-input/30 border-white/10 text-primary h-11"
               value={value.swift_bic_code}
               onChange={(e) => onChange({ swift_bic_code: e.target.value })}

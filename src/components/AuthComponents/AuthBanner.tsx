@@ -5,39 +5,37 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import headTitle from "../../../public/heading-up.png"
-
-
-const slides = [
-  {
-    title: "Command Your Arena",
-    description:
-      "Set up your field, schedule tactical sessions, and manage competitive paintball events with full control.",
-  },
-  {
-    title: "Manage Your Battles",
-    description:
-      "Organize ranked and social matches, track player stats, and build your arena's competitive reputation.",
-  },
-  {
-    title: "Grow Your Community",
-    description:
-      "Attract new players, manage bookings, and create memorable paintball experiences at your field.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 interface AuthBannerProps {
   children: React.ReactNode;
 }
 
 const AuthBanner: React.FC<AuthBannerProps> = ({ children }) => {
+  const { t } = useTranslation("dashboard");
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      title: t("auth.slides.commandArenaTitle"),
+      description: t("auth.slides.commandArenaDesc"),
+    },
+    {
+      title: t("auth.slides.manageBattlesTitle"),
+      description: t("auth.slides.manageBattlesDesc"),
+    },
+    {
+      title: t("auth.slides.growCommunityTitle"),
+      description: t("auth.slides.growCommunityDesc"),
+    },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="flex min-h-screen w-full bg-root-bg">
@@ -65,7 +63,7 @@ const AuthBanner: React.FC<AuthBannerProps> = ({ children }) => {
           />
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
 
           {/* Bottom content */}
           <div className="absolute bottom-0 left-0 right-0 p-8">

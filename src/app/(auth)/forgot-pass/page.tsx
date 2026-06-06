@@ -11,8 +11,11 @@ import { useForgotPasswordMutation } from "@/redux/features/auth/authAPI";
 import { useAppDispatch } from "@/redux/hooks";
 import { setPendingVerification } from "@/redux/features/auth/authSlice";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
+import { useTranslation } from "react-i18next";
+
 
 const ForgotPasswordPage = () => {
+  const { t } = useTranslation("dashboard");
   const [emailAddress, setEmailAddress] = useState("");
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -67,11 +70,10 @@ const ForgotPasswordPage = () => {
         {/* Heading */}
         <div className="text-center space-y-2">
           <h1 className="text-xl sm:text-2xl font-bold text-primary">
-            Forgot your password?
+            {t("auth.forgotPasswordTitle")}
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground">
-            Enter your email and we&apos;ll send you a verification code to
-            reset it.
+            {t("auth.forgotPasswordDesc")}
           </p>
         </div>
 
@@ -79,11 +81,11 @@ const ForgotPasswordPage = () => {
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-primary">
-              Email Address
+              {t("auth.emailAddress")}
             </label>
             <input
               type="email"
-              placeholder="Enter your email address"
+              placeholder={t("auth.placeholders.enterEmail")}
               value={emailAddress}
               onChange={(event) => setEmailAddress(event.target.value)}
               className="w-full px-4 py-2.5 rounded-lg bg-input/30 border border-white/10 text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-custom-yellow/50 transition-colors"
@@ -95,18 +97,18 @@ const ForgotPasswordPage = () => {
             disabled={isLoading}
             className="w-full py-3 rounded-lg bg-custom-red text-white text-sm font-semibold hover:bg-custom-red/90 transition-colors border-2 border-border mt-2"
           >
-            {isLoading ? "Sending..." : "Send Code"}
+            {isLoading ? t("auth.sending") : t("auth.sendCode")}
           </button>
         </div>
 
         {/* Back to sign in */}
         <p className="text-sm text-center text-muted-foreground">
-          Back to{" "}
+          {t("auth.backTo")}{" "}
           <Link
             href="/sign-in"
             className="text-primary font-semibold underline underline-offset-2 hover:text-custom-yellow transition-colors"
           >
-            Sign In
+            {t("auth.signIn")}
           </Link>
         </p>
       </div>

@@ -30,6 +30,8 @@ import {
 import { setArenaField } from "@/redux/features/arenaManagement/arenaManagementSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
+import { useTranslation } from "react-i18next";
+
 
 const TOAST = {
   autoClose: 4200,
@@ -176,7 +178,15 @@ function buildStep2Body(match: MatchRulesStepForm): Step2MatchRequirementsBody {
   };
 }
 
+const stepTranslationKeys = [
+  "onboarding.steps.arenaInfo",
+  "onboarding.steps.businessSetup",
+  "onboarding.steps.packageManagement",
+  "onboarding.steps.payoutSetup",
+];
+
 const ProfileSetupPage = () => {
+  const { t } = useTranslation("dashboard");
   const [currentStep, setCurrentStep] = useState(0);
   const [arena, setArena] = useState<ArenaStepForm>(defaultArena);
   const [matchRules, setMatchRules] =
@@ -465,7 +475,7 @@ const ProfileSetupPage = () => {
                 >
                   {isCompleted ? <Check className="w-4 h-4" /> : step.id}
                 </div>
-                <span className="text-sm font-medium">{step.label}</span>
+                <span className="text-sm font-medium">{t(stepTranslationKeys[index])}</span>
               </button>
             );
           })}
@@ -482,7 +492,7 @@ const ProfileSetupPage = () => {
             className="object-contain"
           />
           <span className="text-sm text-muted-foreground">
-            Step {currentStep + 1} of {steps.length}
+            {t("onboarding.stepCount", { current: currentStep + 1, total: steps.length })}
           </span>
         </div>
 
@@ -505,7 +515,7 @@ const ProfileSetupPage = () => {
                   }`}
                 />
                 <span className="text-[10px] text-muted-foreground truncate max-w-full">
-                  {step.label}
+                  {t(stepTranslationKeys[index])}
                 </span>
               </div>
             );
@@ -527,7 +537,7 @@ const ProfileSetupPage = () => {
                 : "border border-white/10 bg-input/30 text-primary hover:bg-input/50"
             }`}
           >
-            ← Previous
+            {t("onboarding.previous")}
           </button>
 
           <button
@@ -537,10 +547,10 @@ const ProfileSetupPage = () => {
             className="px-6 py-2.5 rounded-lg bg-custom-red text-white text-sm font-semibold hover:bg-custom-red/90 transition-colors border-2 border-border disabled:opacity-60 disabled:pointer-events-none"
           >
             {busy
-              ? "Please wait…"
+              ? t("onboarding.pleaseWait")
               : isLastStep
-                ? "Submit & Approve"
-                : "Continue"}
+                ? t("onboarding.submitApprove")
+                : t("onboarding.continue")}
           </button>
         </div>
       </main>

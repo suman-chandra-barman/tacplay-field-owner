@@ -23,8 +23,11 @@ import {
   saveAuthTokens,
   saveAuthUser,
 } from "@/lib/auth";
+import { useTranslation } from "react-i18next";
+
 
 const VerifyOtpPage = () => {
+  const { t } = useTranslation("dashboard");
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
@@ -183,10 +186,10 @@ const VerifyOtpPage = () => {
         {/* Heading */}
         <div className="text-center space-y-2">
           <h1 className="text-xl sm:text-2xl font-bold text-primary">
-            Verify your Code
+            {t("auth.verifyCode")}
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground">
-            We sent a verification code to{" "}
+            {t("auth.verificationSent")}{" "}
             <span className="text-custom-yellow font-medium">
               {emailAddress || "example@email.com"}
             </span>
@@ -221,18 +224,18 @@ const VerifyOtpPage = () => {
           disabled={isVerifying}
           className="w-full py-3 rounded-lg bg-custom-red text-white text-sm font-semibold hover:bg-custom-red/90 transition-colors border-2 border-border mt-2"
         >
-          {isVerifying ? "Verifying..." : "Send Code"}
+          {isVerifying ? t("auth.verifying") : t("auth.sendCode")}
         </button>
 
         {/* Resend */}
         <p className="text-sm text-center text-muted-foreground">
-          Didn&apos;t receive the code?{" "}
+          {t("auth.didNotReceiveCode")}{" "}
           <button
             onClick={handleResendOtp}
             disabled={isResending}
-            className="text-custom-yellow font-semibold hover:underline transition-colors"
+            className="text-custom-yellow font-semibold hover:underline transition-colors cursor-pointer"
           >
-            Resend
+            {t("auth.resend")}
           </button>
         </p>
       </div>
