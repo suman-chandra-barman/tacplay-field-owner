@@ -99,7 +99,7 @@ const defaultArena: ArenaStepForm = {
   country: "Bangladesh",
   city: "Dhaka",
   full_address: "",
-  image: null,
+  images: [],
 };
 
 const defaultMatchRules: MatchRulesStepForm = {
@@ -246,10 +246,10 @@ const ProfileSetupPage = () => {
           );
           return;
         }
-        if (!arena.image) {
+        if (!arena.images || arena.images.length === 0) {
           toastStepError(
             "Arena photo required",
-            "Upload a thumbnail image so players can recognize your field.",
+            "Upload at least one thumbnail image so players can recognize your field.",
           );
           return;
         }
@@ -259,7 +259,7 @@ const ProfileSetupPage = () => {
           country: arena.country.trim(),
           city: arena.city.trim(),
           full_address: arena.full_address.trim(),
-          image: arena.image,
+          images: arena.images,
         }).unwrap();
         saveArenaSuccess(response);
         toastStepSuccess(

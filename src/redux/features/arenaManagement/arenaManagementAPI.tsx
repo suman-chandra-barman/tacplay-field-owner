@@ -102,7 +102,7 @@ export type Step1ArenaInfoInput = {
   country: string;
   city: string;
   full_address: string;
-  image: File | null;
+  images: File[];
 };
 
 export type Step2MatchRequirementsBody = {
@@ -327,8 +327,10 @@ const arenaManagementAPI = baseAPI.injectEndpoints({
         formData.append("country", body.country);
         formData.append("city", body.city);
         formData.append("full_address", body.full_address);
-        if (body.image) {
-          formData.append("image", body.image);
+        if (body.images && body.images.length > 0) {
+          body.images.forEach((file) => {
+            formData.append("image", file);
+          });
         }
         return {
           url: "/api/arena/completion-flow/step-1-arena-info/",
