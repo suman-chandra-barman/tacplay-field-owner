@@ -231,7 +231,7 @@ export default function DashboardSidebar() {
                     {currentSubscription?.has_active_subscription
                       ? t("sidebar.daysLeft", {
                           days: currentSubscription.days_left ?? 0,
-                          status: currentSubscription.status,
+                          status: currentSubscription.status
                         })
                       : t("sidebar.unlockMessage")}
                   </p>

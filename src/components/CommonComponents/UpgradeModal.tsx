@@ -209,15 +209,21 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                         <span className="text-white text-4xl font-bold">
                           {plan.currency} {plan.price}
                         </span>
-                        <span className="text-[#9a98b8] text-sm ml-1">
-                          / {plan.billing_cycle}
-                        </span>
+                        {plan.code !== "field_bronze_monthly" && (
+                          <span className="text-[#9a98b8] text-sm ml-1">
+                            / {plan.billing_cycle}
+                          </span>
+                        )}
                       </div>
 
                       {/* Description */}
-                      <p className="text-[#cdba20] text-xs mb-4">
-                        {plan.description}
-                      </p>
+                      {plan.code !== "field_bronze_monthly" ? (
+                        <p className="text-[#cdba20] text-xs mb-4">
+                          {plan.description}
+                        </p>
+                      ) : (
+                        <div className="h-4 mb-4" />
+                      )}
 
                       {/* Button */}
                       <button
