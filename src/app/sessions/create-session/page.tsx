@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
 import { useCreateOwnerSessionMutation } from "@/redux/features/sessions/sessionsAPI";
+import { useTranslation } from "react-i18next";
 
 type SessionType = "teams" | "manual_player";
 
@@ -58,27 +59,6 @@ const DEFAULT_FORM: CreateSessionForm = {
   entry_fee: "",
 };
 
-const SELECT_OPTIONS = {
-  matchType: [
-    { label: "Ranked", value: "ranked" },
-    { label: "Social", value: "social" },
-  ],
-  sessionVisibility: [
-    { label: "Premium", value: "premium" },
-    { label: "Public", value: "public" },
-    { label: "Private", value: "private" },
-  ],
-  bookingCutOffUnit: [
-    { label: "Hours", value: "hours" },
-    { label: "Minutes", value: "minutes" },
-    { label: "Days", value: "days" },
-  ],
-  sessionType: [
-    { label: "Team", value: "teams" },
-    { label: "Individual Player", value: "manual_player" },
-  ],
-} as const;
-
 const isValidTime = (value: string) =>
   /^([01]\d|2[0-3]):([0-5]\d)$/.test(value);
 
@@ -114,6 +94,36 @@ const to12HourTimeWithPeriod = (time: string) => {
 
 const CreateSessionPage = () => {
   const router = useRouter();
+  const { t } = useTranslation("dashboard");
+
+  const selectOptions = useMemo(
+    () =>
+      ({
+        matchType: [
+          { label: t("sessions.create.options.ranked"), value: "ranked" },
+          { label: t("sessions.create.options.social"), value: "social" },
+        ],
+        sessionVisibility: [
+          { label: t("sessions.create.options.premium"), value: "premium" },
+          { label: t("sessions.create.options.public"), value: "public" },
+          { label: t("sessions.create.options.private"), value: "private" },
+        ],
+        bookingCutOffUnit: [
+          { label: t("sessions.create.options.hours"), value: "hours" },
+          { label: t("sessions.create.options.minutes"), value: "minutes" },
+          { label: t("sessions.create.options.days"), value: "days" },
+        ],
+        sessionType: [
+          { label: t("sessions.create.options.team"), value: "teams" },
+          {
+            label: t("sessions.create.options.individualPlayer"),
+            value: "manual_player",
+          },
+        ],
+      }) as const,
+    [t],
+  );
+
   const [createOwnerSession, { isLoading: isCreating }] =
     useCreateOwnerSessionMutation();
 
@@ -156,13 +166,15 @@ const CreateSessionPage = () => {
     const start = convertToMinutes(form.start_time);
     const end = convertToMinutes(form.end_time);
 
-    if (start === null || end === null) return "Auto count";
+    if (start === null || end === null) return t("sessions.create.autoCount");
 
     const resolvedEnd = end <= start ? end + 24 * 60 : end;
     const durationMinutes = resolvedEnd - start;
 
-    return durationMinutes > 0 ? `${durationMinutes} min` : "Auto count";
-  }, [form.end_time, form.start_time]);
+    return durationMinutes > 0
+      ? `${durationMinutes} ${t("sessions.create.min")}`
+      : t("sessions.create.autoCount");
+  }, [form.end_time, form.start_time, t]);
 
   const handleFieldChange = <T extends keyof CreateSessionForm>(
     key: T,
@@ -185,53 +197,67 @@ const CreateSessionPage = () => {
   };
 
   const validateForm = () => {
-    if (!form.session_name.trim()) return "Session name is required.";
-    if (!form.description.trim()) return "Description is required.";
-    if (!form.match_date) return "Match date is required.";
+    if (!form.session_name.trim()) {
+      return t("sessions.create.validation.sessionNameRequired");
+    }
+    if (!form.description.trim()) {
+      return t("sessions.create.validation.descriptionRequired");
+    }
+    if (!form.match_date) {
+      return t("sessions.create.validation.matchDateRequired");
+    }
 
     if (!isValidTime(form.start_time)) {
-      return "Start time must be in HH:MM format (24-hour).";
+      return t("sessions.create.validation.startTimeFormat");
     }
 
     if (!isValidTime(form.end_time)) {
-      return "End time must be in HH:MM format (24-hour).";
+      return t("sessions.create.validation.endTimeFormat");
     }
 
     const start = convertToMinutes(form.start_time);
     const end = convertToMinutes(form.end_time);
     if (start === null || end === null) {
-      return "Invalid start or end time.";
+      return t("sessions.create.validation.invalidTimes");
     }
 
     const resolvedEnd = end <= start ? end + 24 * 60 : end;
     if (resolvedEnd - start <= 0) {
-      return "End time must be after start time.";
+      return t("sessions.create.validation.endTimeAfterStart");
     }
 
     const cutOff = Number(form.booking_cut_off_time);
     if (!Number.isInteger(cutOff) || cutOff <= 0) {
-      return "Booking cut-off time must be a positive whole number.";
+      return t("sessions.create.validation.cutOffPositive");
     }
 
     const teamAPlayers = Number(form.team_a_player);
     const teamBPlayers = Number(form.team_b_player);
     if (!Number.isInteger(teamAPlayers) || teamAPlayers <= 0) {
-      return "Team A player count must be a positive whole number.";
+      return t("sessions.create.validation.teamAPlayersPositive");
     }
     if (!Number.isInteger(teamBPlayers) || teamBPlayers <= 0) {
-      return "Team B player count must be a positive whole number.";
+      return t("sessions.create.validation.teamBPlayersPositive");
     }
 
     const entryFee = Number(form.entry_fee);
     if (Number.isNaN(entryFee) || entryFee < 0) {
-      return "Entry fee must be a valid positive number or zero.";
+      return t("sessions.create.validation.entryFeePositive");
     }
 
     if (form.session_type === "manual_player") {
-      if (!form.team_a_name.trim()) return "Team A name is required.";
-      if (!form.team_b_name.trim()) return "Team B name is required.";
-      if (!teamALogo) return "Team A logo is required for Manual Player mode.";
-      if (!teamBLogo) return "Team B logo is required for Manual Player mode.";
+      if (!form.team_a_name.trim()) {
+        return t("sessions.create.validation.teamANameRequired");
+      }
+      if (!form.team_b_name.trim()) {
+        return t("sessions.create.validation.teamBNameRequired");
+      }
+      if (!teamALogo) {
+        return t("sessions.create.validation.teamALogoRequired");
+      }
+      if (!teamBLogo) {
+        return t("sessions.create.validation.teamBLogoRequired");
+      }
     }
 
     return null;
@@ -281,11 +307,11 @@ const CreateSessionPage = () => {
     try {
       const response = await createOwnerSession(buildPayload()).unwrap();
       toast.success(
-        getSuccessMessage(response, "Session created successfully."),
+        getSuccessMessage(response, t("sessions.create.messages.success")),
       );
       router.push("/sessions");
     } catch (error) {
-      toast.error(getErrorMessage(error, "Failed to create session."));
+      toast.error(getErrorMessage(error, t("sessions.create.messages.failed")));
     }
   };
 
@@ -301,12 +327,11 @@ const CreateSessionPage = () => {
               </button>
             </Link>
             <h1 className="text-2xl sm:text-3xl font-bold text-primary">
-              Create New Session
+              {t("sessions.create.title")}
             </h1>
           </div>
           <p className="text-sm text-secondary ml-10">
-            Set a new match session with teams, players, pricing and ranking
-            rules.
+            {t("sessions.create.subtitle")}
           </p>
         </div>
 
@@ -315,14 +340,14 @@ const CreateSessionPage = () => {
           {/* ── Session Details ── */}
           <section className="space-y-4">
             <h2 className="text-lg font-semibold text-primary">
-              Session Details
+              {t("sessions.create.sessionDetails")}
             </h2>
 
             {/* Session Name */}
-            <FormField label="Session Name">
+            <FormField label={t("sessions.create.sessionName")}>
               <input
                 type="text"
-                placeholder="Enter session name"
+                placeholder={t("sessions.create.enterSessionName")}
                 className="form-input-style"
                 value={form.session_name}
                 onChange={(event) =>
@@ -332,10 +357,10 @@ const CreateSessionPage = () => {
             </FormField>
 
             {/* Match Type */}
-            <FormField label="Match Type">
+            <FormField label={t("sessions.create.matchType")}>
               <CustomSelect
-                placeholder="Select match type"
-                options={SELECT_OPTIONS.matchType}
+                placeholder={t("sessions.create.selectMatchType")}
+                options={selectOptions.matchType}
                 value={form.match_type}
                 open={matchTypeOpen}
                 onToggle={() => setMatchTypeOpen(!matchTypeOpen)}
@@ -350,10 +375,10 @@ const CreateSessionPage = () => {
             </FormField>
 
             {/* Session Visibility */}
-            <FormField label="Session Visibility">
+            <FormField label={t("sessions.create.sessionVisibility")}>
               <CustomSelect
-                placeholder="Select visibility"
-                options={SELECT_OPTIONS.sessionVisibility}
+                placeholder={t("sessions.create.selectVisibility")}
+                options={selectOptions.sessionVisibility}
                 value={form.session_visibility}
                 open={visibilityOpen}
                 onToggle={() => setVisibilityOpen(!visibilityOpen)}
@@ -368,10 +393,10 @@ const CreateSessionPage = () => {
             </FormField>
 
             {/* Description */}
-            <FormField label="Description">
+            <FormField label={t("sessions.create.description")}>
               <textarea
                 rows={4}
-                placeholder="Enter session description"
+                placeholder={t("sessions.create.enterDescription")}
                 className="form-input-style resize-none min-h-24"
                 value={form.description}
                 onChange={(event) =>
@@ -384,11 +409,11 @@ const CreateSessionPage = () => {
           {/* ── Date & Time Configuration ── */}
           <section className="space-y-4">
             <h2 className="text-lg font-semibold text-primary">
-              Date &amp; Time Configuration
+              {t("sessions.create.dateTimeConfig")}
             </h2>
 
             {/* Match Date */}
-            <FormField label="Match Date">
+            <FormField label={t("sessions.create.matchDate")}>
               <div className="relative">
                 <input
                   ref={matchDateRef}
@@ -401,7 +426,7 @@ const CreateSessionPage = () => {
                 />
                 <button
                   type="button"
-                  aria-label="Open date picker"
+                  aria-label={t("sessions.create.openDatePicker")}
                   onClick={() => openNativePicker(matchDateRef)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
                 >
@@ -412,7 +437,7 @@ const CreateSessionPage = () => {
 
             {/* Start & End Time */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <FormField label="Start Time">
+              <FormField label={t("sessions.create.startTime")}>
                 <div className="relative">
                   <input
                     ref={startTimeRef}
@@ -426,7 +451,7 @@ const CreateSessionPage = () => {
                   />
                   <button
                     type="button"
-                    aria-label="Open start time picker"
+                    aria-label={t("sessions.create.openStartTimePicker")}
                     onClick={() => openNativePicker(startTimeRef)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
                   >
@@ -434,7 +459,7 @@ const CreateSessionPage = () => {
                   </button>
                 </div>
               </FormField>
-              <FormField label="End Time">
+              <FormField label={t("sessions.create.endTime")}>
                 <div className="relative">
                   <input
                     ref={endTimeRef}
@@ -448,7 +473,7 @@ const CreateSessionPage = () => {
                   />
                   <button
                     type="button"
-                    aria-label="Open end time picker"
+                    aria-label={t("sessions.create.openEndTimePicker")}
                     onClick={() => openNativePicker(endTimeRef)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
                   >
@@ -459,7 +484,7 @@ const CreateSessionPage = () => {
             </div>
 
             {/* Duration */}
-            <FormField label="Duration">
+            <FormField label={t("sessions.create.duration")}>
               <div className="relative">
                 <input
                   type="text"
@@ -472,12 +497,12 @@ const CreateSessionPage = () => {
             </FormField>
 
             {/* Booking Cut-Off Time */}
-            <FormField label="Booking Cut-Off Time">
+            <FormField label={t("sessions.create.bookingCutOffTime")}>
               <div className="flex gap-2">
                 <input
                   type="number"
                   min={1}
-                  placeholder="Enter cut-off value"
+                  placeholder={t("sessions.create.enterCutOffValue")}
                   className="form-input-style flex-1"
                   value={form.booking_cut_off_time}
                   onChange={(event) =>
@@ -488,8 +513,8 @@ const CreateSessionPage = () => {
                   }
                 />
                 <CustomSelect
-                  placeholder="Unit"
-                  options={SELECT_OPTIONS.bookingCutOffUnit}
+                  placeholder={t("sessions.create.unit")}
+                  options={selectOptions.bookingCutOffUnit}
                   value={form.booking_cut_off_unit}
                   open={cutOffUnitOpen}
                   onToggle={() => setCutOffUnitOpen(!cutOffUnitOpen)}
@@ -509,16 +534,16 @@ const CreateSessionPage = () => {
           {/* ── Teams & Capacity ── */}
           <section className="space-y-4">
             <h2 className="text-lg font-semibold text-primary">
-              Teams &amp; Capacity
+              {t("sessions.create.teamsCapacity")}
             </h2>
 
             {/* Team A & B Player count */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <FormField label="Team A Player">
+              <FormField label={t("sessions.create.teamAPlayer")}>
                 <input
                   type="number"
                   min={1}
-                  placeholder="Enter Team A players"
+                  placeholder={t("sessions.create.enterTeamAPlayers")}
                   className="form-input-style"
                   value={form.team_a_player}
                   onChange={(event) =>
@@ -526,11 +551,11 @@ const CreateSessionPage = () => {
                   }
                 />
               </FormField>
-              <FormField label="Team B Player">
+              <FormField label={t("sessions.create.teamBPlayer")}>
                 <input
                   type="number"
                   min={1}
-                  placeholder="Enter Team B players"
+                  placeholder={t("sessions.create.enterTeamBPlayers")}
                   className="form-input-style"
                   value={form.team_b_player}
                   onChange={(event) =>
@@ -541,10 +566,10 @@ const CreateSessionPage = () => {
             </div>
 
             {/* Session Type */}
-            <FormField label="Session Type">
+            <FormField label={t("sessions.create.sessionType")}>
               <CustomSelect
-                placeholder="Select team mode"
-                options={SELECT_OPTIONS.sessionType}
+                placeholder={t("sessions.create.selectTeamMode")}
+                options={selectOptions.sessionType}
                 value={form.session_type}
                 open={sessionTypeOpen}
                 onToggle={() => setSessionTypeOpen(!sessionTypeOpen)}
@@ -563,10 +588,10 @@ const CreateSessionPage = () => {
               <>
                 {/* Team Names */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <FormField label="Team A Name">
+                  <FormField label={t("sessions.create.teamAName")}>
                     <input
                       type="text"
-                      placeholder="Enter Team A name"
+                      placeholder={t("sessions.create.enterTeamAName")}
                       className="form-input-style"
                       value={form.team_a_name}
                       onChange={(event) =>
@@ -574,10 +599,10 @@ const CreateSessionPage = () => {
                       }
                     />
                   </FormField>
-                  <FormField label="Team B Name">
+                  <FormField label={t("sessions.create.teamBName")}>
                     <input
                       type="text"
-                      placeholder="Enter Team B name"
+                      placeholder={t("sessions.create.enterTeamBName")}
                       className="form-input-style"
                       value={form.team_b_name}
                       onChange={(event) =>
@@ -590,7 +615,7 @@ const CreateSessionPage = () => {
                 {/* Team Logos */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Team A Logo */}
-                  <FormField label="Team A Logo">
+                  <FormField label={t("sessions.create.teamALogo")}>
                     <div className="space-y-3">
                       <div
                         onClick={() => teamARef.current?.click()}
@@ -598,10 +623,10 @@ const CreateSessionPage = () => {
                       >
                         <Upload className="w-6 h-6 text-secondary" />
                         <p className="text-xs text-secondary text-center">
-                          Choose a file or upload it here.
+                          {t("sessions.create.uploadInstructions")}
                         </p>
                         <p className="text-[10px] text-secondary/60 text-center">
-                          Pick any format, up to 50 mb in size for uploads.
+                          {t("sessions.create.uploadLimit")}
                         </p>
                       </div>
                       <button
@@ -609,7 +634,7 @@ const CreateSessionPage = () => {
                         onClick={() => teamARef.current?.click()}
                         className="px-4 py-1.5 text-xs font-medium bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 rounded-md hover:bg-emerald-600/30 transition-colors"
                       >
-                        Upload Logo
+                        {t("sessions.create.uploadLogo")}
                       </button>
                       <input
                         type="file"
@@ -622,13 +647,14 @@ const CreateSessionPage = () => {
                         <FileUploadStatus
                           fileName={teamALogo.name}
                           size={teamALogo.size}
+                          t={t}
                         />
                       )}
                     </div>
                   </FormField>
 
                   {/* Team B Logo */}
-                  <FormField label="Team B Logo">
+                  <FormField label={t("sessions.create.teamBLogo")}>
                     <div className="space-y-3">
                       <div
                         onClick={() => teamBRef.current?.click()}
@@ -636,10 +662,10 @@ const CreateSessionPage = () => {
                       >
                         <Upload className="w-6 h-6 text-secondary" />
                         <p className="text-xs text-secondary text-center">
-                          Choose a file or upload it here.
+                          {t("sessions.create.uploadInstructions")}
                         </p>
                         <p className="text-[10px] text-secondary/60 text-center">
-                          Pick any format, up to 50 mb in size for uploads.
+                          {t("sessions.create.uploadLimit")}
                         </p>
                       </div>
                       <button
@@ -647,7 +673,7 @@ const CreateSessionPage = () => {
                         onClick={() => teamBRef.current?.click()}
                         className="px-4 py-1.5 text-xs font-medium bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 rounded-md hover:bg-emerald-600/30 transition-colors"
                       >
-                        Upload Logo
+                        {t("sessions.create.uploadLogo")}
                       </button>
                       <input
                         type="file"
@@ -660,6 +686,7 @@ const CreateSessionPage = () => {
                         <FileUploadStatus
                           fileName={teamBLogo.name}
                           size={teamBLogo.size}
+                          t={t}
                         />
                       )}
                     </div>
@@ -672,14 +699,14 @@ const CreateSessionPage = () => {
           {/* ── Pricing & Payment ── */}
           <section className="space-y-4">
             <h2 className="text-lg font-semibold text-primary">
-              Pricing &amp; Payment
+              {t("sessions.create.pricingPayment")}
             </h2>
 
-            <FormField label="Entry Fee">
+            <FormField label={t("sessions.create.entryFee")}>
               <input
                 type="number"
                 min={0}
-                placeholder="Enter entry fee amount"
+                placeholder={t("sessions.create.enterEntryFee")}
                 className="form-input-style"
                 value={form.entry_fee}
                 onChange={(event) =>
@@ -696,11 +723,11 @@ const CreateSessionPage = () => {
                 type="button"
                 className="cursor-pointer bg-transparent px-10 py-2.5 rounded-lg border border-white/10 text-primary text-sm font-medium hover:bg-white/5 transition-colors"
               >
-                Cancel
+                {t("sessions.create.cancel")}
               </Button>
             </Link>
             <Button type="submit" disabled={isCreating}>
-              {isCreating ? "Creating..." : "Create Session"}
+              {isCreating ? t("sessions.create.creating") : t("sessions.create.createSession")}
             </Button>
           </div>
         </form>
@@ -812,9 +839,11 @@ const CustomSelect = ({
 const FileUploadStatus = ({
   fileName,
   size,
+  t,
 }: {
   fileName: string;
   size: number;
+  t: (key: string) => string;
 }) => {
   const sizeKB = (size / 1024).toFixed(1);
   const sizeMB = (size / (1024 * 1024)).toFixed(2);
@@ -832,7 +861,7 @@ const FileUploadStatus = ({
       </div>
       <div className="flex items-center gap-1 text-emerald-400">
         <CheckCircle2 className="w-3.5 h-3.5" />
-        <span className="text-[10px]">Complete</span>
+        <span className="text-[10px]">{t("sessions.create.uploadComplete")}</span>
       </div>
     </div>
   );
