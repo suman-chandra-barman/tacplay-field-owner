@@ -9,13 +9,15 @@ import {
   FileText,
   Euro,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import StatsCard from "@/components/DashboardComponents/StatsCard";
 import RevenueChart from "@/components/DashboardComponents/RevenewChart";
 import SessionPieChart from "@/components/DashboardComponents/SessionPieChart";
 import BookingBarChart from "@/components/DashboardComponents/BookingBarChart";
 import DashboardLoading from "@/components/DashboardComponents/DashboardLoading";
 import { useGetDashboardOverviewQuery } from "@/redux/features/dashboard/dashboardAPI";
+import { useGetFieldOwnerSubscriptionStatusQuery } from "@/redux/features/subscriptions/subscriptionsAPI";
+import UpgradeModal from "@/components/CommonComponents/UpgradeModal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setDashboardRange } from "@/redux/features/dashboard/dashboardSlice";
 import type { DashboardRange } from "@/types/DashboardTypes";
@@ -44,9 +46,13 @@ export default function Home() {
   const selectedRange = useAppSelector(
     (state) => state.dashboard.selectedRange,
   );
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
 
   const { data, isLoading, isFetching, isError } =
     useGetDashboardOverviewQuery(selectedRange);
+
+  const { data: subscriptionStatus } =
+    useGetFieldOwnerSubscriptionStatusQuery(undefined);
 
   const payload = data?.data;
   const header = payload?.analytics_header;
@@ -59,6 +65,9 @@ export default function Home() {
   );
   const visibleRanges =
     revenueRanges.length > 0 ? revenueRanges : RANGE_OPTIONS;
+
+  const currentPlan = subscriptionStatus?.data?.plan_name;
+  const isBronze = currentPlan === "Bronze Plan";
 
   const showLoadingState = (isLoading || isFetching) && !payload;
 
@@ -130,6 +139,8 @@ export default function Home() {
             valueDisplay={revenueSection.value}
             legends={revenueSection.legends}
             chartData={revenueSection.chart}
+            isLocked={isBronze}
+            onUpgradeClick={() => setIsUpgradeModalOpen(true)}
           />
         ) : null}
 
@@ -139,6 +150,8 @@ export default function Home() {
               title={payload.mark_3.title}
               centerValueDisplay={payload.mark_3.center_value_display}
               items={payload.mark_3.items}
+              isLocked={isBronze}
+              onUpgradeClick={() => setIsUpgradeModalOpen(true)}
             />
           ) : null}
 
@@ -150,10 +163,16 @@ export default function Home() {
               totalsDisplay={payload.mark_4.totals_display}
               legends={payload.mark_4.legends}
               chartData={payload.mark_4.chart}
+              isLocked={isBronze}
+              onUpgradeClick={() => setIsUpgradeModalOpen(true)}
             />
           ) : null}
         </div>
       </div>
+      <UpgradeModal
+        isOpen={isUpgradeModalOpen}
+        onClose={() => setIsUpgradeModalOpen(false)}
+      />
     </div>
   );
 }
