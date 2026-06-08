@@ -222,7 +222,9 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                           {plan.description}
                         </p>
                       ) : (
-                        <div className="h-4 mb-4" />
+                        <p className="text-[#cdba20] text-xs mb-4">
+                         Free plan for field owner.
+                        </p>
                       )}
 
                       {/* Button */}
