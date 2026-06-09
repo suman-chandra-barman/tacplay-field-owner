@@ -30,8 +30,8 @@ const SessionTable: React.FC = () => {
 
   const columns = [
     {
-      header: t("sessions.columns.sessionId"),
-      accessor: "session_id" as keyof SessionsListItem,
+      header: t("sessions.columns.sessionName"),
+      accessor: "session_name" as keyof SessionsListItem,
     },
     {
       header: t("sessions.columns.date"),

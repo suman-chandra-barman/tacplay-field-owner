@@ -69,6 +69,7 @@
     "loadFailed": "Sitzungen konnten nicht geladen werden.",
     "columns": {
       "sessionId": "Sitzungs-ID",
+      "sessionName": "Sitzungsname",
       "date": "Datum",
       "time": "Zeit",
       "matchType": "Match-Typ",

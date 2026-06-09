@@ -146,7 +146,7 @@ const SessionDetailsPage = () => {
                   style={{ transform: "skewX(20deg)" }}
                 >
                   <span className="text-white text-xs font-semibold">
-                    {details.session_id}
+                    {details.session_name}
                   </span>
                   <div className="w-px h-3 bg-white/30" />
                   <div className="flex items-center gap-2">

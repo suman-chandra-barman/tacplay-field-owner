@@ -69,6 +69,7 @@
     "loadFailed": "Impossible de charger les sessions.",
     "columns": {
       "sessionId": "ID session",
+      "sessionName": "Nom de la session",
       "date": "Date",
       "time": "Heure",
       "matchType": "Type de match",

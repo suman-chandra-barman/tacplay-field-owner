@@ -69,6 +69,7 @@
     "loadFailed": "Failed to load sessions.",
     "columns": {
       "sessionId": "Session ID",
+      "sessionName": "Session Name",
       "date": "Date",
       "time": "Time",
       "matchType": "Match Type",

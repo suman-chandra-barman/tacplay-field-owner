@@ -18,6 +18,7 @@ export type SessionsListQuery = {
 export type SessionsListItem = {
   id: number;
   session_id: string;
+  session_name: string;
   date: string;
   time: string;
   match_type: string;
