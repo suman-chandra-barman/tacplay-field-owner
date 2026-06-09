@@ -3,7 +3,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Loader2, Pen, Save } from "lucide-react";
+import { Loader2, Pen, Save, Lock, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -20,6 +20,7 @@ import {
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import UpgradeModal from "@/components/CommonComponents/UpgradeModal";
 
 type PayoutForm = {
   business_name: string;
@@ -34,12 +35,13 @@ type PayoutForm = {
 
 const PayoutDetailsTab = () => {
   const { t } = useTranslation("dashboard");
-  const { data, isLoading, isFetching, isError } = useGetPayoutDetailsQuery();
+  const { data, isLoading, isFetching, isError, error } = useGetPayoutDetailsQuery();
   const [editPayoutDetails, { isLoading: isSaving }] =
     useEditPayoutDetailsMutation();
 
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState<PayoutForm | null>(null);
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
 
   const baseForm = useMemo<PayoutForm>(
     () => ({
@@ -105,6 +107,41 @@ const PayoutDetailsTab = () => {
   }
 
   if (isError) {
+    const isForbidden = error && "status" in error && error.status === 403;
+    const errorData = error && "status" in error ? (error.data as Record<string, unknown> | undefined) : undefined;
+    const errorMsg = typeof errorData?.message === "string" ? errorData.message : "";
+
+    if (isForbidden || errorMsg.includes("Bronze plan")) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12 px-6 text-center bg-card border border-white/5 rounded-2xl shadow-xl min-h-[300px]">
+          <div className="w-16 h-16 rounded-full bg-custom-red/10 border border-custom-red/20 flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(152,0,9,0.3)] animate-pulse">
+            <Lock className="w-6 h-6 text-custom-red" />
+          </div>
+          <h3 className="text-lg sm:text-xl font-bold text-primary mb-2">
+            {t("arena.payoutTab.unlockTitle", "Unlock Payout Details")}
+          </h3>
+          <p className="text-sm text-secondary max-w-[420px] mb-6 leading-relaxed">
+            {t(
+              "arena.payoutTab.unlockDesc",
+              "Upgrade your plan to Silver or Gold to view and edit your payout accounts, bank credentials, and manage business details."
+            )}
+          </p>
+          <button
+            onClick={() => setIsUpgradeModalOpen(true)}
+            className="flex items-center gap-2 bg-linear-to-r from-[#980009] via-[#C00069] to-[#980009] text-white text-sm font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-all shadow-[0_0_15px_rgba(192,0,105,0.4)] hover:scale-105 active:scale-95 cursor-pointer"
+          >
+            <Crown className="w-4 h-4 text-[#cdba20]" />
+            {t("sidebar.upgrade", "Upgrade")}
+          </button>
+
+          <UpgradeModal
+            isOpen={isUpgradeModalOpen}
+            onClose={() => setIsUpgradeModalOpen(false)}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="py-10 text-sm text-destructive">
         {t("arena.payoutTab.loadFailed")}

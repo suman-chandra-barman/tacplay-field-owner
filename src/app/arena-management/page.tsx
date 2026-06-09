@@ -21,11 +21,9 @@ const ArenaManagementPage = () => {
   const { t } = useTranslation("dashboard");
   const { data, isLoading, isFetching } = useGetArenaInfoQuery();
   const { data: subscriptionStatus } = useGetFieldOwnerSubscriptionStatusQuery(undefined);
-
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
 
   const currentPlan = subscriptionStatus?.data?.plan_name;
