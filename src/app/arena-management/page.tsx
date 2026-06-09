@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BillingsTab from "@/components/ArenaManagementComponents/BillingsTab";
 import { useGetArenaInfoQuery } from "@/redux/features/arenaManagement/arenaManagementAPI";
 import { useGetFieldOwnerSubscriptionStatusQuery } from "@/redux/features/subscriptions/subscriptionsAPI";
-import UpgradeModal from "@/components/CommonComponents/UpgradeModal";
 import ArenaInfoTab from "@/components/ArenaManagementComponents/ArenaInfoTab";
 import FieldSetupTab from "@/components/ArenaManagementComponents/FieldSetupTab";
 import PackageManagementTab from "@/components/ArenaManagementComponents/PackageManagementTab";
@@ -340,11 +339,10 @@ const ArenaManagementPage = () => {
             </div>
 
             {/* Pro Badge  that will be changed bassed on the package... silver-silver/ bronz- free / gold-gold*/}
-            {isBronze && (
+            {!isBronze && (
               <div className="pb-1">
                 <button
-                  onClick={() => setIsUpgradeModalOpen(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-custom-red text-white text-xs sm:text-sm font-semibold cursor-pointer hover:opacity-90 active:scale-95 transition-all shadow-md shadow-custom-red/25"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-custom-red text-white text-xs sm:text-sm font-semibold shadow-md shadow-custom-red/25"
                 >
                   <Crown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#cdba20]" />
                   {t("arena.pro")}
@@ -416,10 +414,6 @@ const ArenaManagementPage = () => {
         </div>
       </div>
 
-      <UpgradeModal
-        isOpen={isUpgradeModalOpen}
-        onClose={() => setIsUpgradeModalOpen(false)}
-      />
       <ManageCoverImagesModal
         isOpen={isManageModalOpen}
         onClose={() => setIsManageModalOpen(false)}
