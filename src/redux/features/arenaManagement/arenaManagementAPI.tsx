@@ -157,6 +157,8 @@ export type ArenaInfoEditInput = {
   city: string;
   full_address: string;
   image?: File | null;
+  images?: File[];
+  delete_image_ids?: string;
 };
 
 export type FieldSetupResponseData = {
@@ -243,6 +245,14 @@ const arenaManagementAPI = baseAPI.injectEndpoints({
         formData.append("full_address", body.full_address);
         if (body.image) {
           formData.append("image", body.image);
+        }
+        if (body.images && body.images.length > 0) {
+          body.images.forEach((file) => {
+            formData.append("image", file);
+          });
+        }
+        if (body.delete_image_ids) {
+          formData.append("delete_image_ids", body.delete_image_ids);
         }
 
         return {

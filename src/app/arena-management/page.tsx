@@ -3,7 +3,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Crown, Shield, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
+import { Crown, Shield, ChevronLeft, ChevronRight, X, Maximize2, Pen } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BillingsTab from "@/components/ArenaManagementComponents/BillingsTab";
 import { useGetArenaInfoQuery } from "@/redux/features/arenaManagement/arenaManagementAPI";
@@ -14,6 +14,7 @@ import FieldSetupTab from "@/components/ArenaManagementComponents/FieldSetupTab"
 import PackageManagementTab from "@/components/ArenaManagementComponents/PackageManagementTab";
 import PayoutDetailsTab from "@/components/ArenaManagementComponents/PayoutDetailsTab";
 import ArenaManagementLoading from "@/components/ArenaManagementComponents/ArenaManagementLoading";
+import ManageCoverImagesModal from "@/components/ArenaManagementComponents/ManageCoverImagesModal";
 import { toAbsoluteMediaUrl } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 
@@ -26,6 +27,7 @@ const ArenaManagementPage = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
 
   const currentPlan = subscriptionStatus?.data?.plan_name;
   const isBronze = currentPlan === "Bronze Plan";
@@ -71,6 +73,13 @@ const ArenaManagementPage = () => {
 
     return () => clearInterval(interval);
   }, [imageUrls.length, isLightboxOpen, isHovered]);
+
+  // Reset slide index if it is out of bounds (e.g., after deleting images)
+  useEffect(() => {
+    if (currentSlide >= imageUrls.length) {
+      setCurrentSlide(Math.max(0, imageUrls.length - 1));
+    }
+  }, [imageUrls.length, currentSlide]);
 
   // Keyboard controls for lightbox and body scroll lock
   useEffect(() => {
@@ -192,6 +201,20 @@ const ArenaManagementPage = () => {
             aria-label="Maximize Cover View"
           >
             <Maximize2 className="w-4 h-4" />
+          </button>
+
+          {/* Edit Cover Images Trigger */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsManageModalOpen(true);
+            }}
+            className="absolute right-4 top-4 z-20 px-3 py-1.5 rounded-lg flex items-center gap-1.5 bg-black/40 backdrop-blur-md border border-white/10 text-white hover:bg-black/60 hover:scale-105 active:scale-95 transition-all duration-300 sm:opacity-0 sm:group-hover/slider:opacity-100 opacity-100 cursor-pointer shadow-md text-xs font-semibold"
+            aria-label="Manage Cover Images"
+          >
+            <Pen className="w-3.5 h-3.5" />
+            {t("arena.editSliderImages", "Edit Slider")}
           </button>
         </div>
 
@@ -396,6 +419,11 @@ const ArenaManagementPage = () => {
       <UpgradeModal
         isOpen={isUpgradeModalOpen}
         onClose={() => setIsUpgradeModalOpen(false)}
+      />
+      <ManageCoverImagesModal
+        isOpen={isManageModalOpen}
+        onClose={() => setIsManageModalOpen(false)}
+        arenaInfo={arenaInfo}
       />
     </div>
   );
