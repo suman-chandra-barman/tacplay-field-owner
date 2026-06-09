@@ -137,7 +137,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-6 pb-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-6 pb-8 items-stretch">
           {isPlansLoading || isPlansFetching ? (
             <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
               {[0, 1, 2].map((placeholder) => (
@@ -164,7 +164,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                     }
                   }}
                   className={cn(
-                    "relative rounded-2xl p-5 transition-all duration-200",
+                    "relative rounded-2xl p-5 transition-all duration-200 flex flex-col",
                     isSelected
                       ? "border-2 border-transparent bg-[linear-gradient(#0b0b0f,#0b0b0f)_padding-box,linear-gradient(135deg,#cdba20,#C00069)_border-box] shadow-[0_0_24px_rgba(205,186,32,0.35)]"
                       : "border border-[#2C2740]",
@@ -199,7 +199,7 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                   </div>
 
                   {isComingSoonPlan ? (
-                    <div className="flex items-center justify-center h-36 md:min-h-80 text-[#cdba20] text-sm font-semibold tracking-wide">
+                    <div className="flex-1 flex items-center justify-center min-h-36 md:min-h-80 text-[#cdba20] text-sm font-semibold tracking-wide">
                       {t("upgradeModal.comingSoon")}
                     </div>
                   ) : (

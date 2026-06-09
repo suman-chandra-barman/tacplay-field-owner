@@ -545,16 +545,12 @@
         "Apparaître dans les résultats de recherche de terrains",
         "Aperçu de base des réservations",
         "Notifications push",
-        "Avis et évaluations des joueurs",
         "Héberger des matchs classés"
       ],
       "field_silver_monthly": [
         "Tout ce qui est dans Bronze",
         "Analyses de réservation avancées",
         "Affichage prioritaire dans les recherches",
-        "Planification intelligente par IA",
-        "Codes de réduction et promotions",
-        "Campagnes d'emailing et push",
         "Support client prioritaire par email"
       ],
       "field_gold_monthly": [
