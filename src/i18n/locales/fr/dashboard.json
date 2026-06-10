@@ -36,7 +36,7 @@
     "upgradeToPremium": "Passer en Premium",
     "currentPlan": "Forfait actuel : {{plan}}",
     "active": "Actif",
-    "upgradeToSilver": "Passez a Silver pour plus de fonctionnalites",
+    "upgradeToSilver": "Passez a Essential for Field Growth pour plus de fonctionnalites",
     "daysLeft": "{{days}} jours restants - {{status}}",
     "unlockMessage": "Debloquez l'hebergement classe, les analyses et les outils premium.",
     "manage": "Gerer",
@@ -367,7 +367,7 @@
     },
     "payoutTab": {
       "loading": "Chargement des détails de paiement...",
-      "loadFailed": "Votre forfait Bronze actuel n'inclut pas l'accès aux gains ni aux détails de paiement. Veuillez passer au forfait Argent ou Or pour accéder à cette fonctionnalité.",
+      "loadFailed": "Votre forfait Essential Starter for Fields actuel n'inclut pas l'accès aux gains ni aux détails de paiement. Veuillez passer au forfait Essential for Field Growth ou Or pour accéder à cette fonctionnalité.",
       "updated": "Détails de paiement mis à jour avec succès.",
       "updateFailed": "Échec de la mise à jour des détails de paiement."
     },
@@ -534,6 +534,11 @@
     "title": "Propulsez votre terrain. Contrôlez chaque match.",
     "subtitle": "Choisissez un plan qui déverrouille les bons outils pour gérer les sessions, héberger des jeux classés et développer votre arène sur TACPLAY.",
     "cancel": "Annuler",
+    "plans": {
+      "bronze": "Essentiel Starter pour Terrains",
+      "silver": "Essentiel pour la Croissance des Terrains",
+      "gold": "Plan Or"
+    },
     "currentPlan": "Plan actuel",
     "comingSoon": "Bientôt disponible",
     "failedToLoad": "Échec du chargement des plans d'abonnement.",
@@ -554,13 +559,13 @@
         "Héberger des matchs classés"
       ],
       "field_silver_monthly": [
-        "Tout ce qui est dans Bronze",
+        "Tout ce qui est dans Essential Starter for Fields",
         "Analyses de réservation avancées",
         "Affichage prioritaire dans les recherches",
         "Support client prioritaire par email"
       ],
       "field_gold_monthly": [
-        "Tout ce qui est dans Silver",
+        "Tout ce qui est dans Essential for Field Growth",
         "Création illimitée de sessions",
         "Suivi complet des gains",
         "Informations détaillées sur les performances",

@@ -135,7 +135,7 @@ const SessionPieChart: React.FC<SessionPieChartProps> = ({
               {t("home.unlockSessionTitle", "Unlock Session Distribution")}
             </h4>
             <p className="text-xs text-secondary max-w-[320px] mb-4 leading-relaxed">
-              {t("home.unlockSessionDesc", "Upgrade your plan to Silver or Gold to view match distribution charts analyzing Ranked vs. Social games hosted at your arena.")}
+              {t("home.unlockSessionDesc", "Upgrade your plan to Essential for Field Growth or Gold to view match distribution charts analyzing Ranked vs. Social games hosted at your arena.")}
             </p>
             <button
               onClick={onUpgradeClick}

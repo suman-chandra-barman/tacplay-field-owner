@@ -67,7 +67,7 @@ export default function Home() {
     revenueRanges.length > 0 ? revenueRanges : RANGE_OPTIONS;
 
   const currentPlan = subscriptionStatus?.data?.plan_name;
-  const isBronze = currentPlan === "Bronze Plan";
+  const isBronze = currentPlan === "Bronze Plan" || subscriptionStatus?.data?.plan_code === "field_bronze_monthly";
 
   const showLoadingState = (isLoading || isFetching) && !payload;
 

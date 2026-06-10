@@ -159,7 +159,7 @@ const RevenueChart: React.FC<RevenueChartProps> = ({
               {t("home.unlockRevenueTitle", "Unlock Revenue Analytics")}
             </h4>
             <p className="text-xs text-secondary max-w-[320px] mb-4 leading-relaxed">
-              {t("home.unlockRevenueDesc", "Upgrade your plan to Silver or Gold to view interactive charts tracking your weekly, monthly, and yearly revenue growth alongside booking counts.")}
+              {t("home.unlockRevenueDesc", "Upgrade your plan to Essential for Field Growth or Gold to view interactive charts tracking your weekly, monthly, and yearly revenue growth alongside booking counts.")}
             </p>
             <button
               onClick={onUpgradeClick}

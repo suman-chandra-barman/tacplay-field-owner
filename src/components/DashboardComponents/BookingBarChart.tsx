@@ -163,7 +163,7 @@ const BookingBarChart: React.FC<BookingBarChartProps> = ({
               {t("home.unlockBookingTitle", "Unlock Booking Source Breakdown")}
             </h4>
             <p className="text-xs text-secondary max-w-[320px] mb-4 leading-relaxed">
-              {t("home.unlockBookingDesc", "Upgrade your plan to Silver or Gold to view match booking breakdown analytics between Premium and Free slots.")}
+              {t("home.unlockBookingDesc", "Upgrade your plan to Essential for Field Growth or Gold to view match booking breakdown analytics between Premium and Free slots.")}
             </p>
             <button
               onClick={onUpgradeClick}

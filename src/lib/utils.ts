@@ -16,3 +16,19 @@ export const toAbsoluteMediaUrl = (url: string | null | undefined) => {
 
   return `${apiBaseUrl}${url.startsWith("/") ? "" : "/"}${url}`;
 };
+
+export function getPlanDisplayName(planName: string | null | undefined, t: any): string | null | undefined {
+  if (!planName) return planName;
+  const normalized = planName.trim().toLowerCase();
+  if (normalized === "bronze plan" || normalized === "bronze") {
+    return t("upgradeModal.plans.bronze", "Essential Starter for Fields");
+  }
+  if (normalized === "silver plan" || normalized === "silver") {
+    return t("upgradeModal.plans.silver", "Essential for Field Growth.");
+  }
+  if (normalized === "gold plan" || normalized === "gold") {
+    return t("upgradeModal.plans.gold", planName);
+  }
+  return planName;
+}
+

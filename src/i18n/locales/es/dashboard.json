@@ -36,7 +36,7 @@
     "upgradeToPremium": "Mejorar a Premium",
     "currentPlan": "Plan actual: {{plan}}",
     "active": "Activo",
-    "upgradeToSilver": "Sube a Silver para mas funciones",
+    "upgradeToSilver": "Sube a Essential for Field Growth para mas funciones",
     "daysLeft": "{{days}} dias restantes - {{status}}",
     "unlockMessage": "Desbloquea partidas clasificadas, analiticas y herramientas premium.",
     "manage": "Gestionar",
@@ -367,7 +367,7 @@
     },
     "payoutTab": {
       "loading": "Cargando detalles de pago...",
-      "loadFailed": "Tu plan Bronce actual no incluye el acceso a las ganancias ni a los detalles de pago. Por favor, mejora a Plata o Oro para acceder a esta función.",
+      "loadFailed": "Tu plan Essential Starter for Fields actual no incluye el acceso a las ganancias ni a los detalles de pago. Por favor, mejora a Essential for Field Growth o Oro para acceder a esta función.",
       "updated": "Detalles de pago actualizados correctamente.",
       "updateFailed": "Error al actualizar los detalles de pago."
     },
@@ -534,6 +534,11 @@
     "title": "Potencia tu campo. Controla cada partida.",
     "subtitle": "Elige un plan que desbloquee las herramientas adecuadas para gestionar sesiones, organizar juegos clasificados y hacer crecer tu arena en TACPLAY.",
     "cancel": "Cancelar",
+    "plans": {
+      "bronze": "Essential Starter para Campos",
+      "silver": "Essential para el Crecimiento del Campo",
+      "gold": "Plan Oro"
+    },
     "currentPlan": "Plan actual",
     "comingSoon": "Próximamente",
     "failedToLoad": "No se pudieron cargar los planes de suscripción.",
@@ -554,13 +559,13 @@
         "Organizar partidos clasificados"
       ],
       "field_silver_monthly": [
-        "Todo lo de Bronce",
+        "Todo lo de Essential Starter for Fields",
         "Analíticas avanzadas de reservas",
         "Listado prioritario en búsquedas",
         "Soporte prioritario por correo electrónico"
       ],
       "field_gold_monthly": [
-        "Todo lo de Plata",
+        "Todo lo de Essential for Field Growth",
         "Creación ilimitada de sesiones",
         "Seguimiento completo de ganancias",
         "Información detallada de rendimiento",

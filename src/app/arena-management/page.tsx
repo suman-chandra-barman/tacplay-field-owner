@@ -27,7 +27,7 @@ const ArenaManagementPage = () => {
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
 
   const currentPlan = subscriptionStatus?.data?.plan_name;
-  const isBronze = currentPlan === "Bronze Plan";
+  const isBronze = currentPlan === "Bronze Plan" || subscriptionStatus?.data?.plan_code === "field_bronze_monthly";
 
   const arenaInfo = data?.data;
   const userInfo = arenaInfo?.user_info;

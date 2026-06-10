@@ -111,7 +111,7 @@ const PayoutDetailsTab = () => {
     const errorData = error && "status" in error ? (error.data as Record<string, unknown> | undefined) : undefined;
     const errorMsg = typeof errorData?.message === "string" ? errorData.message : "";
 
-    if (isForbidden || errorMsg.includes("Bronze plan")) {
+    if (isForbidden || errorMsg.includes("Bronze plan") || errorMsg.includes("Essential Starter for Fields")) {
       return (
         <div className="flex flex-col items-center justify-center py-12 px-6 text-center bg-card border border-white/5 rounded-2xl shadow-xl min-h-[300px]">
           <div className="w-16 h-16 rounded-full bg-custom-red/10 border border-custom-red/20 flex items-center justify-center mb-4 shadow-[0_0_20px_rgba(152,0,9,0.3)] animate-pulse">
@@ -123,7 +123,7 @@ const PayoutDetailsTab = () => {
           <p className="text-sm text-secondary max-w-[420px] mb-6 leading-relaxed">
             {t(
               "arena.payoutTab.unlockDesc",
-              "Upgrade your plan to Silver or Gold to view and edit your payout accounts, bank credentials, and manage business details."
+              "Upgrade your plan to Essential for Field Growth or Gold to view and edit your payout accounts, bank credentials, and manage business details."
             )}
           </p>
           <button

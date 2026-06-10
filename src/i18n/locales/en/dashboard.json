@@ -36,7 +36,7 @@
     "upgradeToPremium": "Upgrade to Premium",
     "currentPlan": "Current plan: {{plan}}",
     "active": "Active",
-    "upgradeToSilver": "Upgrade to Silver for more Features",
+    "upgradeToSilver": "Upgrade to Essential for Field Growth for more Features",
     "daysLeft": "{{days}} days left - {{status}}",
     "unlockMessage": "Unlock ranked hosting, analytics, and premium tools.",
     "manage": "Manage",
@@ -367,7 +367,7 @@
     },
     "payoutTab": {
       "loading": "Loading payout details...",
-      "loadFailed": "Your current Bronze plan does not include access to earnings or payout details. Please upgrade to Silver or Gold to access this feature.",
+      "loadFailed": "Your current Essential Starter for Fields plan does not include access to earnings or payout details. Please upgrade to Essential for Field Growth or Gold to access this feature.",
       "updated": "Payout details updated successfully.",
       "updateFailed": "Failed to update payout details."
     },
@@ -534,6 +534,11 @@
     "title": "Power Your Field. Control Every Match.",
     "subtitle": "Choose a plan that unlocks the right tools to manage sessions, host ranked games, and grow your arena on TACPLAY.",
     "cancel": "Cancel",
+    "plans": {
+      "bronze": "Essential Starter for Fields",
+      "silver": "Essential for Field Growth.",
+      "gold": "Gold Plan"
+    },
     "currentPlan": "Current Plan",
     "comingSoon": "Coming Soon",
     "failedToLoad": "Failed to load subscription plans.",
@@ -554,13 +559,13 @@
         "Host ranked matches"
       ],
       "field_silver_monthly": [
-        "Everything in Bronze",
+        "Everything in Essential Starter for Fields",
         "Advanced booking analytics",
         "Priority listing in search",
         "Priority Email Support"
       ],
       "field_gold_monthly": [
-        "Everything in Silver",
+        "Everything in Essential for Field Growth",
         "Unlimited session creation",
         "Full earnings tracking",
         "Detailed performance insights",

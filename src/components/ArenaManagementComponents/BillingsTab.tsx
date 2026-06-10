@@ -7,6 +7,7 @@ import { Loader2, Search } from "lucide-react";
 import { useGetFieldOwnerBillingHistoryQuery } from "@/redux/features/subscriptions/subscriptionsAPI";
 import type { BillingHistoryItem } from "@/types/SubscriptionTypes";
 import { useTranslation } from "react-i18next";
+import { getPlanDisplayName } from "@/lib/utils";
 
 const statusBadgeClassMap: Record<string, string> = {
   paid: "bg-teal-500/20 text-teal-400 border border-teal-500/30",
@@ -175,7 +176,7 @@ const BillingsTab = () => {
                   {item.invoice_id}
                 </td>
                 <td className="p-3 text-muted-foreground">{item.date}</td>
-                <td className="p-3 text-muted-foreground">{item.plan}</td>
+                <td className="p-3 text-muted-foreground">{getPlanDisplayName(item.plan, t)}</td>
                 <td className="p-3 text-primary font-medium">
                   {formatPrice(item)}
                 </td>

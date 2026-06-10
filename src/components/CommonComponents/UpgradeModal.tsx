@@ -3,7 +3,7 @@
 import React from "react";
 import { Check, X } from "lucide-react";
 import { Dialog, DialogContent, DialogClose, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+import { cn, getPlanDisplayName } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { toast } from "react-toastify";
 import { getErrorMessage, getSuccessMessage } from "@/lib/auth";
@@ -194,9 +194,10 @@ export default function UpgradeModal({ isOpen, onClose }: UpgradeModalProps) {
                   {/* Plan name + avatars */}
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-white font-semibold text-sm">
-                      {plan.name}
+                      {getPlanDisplayName(plan.name, t)}
                     </span>
                   </div>
+
 
                   {isComingSoonPlan ? (
                     <div className="flex-1 flex items-center justify-center min-h-36 md:min-h-80 text-[#cdba20] text-sm font-semibold tracking-wide">

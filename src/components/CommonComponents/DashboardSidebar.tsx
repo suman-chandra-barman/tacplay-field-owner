@@ -13,7 +13,7 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, getPlanDisplayName } from "@/lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutGrid, Settings, Crown } from "lucide-react";
 import { Button } from "../ui/button";
@@ -222,7 +222,7 @@ export default function DashboardSidebar() {
                     {currentSubscription?.has_active_subscription
                       ? t("sidebar.currentPlan", {
                           plan:
-                            currentSubscription.plan_name ??
+                            getPlanDisplayName(currentSubscription.plan_name, t) ??
                             t("sidebar.active"),
                         })
                       : t("sidebar.upgradeToSilver")}

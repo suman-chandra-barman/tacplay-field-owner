@@ -36,7 +36,7 @@
     "upgradeToPremium": "Auf Premium upgraden",
     "currentPlan": "Aktueller Plan: {{plan}}",
     "active": "Aktiv",
-    "upgradeToSilver": "Auf Silber upgraden für mehr Funktionen",
+    "upgradeToSilver": "Auf Essential for Field Growth upgraden für mehr Funktionen",
     "daysLeft": "{{days}} Tage übrig - {{status}}",
     "unlockMessage": "Schalten Sie Ranglisten-Hosting, Analysen und Premium-Tools frei.",
     "manage": "Verwalten",
@@ -367,7 +367,7 @@
     },
     "payoutTab": {
       "loading": "Auszahlungsdetails werden geladen...",
-      "loadFailed": "Ihr aktueller Bronze-Plan beinhaltet keinen Zugriff auf Einnahmen oder Auszahlungsdetails. Bitte führen Sie ein Upgrade auf Silber oder Gold durch, um auf diese Funktion zuzugreifen.",
+      "loadFailed": "Ihr aktueller Essential Starter for Fields-Plan beinhaltet keinen Zugriff auf Einnahmen oder Auszahlungsdetails. Bitte führen Sie ein Upgrade auf Essential for Field Growth oder Gold durch, um auf diese Funktion zuzugreifen.",
       "updated": "Auszahlungsdetails erfolgreich aktualisiert.",
       "updateFailed": "Auszahlungsdetails konnten nicht aktualisiert werden."
     },
@@ -534,6 +534,11 @@
     "title": "Stärken Sie Ihr Spielfeld. Kontrollieren Sie jedes Match.",
     "subtitle": "Wählen Sie einen Plan, der die richtigen Tools freischaltet, um Sitzungen zu verwalten, Ranglistenspiele zu veranstalten und Ihre Arena auf TACPLAY auszubauen.",
     "cancel": "Abbrechen",
+    "plans": {
+      "bronze": "Essential Starter für Spielfelder",
+      "silver": "Essential für Spielfeld-Wachstum",
+      "gold": "Gold-Plan"
+    },
     "currentPlan": "Aktueller Plan",
     "comingSoon": "Demnächst",
     "failedToLoad": "Abonnementpläne konnten nicht geladen werden.",
@@ -554,13 +559,13 @@
         "Ranglistenspiele veranstalten"
       ],
       "field_silver_monthly": [
-        "Alles in Bronze",
+        "Alles in Essential Starter for Fields",
         "Erweiterte Buchungsanalyse",
         "Vorrangige Platzierung in der Suche",
         "Vorrangiger E-Mail-Support"
       ],
       "field_gold_monthly": [
-        "Alles in Silber",
+        "Alles in Essential for Field Growth",
         "Unbegrenzte Sitzungserstellung",
         "Vollständige Einnahmenverfolgung",
         "Detaillierte Leistungseinblicke",
