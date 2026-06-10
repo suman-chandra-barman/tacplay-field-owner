@@ -109,7 +109,7 @@ const defaultMatchRules: MatchRulesStepForm = {
   maximum_players_per_session: "16",
   default_session_duration: "50",
   duration_unit: "minute",
-  base_price_per_player: "25.25",
+  base_price_per_player: "0",
   allow_social_matches: true,
   allow_ranked_matches: false,
 };
@@ -172,7 +172,7 @@ function buildStep2Body(match: MatchRulesStepForm): Step2MatchRequirementsBody {
       match.default_session_duration,
       "Default session duration",
     ),
-    base_price_per_player: match.base_price_per_player.trim(),
+    base_price_per_player: "0",
     allow_social_matches: match.allow_social_matches,
     allow_ranked_matches: match.allow_ranked_matches,
   };

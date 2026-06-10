@@ -138,20 +138,6 @@ const StepBusinessSetup = ({ value, onChange }: StepBusinessSetupProps) => {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-primary">
-            {t("onboardingFields.business.basePrice")}
-          </label>
-          <Input
-            placeholder="0.00"
-            className="bg-input/30 border-white/10 text-primary h-11"
-            value={value.base_price_per_player}
-            onChange={(e) =>
-              onChange({ base_price_per_player: e.target.value })
-            }
-          />
-        </div>
-
         <div className="flex items-center justify-between py-3 border-t border-white/5">
           <label className="text-sm font-medium text-primary">
             {t("onboardingFields.business.allowSocial")}

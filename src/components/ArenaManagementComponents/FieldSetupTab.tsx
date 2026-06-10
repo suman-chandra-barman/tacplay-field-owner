@@ -80,7 +80,7 @@ const FieldSetupTab = () => {
         minimum_players_per_session: draft.minimum_players_per_session,
         maximum_players_per_session: draft.maximum_players_per_session,
         default_session_duration: draft.default_session_duration,
-        base_price_per_player: draft.base_price_per_player,
+        base_price_per_player: "0",
         allow_social_matches: draft.allow_social_matches,
         allow_ranked_matches: draft.allow_ranked_matches,
       }).unwrap();
@@ -276,27 +276,6 @@ const FieldSetupTab = () => {
               </SelectContent>
             </Select>
           </div>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-primary">
-            {t("onboardingFields.business.basePrice")}
-          </label>
-          <Input
-            value={form.base_price_per_player}
-            onChange={(event) =>
-              setDraft((previous) =>
-                previous
-                  ? {
-                      ...previous,
-                      base_price_per_player: event.target.value,
-                    }
-                  : previous,
-              )
-            }
-            readOnly={!isEditing}
-            className="bg-input/30 border-white/10 text-primary h-11"
-          />
         </div>
 
         <div className="flex items-center justify-between py-3 border-t border-white/5">
