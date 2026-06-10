@@ -49,7 +49,7 @@ const DEFAULT_FORM: CreateSessionForm = {
   match_date: "",
   start_time: "",
   end_time: "",
-  booking_cut_off_time: "",
+  booking_cut_off_time: "12",
   booking_cut_off_unit: "hours",
   team_a_player: "",
   team_b_player: "",
