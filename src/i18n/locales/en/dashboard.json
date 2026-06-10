@@ -132,7 +132,12 @@
       "cancelledSuccess": "Match cancelled successfully.",
       "cancelledFailed": "Failed to cancel match.",
       "resultSuccess": "Final result submitted successfully.",
-      "resultFailed": "Failed to submit final result."
+      "resultFailed": "Failed to submit final result.",
+      "editSession": "Edit Session",
+      "editButton": "Edit",
+      "editing": "Saving...",
+      "updated": "Session updated successfully.",
+      "updateFailed": "Failed to update session."
     },
     "create": {
       "title": "Create New Session",

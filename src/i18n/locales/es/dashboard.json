@@ -132,7 +132,12 @@
       "cancelledSuccess": "Partida cancelada con éxito.",
       "cancelledFailed": "Error al cancelar la partida.",
       "resultSuccess": "Resultado final enviado con éxito.",
-      "resultFailed": "Error al enviar el resultado final."
+      "resultFailed": "Error al enviar el resultado final.",
+      "editSession": "Editar sesión",
+      "editButton": "Editar",
+      "editing": "Guardando...",
+      "updated": "Sesión actualizada correctamente.",
+      "updateFailed": "Error al actualizar la sesión."
     },
     "create": {
       "title": "Crear nueva sesión",

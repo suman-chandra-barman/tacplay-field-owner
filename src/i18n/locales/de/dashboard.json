@@ -132,7 +132,12 @@
       "cancelledSuccess": "Spiel erfolgreich abgebrochen.",
       "cancelledFailed": "Spiel konnte nicht abgebrochen werden.",
       "resultSuccess": "Endergebnis erfolgreich übermittelt.",
-      "resultFailed": "Endergebnis konnte nicht übermittelt werden."
+      "resultFailed": "Endergebnis konnte nicht übermittelt werden.",
+      "editSession": "Sitzung bearbeiten",
+      "editButton": "Bearbeiten",
+      "editing": "Speichern...",
+      "updated": "Sitzung erfolgreich aktualisiert.",
+      "updateFailed": "Sitzung konnte nicht aktualisiert werden."
     },
     "create": {
       "title": "Neue Sitzung erstellen",

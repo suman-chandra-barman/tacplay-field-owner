@@ -132,7 +132,12 @@
       "cancelledSuccess": "Match annulé avec succès.",
       "cancelledFailed": "Échec de l'annulation du match.",
       "resultSuccess": "Résultat final soumis avec succès.",
-      "resultFailed": "Échec de la soumission du résultat final."
+      "resultFailed": "Échec de la soumission du résultat final.",
+      "editSession": "Modifier la session",
+      "editButton": "Modifier",
+      "editing": "Enregistrement...",
+      "updated": "Session mise à jour avec succès.",
+      "updateFailed": "Échec de la mise à jour de la session."
     },
     "create": {
       "title": "Créer une nouvelle session",

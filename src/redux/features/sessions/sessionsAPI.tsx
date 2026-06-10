@@ -102,6 +102,17 @@ const sessionsAPI = baseAPI.injectEndpoints({
       }),
       invalidatesTags: ["Sessions"],
     }),
+    updateOwnerSession: builder.mutation<
+      CreateSessionResponse,
+      { sessionId: number; payload: FormData }
+    >({
+      query: ({ sessionId, payload }) => ({
+        url: `/api/session/owner/sessions/${sessionId}/update/`,
+        method: "PATCH",
+        body: payload,
+      }),
+      invalidatesTags: ["Sessions"],
+    }),
   }),
 });
 
@@ -115,6 +126,7 @@ export const {
   useSubmitOwnerSessionResultMutation,
   useCheckInOwnerSessionPlayersMutation,
   useCreateOwnerSessionMutation,
+  useUpdateOwnerSessionMutation,
 } = sessionsAPI;
 
 export default sessionsAPI;

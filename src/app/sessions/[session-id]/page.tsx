@@ -3,9 +3,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowLeft, Eye } from "lucide-react";
+import { ArrowLeft, Eye, Pencil } from "lucide-react";
 import Link from "next/link";
 import SessionInfoSheet from "@/components/SessionComponents/SessionDetailsComponents/SessionInfoSheet";
+import EditSessionSheet from "@/components/SessionComponents/SessionDetailsComponents/EditSessionSheet";
 import PlayerDetailsSheet from "@/components/SessionComponents/SessionDetailsComponents/PlayerDetailsSheet";
 import PlayerCard from "@/components/SessionComponents/SessionDetailsComponents/PlayerCard";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,7 @@ const SessionDetailsPage = () => {
     useGetOwnerSessionDetailsQuery(sessionId, { skip: !isValidSessionId });
 
   const [sessionInfoOpen, setSessionInfoOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [playerDetailsOpen, setPlayerDetailsOpen] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState<number | null>(
     null,
@@ -116,15 +118,26 @@ const SessionDetailsPage = () => {
               {t("sessions.details.title")}
             </h1>
           </div>
-          <Button
-            onClick={() => setSessionInfoOpen(true)}
-            className="flex gap-2"
-          >
-            <Eye className="w-4 h-4" />
-            <span className="hidden sm:inline">
-              {t("sessions.details.viewInfo")}
-            </span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={() => setEditOpen(true)}
+              className="flex gap-2 bg-transparent border border-white/10 hover:bg-white/5 text-primary hover:text-white"
+            >
+              <Pencil className="w-4 h-4" />
+              <span className="hidden sm:inline">
+                {t("sessions.details.editButton")}
+              </span>
+            </Button>
+            <Button
+              onClick={() => setSessionInfoOpen(true)}
+              className="flex gap-2"
+            >
+              <Eye className="w-4 h-4" />
+              <span className="hidden sm:inline">
+                {t("sessions.details.viewInfo")}
+              </span>
+            </Button>
+          </div>
         </div>
 
         {/* Match Header Card */}
@@ -196,7 +209,7 @@ const SessionDetailsPage = () => {
                 {/* Center - Team Full */}
                 <div className="text-center">
                   <p className="text-primary text-xl sm:text-3xl lg:text-5xl font-black leading-none">
-                    {details.top_summary.team_full.booked_display}
+                    {`${details.top_summary.team_full.team_a_capacity} / ${details.top_summary.team_full.team_b_capacity}`}
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs mt-1">
                     {t("sessions.details.teamFull")}
@@ -276,6 +289,11 @@ const SessionDetailsPage = () => {
         <SessionInfoSheet
           open={sessionInfoOpen}
           onOpenChange={setSessionInfoOpen}
+          sessionId={sessionId}
+        />
+        <EditSessionSheet
+          open={editOpen}
+          onOpenChange={setEditOpen}
           sessionId={sessionId}
         />
         <PlayerDetailsSheet
